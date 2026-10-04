@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scheme Finder - User Details</title>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:#eef8ff;
+    color:#123d70;
+}
+.header{
+    height:74px;
+    background:#ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 32px;
+    border-bottom:1px solid #dfeaf4;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    z-index:1000;
+}
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:18px;
+}
+.menu-toggle{
+    width:42px;
+    height:42px;
+    border:none;
+    background:#eaf5ff;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    color:#0759a5;
+    font-size:21px;
+    transition:.2s;
+}
+.menu-toggle:hover{
+    background:#dceeff;
+}
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+.logo-emblem{
+    width:43px;
+    height:53px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+.logo-emblem img{
+    width:40px;
+    height:50px;
+    object-fit:contain;
+    display:block;
+}
+.logo-text{
+    font-size:29px;
+    font-weight:700;
+    color:#06427f;
+}
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+.notification{
+    position:relative;
+    font-size:21px;
+    color:#174d88;
+    cursor:pointer;
+}
+.notification .dot{
+    position:absolute;
+    width:9px;
+    height:9px;
+    background:#ed334d;
+    border-radius:50%;
+    top:-2px;
+    right:-3px;
+    border:1px solid white;
+}
+.profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    color:#123e72;
+    font-size:16px;
+    font-weight:600;
+}
+.profile-circle{
+    width:43px;
+    height:43px;
+    border-radius:50%;
+    background:#e8f4ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#075db5;
+    font-size:20px;
+}
+.profile .arrow{
+    font-size:11px;
+    margin-left:3px;
+}
+.menu{
+    padding:32px 17px;
+    position:relative;
+    z-index:2;
+}
+.menu-item{
+    height:52px;
+    display:flex;
+    align-items:center;
+    gap:17px;
+    padding:0 18px;
+    margin-bottom:7px;
+    border-radius:10px;
+    color:white;
+    text-decoration:none;
+    font-size:16px;
+    transition:.2s;
+}
+.menu-item i{
+    width:18px;
+    font-size:20px;
+    text-align:center;
+}
+.menu-item:hover{
+    background:rgba(255,255,255,.10);
+}
+.menu-item.active{
+    background:
+        linear-gradient(
+            90deg,
+            #147de3,
+            #1678d7
+        );
+    box-shadow:
+        0 4px 10px rgba(0,0,0,.08);
+}
+.overlay{
+    position:fixed;
+    top:74px;
+    left:0;
+    right:0;
+    bottom:0;
+    background:rgba(0,0,0,.25);
+    z-index:850;
+    display:none;
+}
+.overlay.show{
+    display:block;
+}
+.main{
+    padding-top:74px;
+    min-height:100vh;
+    background:
+        linear-gradient(
+            135deg,
+            #eaf7ff 0%,
+            #f4fbff 48%,
+            #e7f5ff 100%
+        );
+    position:relative;
+    overflow:hidden;
+}
+.main::before{
+    content:"";
+    position:absolute;
+    width:470px;
+    height:470px;
+    left:-300px;
+    bottom:-230px;
+    border-radius:50%;
+    background:rgba(36,117,207,.08);
+}
+.main::after{
+    content:"";
+    position:absolute;
+    width:390px;
+    height:390px;
+    right:-200px;
+    bottom:-200px;
+    border-radius:50%;
+    background:rgba(39,128,219,.07);
+}
+.content{
+    position:relative;
+    z-index:2;
+    margin:32px 30px 40px;
+    background:#ffffff;
+    border-radius:14px;
+    min-height:843px;
+    padding:0 40px 34px;
+    box-shadow:
+        0 5px 25px rgba(30,96,155,.08);
+}
+.back-button{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding:10px 18px;
+    background:#eaf5ff;
+    border-radius:10px;
+    color:#1263b6;
+    font-size:15px;
+    font-weight:600;
+    text-decoration:none;
+}
+.back-button i{
+    font-size:16px;
+}
+.page-heading{
+    height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:5px 8px 0 0;
+}
+.heading-left{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+.heading-icon{
+    width:82px;
+    height:82px;
+    border-radius:50%;
+    background:#e2f1ff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#0968c7;
+    font-size:38px;
+}
+.heading-text h1{
+    font-size:32px;
+    color:#07457f;
+    font-weight:700;
+    margin-bottom:7px;
+}
+.heading-text p{
+    color:#617b99;
+    font-size:17px;
+}
+.illustration{
+    width:280px;
+    height:120px;
+    position:relative;
+    overflow:hidden;
+}
+.illustration .circle{
+    position:absolute;
+    width:115px;
+    height:90px;
+    right:55px;
+    top:12px;
+    border-radius:50%;
+    background:#dceeff;
+}
+.illustration .circle2{
+    position:absolute;
+    width:105px;
+    height:80px;
+    right:0;
+    top:27px;
+    border-radius:50%;
+    background:#d6ecff;
+}
+.laptop{
+    position:absolute;
+    right:10px;
+    bottom:9px;
+    width:105px;
+    height:58px;
+    background:#0d4b89;
+    border-radius:5px 5px 2px 2px;
+    transform:skew(-5deg);
+}
+.laptop::after{
+    content:"";
+    position:absolute;
+    bottom:-7px;
+    left:-12px;
+    width:130px;
+    height:7px;
+    background:#7eafd6;
+    border-radius:5px;
+}
+.screen{
+    position:absolute;
+    width:72px;
+    height:43px;
+    background:#d9efff;
+    top:7px;
+    left:17px;
+    border-radius:3px;
+}
+.person-head{
+    position:absolute;
+    right:100px;
+    top:21px;
+    width:31px;
+    height:31px;
+    border-radius:50%;
+    background:#f3bd91;
+}
+.person-hair{
+    position:absolute;
+    right:94px;
+    top:10px;
+    width:47px;
+    height:50px;
+    background:#101c42;
+    border-radius:50% 50% 35% 35%;
+    transform:rotate(-8deg);
+}
+.person-body{
+    position:absolute;
+    right:78px;
+    bottom:7px;
+    width:75px;
+    height:65px;
+    background:#0871d7;
+    border-radius:38px 38px 8px 8px;
+    transform:rotate(4deg);
+}
+.plant{
+    position:absolute;
+    left:16px;
+    bottom:7px;
+    width:65px;
+    height:75px;
+}
+.stem{
+    position:absolute;
+    left:30px;
+    bottom:0;
+    width:4px;
+    height:62px;
+    background:#2181c7;
+}
+.leaf{
+    position:absolute;
+    width:25px;
+    height:14px;
+    background:#1593dd;
+    border-radius:100% 0 100% 0;
+}
+.leaf.one{
+    left:30px;
+    top:24px;
+    transform:rotate(-35deg);
+}
+.leaf.two{
+    left:8px;
+    top:40px;
+    transform:rotate(30deg);
+}
+.leaf.three{
+    left:35px;
+    top:45px;
+    transform:rotate(-30deg);
+}
+.form-section{
+    border:1px solid #dceaf5;
+    border-radius:13px;
+    margin-bottom:23px;
+    overflow:hidden;
+    background:white;
+    box-shadow:
+        0 2px 8px rgba(22,88,140,.04);
+}
+.section-title{
+    height:47px;
+    background:#eaf5ff;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:0 20px;
+    color:#0754a0;
+    font-size:16px;
+    font-weight:700;
+}
+.section-title i{
+    font-size:23px;
+}
+.form-body{
+    padding:22px 20px 23px;
+}
+.grid-3{
+    display:grid;
+    grid-template-columns:
+        1fr 1fr 1fr;
+    gap:30px;
+}
+.grid-2{
+    display:grid;
+    grid-template-columns:
+        1fr 1fr;
+    gap:38px;
+}
+.field{
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+}
+.field label{
+    color:#143d70;
+    font-size:14px;
+    font-weight:600;
+}
+.required{
+    color:#e53948;
+}
+.input-box{
+    height:46px;
+    border:1px solid #ccdce9;
+    border-radius:8px;
+    background:white;
+    display:flex;
+    align-items:center;
+    padding:0 14px;
+    color:#8a9db2;
+    transition:.2s;
+}
+.input-box i{
+    color:#315b87;
+    width:27px;
+    font-size:17px;
+}
+.input-box input,
+.input-box select{
+    flex:1;
+    width:100%;
+    height:100%;
+    border:none;
+    outline:none;
+    background:transparent;
+    color:#6f8298;
+    font-family:inherit;
+    font-size:13px;
+}
+.input-box select{
+    cursor:pointer;
+}
+.input-box:focus-within{
+    border-color:#2581df;
+    box-shadow:
+        0 0 0 2px rgba(37,129,223,.08);
+}
+.select-arrow{
+    color:#50708f !important;
+    width:auto !important;
+    font-size:12px !important;
+}
+.button-row{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:5px;
+}
+.find-button{
+    width:300px;
+    height:54px;
+    border:none;
+    border-radius:10px;
+    background:
+        linear-gradient(
+            90deg,
+            #0874e8,
+            #1479e8
+        );
+    color:white;
+    font-size:15px;
+    font-weight:600;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:13px;
+    box-shadow:
+        0 5px 12px rgba(16,112,220,.18);
+    transition:.2s;
+}
+.find-button:hover{
+    transform:translateY(-1px);
+    box-shadow:
+        0 7px 15px rgba(16,112,220,.25);
+}
+.find-button i{
+    font-size:20px;
+}
+@media(max-width:850px){
+
+    .content{
+
+        margin:25px 20px;
+
+        padding:0 25px 30px;
+    }
+
+    .grid-3{
+
+        grid-template-columns:1fr;
+    }
+
+    .grid-2{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+    }
+
+    .illustration{
+        display:none;
+    }
+
+    .heading-text h1{
+        font-size:27px;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .header{
+
+        padding:0 15px;
+    }
+
+    .header-right{
+
+        gap:15px;
+    }
+
+    .profile span{
+        display:none;
+    }
+
+    .content{
+
+        margin:15px;
+
+        padding:0 15px 25px;
+    }
+
+    .page-heading{
+
+        height:auto;
+
+        padding:20px 0;
+    }
+
+    .heading-icon{
+
+        width:60px;
+        height:60px;
+
+        font-size:27px;
+    }
+
+    .heading-text h1{
+        font-size:23px;
+    }
+
+    .heading-text p{
+        font-size:13px;
+    }
+
+    .button-row{
+        justify-content:stretch;
+    }
+
+    .find-button{
+        width:100%;
+    }
+
+    .logo-text{
+        font-size:22px;
+    }
+
+}
+
+
+/* VERY SMALL SCREEN */
+
+@media(max-width:400px){
+
+    .logo-emblem{
+        width:35px;
+    }
+
+    .logo-emblem img{
+        width:34px;
+        height:44px;
+    }
+
+    .logo-text{
+        font-size:19px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+<header class="header">
+    <!-- LEFT HEADER -->
+    <div class="header-left">
+        <!-- LOGO -->
+
+        <div class="logo">
+
+
+            <!-- PERFECT EMBLEM OF INDIA -->
+
+            <div class="logo-emblem">
+
+                <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                    alt="Emblem of India"
+                >
+
+            </div>
+
+
+            <div class="logo-text">
+                Scheme Finder
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- RIGHT HEADER -->
+
+    <div class="header-right">
+
+
+        <!-- NOTIFICATION -->
+
+        <div class="notification">
+
+            <i class="fa-regular fa-bell"></i>
+
+            <span class="dot"></span>
+
+        </div>
+
+
+        <!-- PROFILE -->
+
+        <div class="profile">
+
+            <div class="profile-circle">
+
+                <i class="fa-regular fa-user"></i>
+
+            </div>
+
+            <span>Sneha</span>
+
+            <i class="fa-solid fa-chevron-down arrow"></i>
+
+        </div>
+
+    </div>
+
+</header>
+<!-- OVERLAY -->
+
+<div
+    class="overlay"
+    id="overlay"
+    onclick="toggleSidebar()"
+></div>
+
+
+
+<!-- =========================================================
+     MAIN
+========================================================= -->
+
+<main class="main">
+
+
+    <div class="content">
+
+        <!-- PAGE HEADER -->
+
+        <div class="page-heading">
+
+
+            <div class="heading-left">
+
+
+                <div class="heading-icon">
+
+                    <i class="fa-regular fa-user"></i>
+
+                </div>
+
+
+                <div class="heading-text">
+
+                    <h1>
+                        Tell Us About Yourself
+                    </h1>
+
+                    <p>
+                        Help us understand your profile so we can find the best schemes for you.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ILLUSTRATION -->
+
+            <div class="illustration">
+
+
+                <div class="circle"></div>
+
+                <div class="circle2"></div>
+
+
+                <div class="person-hair"></div>
+
+                <div class="person-head"></div>
+
+                <div class="person-body"></div>
+
+
+                <div class="laptop">
+
+                    <div class="screen"></div>
+
+                </div>
+
+
+                <div class="plant">
+
+                    <div class="stem"></div>
+
+                    <div class="leaf one"></div>
+
+                    <div class="leaf two"></div>
+
+                    <div class="leaf three"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <section class="form-section">
+
+
+            <div class="section-title">
+
+                <i class="fa-regular fa-circle-user"></i>
+
+                <span>Personal Information</span>
+
+            </div>
+
+
+            <div class="form-body">
+
+
+                <div class="grid-3">
+
+
+                    <div class="field">
+
+                        <label>
+                            Full Name
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-regular fa-user"></i>
+
+                            <input
+                                type="text"
+                                placeholder="Enter your full name"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="field">
+
+                        <label>
+                            Age
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-regular fa-calendar"></i>
+
+                            <input
+                                type="number"
+                                placeholder="Enter your age"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="field">
+
+                        <label>
+                            Gender
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-regular fa-user"></i>
+
+                            <select>
+
+                                <option>Select gender</option>
+
+                                <option>Male</option>
+
+                                <option>Female</option>
+
+                                <option>Other</option>
+
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             LOCATION
+        ================================================== -->
+
+        <section class="form-section">
+
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span>Location</span>
+
+            </div>
+
+
+            <div class="form-body">
+
+
+                <div class="grid-2">
+
+
+                    <div class="field">
+
+                        <label>
+                            State
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            <select>
+
+                                <option>Select state</option>
+
+                                <option>Andhra Pradesh</option>
+
+                                <option>Telangana</option>
+
+                                <option>Karnataka</option>
+
+                                <option>Tamil Nadu</option>
+
+                                <option>Maharashtra</option>
+
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="field">
+
+                        <label>
+                            District
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-regular fa-building"></i>
+
+                            <select>
+
+                                <option>Select district</option>
+
+                                <option>Krishna</option>
+
+                                <option>Guntur</option>
+
+                                <option>Vijayawada</option>
+
+                                <option>Visakhapatnam</option>
+
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =================================================
+             BACKGROUND
+        ================================================== -->
+
+        <section class="form-section">
+
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-graduation-cap"></i>
+
+                <span>Background</span>
+
+            </div>
+
+
+            <div class="form-body">
+
+
+                <div class="grid-3">
+
+
+                    <div class="field">
+
+                        <label>
+                            Education
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-graduation-cap"></i>
+
+                            <select>
+
+                                <option>Select education level</option>
+
+                                <option>School</option>
+
+                                <option>Intermediate</option>
+
+                                <option>Diploma</option>
+
+                                <option>Undergraduate</option>
+
+                                <option>Postgraduate</option>
+
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="field">
+
+                        <label>
+                            Occupation
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-briefcase"></i>
+
+                            <select>
+
+                                <option>Select occupation</option>
+
+                                <option>Student</option>
+
+                                <option>Employed</option>
+
+                                <option>Unemployed</option>
+
+                                <option>Entrepreneur</option>
+
+                                <option>Job Seeker</option>
+
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="field">
+
+                        <label>
+                            Annual Income
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                            <select>
+
+                                <option>Select income range</option>
+
+                                <option>Below ₹1 Lakh</option>
+
+                                <option>₹1 - ₹2.5 Lakhs</option>
+
+                                <option>₹2.5 - ₹5 Lakhs</option>
+
+                                <option>₹5 - ₹10 Lakhs</option>
+
+                                <option>Above ₹10 Lakhs</option>
+
+                            </select>
+
+                            <i class="fa-solid fa-chevron-down select-arrow"></i>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FIND BUTTON -->
+
+        <div class="button-row">
+
+            <button
+                class="find-button"
+                onclick="findSchemes()"
+            >
+
+             <a href="dashboard.html" class="save-link">
+                <span>Save & Continue</span>
+             </a>
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</main>
+
+<script>
+
+function findSchemes(){
+
+    const name =
+        document.querySelector(
+            'input[placeholder="Enter your full name"]'
+        ).value;
+
+    const age =
+        document.querySelector(
+            'input[placeholder="Enter your age"]'
+        ).value;
+
+
+    const selects =
+        document.querySelectorAll("select");
+
+
+    const gender = selects[0].value;
+
+    const state = selects[1].value;
+
+    const district = selects[2].value;
+
+    const education = selects[3].value;
+
+    const occupation = selects[4].value;
+
+    const income = selects[5].value;
+
+
+    if(
+        name === "" ||
+        age === "" ||
+        gender === "Select gender" ||
+        state === "Select state" ||
+        district === "Select district" ||
+        education === "Select education level" ||
+        occupation === "Select occupation" ||
+        income === "Select income range"
+    ){
+
+        
+
+        return;
+    }
+
+
+    alert(
+        "Finding eligible government schemes for you..."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

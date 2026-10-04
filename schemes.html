@@ -1,0 +1,1705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scheme Finder</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5faff;
+    color: #315b88;
+}
+
+
+/* =========================
+   APP
+========================= */
+
+.app {
+    min-height: 100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+
+    width: 260px;
+
+    background: linear-gradient(
+        180deg,
+        #07529e,
+        #006bcf
+    );
+
+    color: white;
+
+    z-index: 1000;
+
+    transform: translateX(-100%);
+
+    transition: transform 0.3s ease;
+
+    overflow: hidden;
+}
+
+
+/* SIDEBAR OPEN */
+
+.sidebar.open {
+    transform: translateX(0);
+}
+
+
+/* =========================
+   SIDEBAR HEADER
+========================= */
+
+.sidebar-header {
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 0 25px;
+}
+
+.gov-logo {
+    font-size: 35px;
+}
+
+.sidebar-header h2 {
+    font-size: 21px;
+}
+
+
+/* =========================
+   SIDEBAR MENU
+========================= */
+
+.sidebar-menu {
+    padding: 20px 15px;
+}
+
+.menu-item {
+    height: 54px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 18px;
+
+    padding: 0 16px;
+
+    margin-bottom: 7px;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 9px;
+
+    font-size: 15px;
+
+    transition: 0.2s;
+}
+
+.menu-item i {
+    width: 25px;
+
+    text-align: center;
+
+    font-size: 22px;
+}
+
+.menu-item:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.menu-item.active {
+    background: #087cf4;
+}
+
+
+/* =========================
+   SIDEBAR BOTTOM
+========================= */
+
+.sidebar-bottom {
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    height: 300px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    flex-direction: column;
+
+    padding-bottom: 50px;
+
+    text-align: center;
+}
+
+.building {
+    font-size: 85px;
+
+    opacity: 0.12;
+
+    margin-bottom: 15px;
+}
+
+.sidebar-bottom p {
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.overlay {
+    position: fixed;
+
+    inset: 0;
+
+    background: rgba(0,0,0,0.35);
+
+    z-index: 900;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition: 0.3s;
+}
+
+.overlay.active {
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main {
+    width: 100%;
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   TOP BAR
+========================= */
+
+.topbar {
+    height: 72px;
+
+    background: white;
+
+    border-bottom: 1px solid #e1ebf4;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 28px;
+
+    gap: 25px;
+}
+
+
+/* =========================
+   HAMBURGER
+========================= */
+
+.menu-button {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 5px;
+
+    border-radius: 8px;
+}
+
+.menu-button:hover {
+    background: #edf6ff;
+}
+
+
+/* THREE LINES */
+
+.menu-button span {
+    display: block;
+
+    width: 25px;
+    height: 3px;
+
+    background: #0757a5;
+
+    border-radius: 5px;
+
+    transition: 0.3s;
+}
+
+
+/* ANIMATION TO X */
+
+.menu-button.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.menu-button.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-button.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-box {
+    width: 285px;
+
+    height: 42px;
+
+    border: 1px solid #d7e4ef;
+
+    border-radius: 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 0 16px;
+
+    margin-left: auto;
+}
+
+.search-box i {
+    color: #6483a5;
+
+    margin-right: 10px;
+}
+
+.search-box input {
+    width: 100%;
+
+    border: none;
+
+    outline: none;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+.notification {
+    position: relative;
+
+    font-size: 25px;
+
+    color: #064c99;
+}
+
+.notification span {
+    position: absolute;
+
+    top: -5px;
+    right: -6px;
+
+    width: 16px;
+    height: 16px;
+
+    background: #e52d35;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 9px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.user-profile {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #064582;
+}
+
+.profile-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #e6f2ff;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    color: #0755a3;
+
+    font-size: 23px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content {
+    padding: 25px 28px;
+
+    background:
+        radial-gradient(
+            circle at 60% 20%,
+            #eaf6ff,
+            transparent 30%
+        ),
+        #f5faff;
+
+    min-height: calc(100vh - 72px);
+}
+
+
+/* =========================
+   BACK
+========================= */
+
+.back {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: #0864c8;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+/* =========================
+   HERO CARD
+========================= */
+
+.hero-card {
+    position: relative;
+
+    min-height: 181px;
+
+    background: white;
+
+    border: 1px solid #dbe8f3;
+
+    border-radius: 10px;
+
+    padding: 25px 135px;
+
+    overflow: hidden;
+}
+
+.hero-icon {
+    position: absolute;
+
+    left: 24px;
+    top: 29px;
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    background: #0879ea;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 38px;
+}
+
+.hero-content h1 {
+    color: #06488e;
+
+    font-size: 25px;
+
+    margin-bottom: 9px;
+}
+
+.hero-meta {
+    display: flex;
+
+    gap: 10px;
+
+    color: #4c729c;
+
+    font-size: 14px;
+
+    margin-bottom: 14px;
+}
+
+.hero-content p {
+    color: #41678f;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+    max-width: 680px;
+}
+
+.match {
+    position: absolute;
+
+    top: 17px;
+    right: 20px;
+
+    padding: 9px 14px;
+
+    border-radius: 20px;
+
+    background: #e4f8ed;
+
+    color: #19945d;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   MAIN GRID
+========================= */
+
+.main-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(600px, 1fr)
+        445px;
+
+    gap: 24px;
+
+    margin-top: 12px;
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+.tabs {
+    height: 45px;
+
+    background: white;
+
+    border: 1px solid #e1ebf4;
+
+    border-radius: 8px;
+
+    display: flex;
+
+    margin-bottom: 13px;
+
+    overflow: hidden;
+}
+
+.tab {
+    border: none;
+
+    background: transparent;
+
+    padding: 0 26px;
+
+    color: #315b88;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.tab.active {
+    color: #0873df;
+
+    font-weight: bold;
+}
+
+.tab.active::after {
+    content: "";
+
+    position: absolute;
+
+    left: 10px;
+    right: 10px;
+
+    bottom: 0;
+
+    height: 3px;
+
+    background: #087cf0;
+}
+
+
+/* =========================
+   INFO CARDS
+========================= */
+
+.info-card {
+    background: white;
+
+    border: 1px solid #dce8f2;
+
+    border-radius: 9px;
+
+    padding: 18px;
+
+    margin-bottom: 9px;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    margin-bottom: 10px;
+}
+
+.section-heading h3 {
+    color: #064886;
+
+    font-size: 15px;
+}
+
+.section-icon {
+    width: 48px;
+    height: 48px;
+
+    border-radius: 50%;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.blue {
+    background: #e4f2ff;
+
+    color: #0874df;
+}
+
+.green {
+    background: #dcf7e9;
+
+    color: #18a465;
+}
+
+.purple {
+    background: #eee2ff;
+
+    color: #6929d5;
+}
+
+.info-card p {
+    margin-left: 64px;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+}
+
+.check-list {
+    list-style: none;
+
+    margin-left: 64px;
+}
+
+.check-list li {
+    margin-bottom: 9px;
+
+    font-size: 13px;
+}
+
+.check-list i {
+    color: #20a66a;
+
+    margin-right: 10px;
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.right-content {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+}
+
+
+/* QUICK CARD */
+
+.quick-card {
+    background: white;
+
+    border: 1px solid #dce8f2;
+
+    border-radius: 9px;
+
+    padding: 15px;
+}
+
+.quick-heading {
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    margin-bottom: 12px;
+}
+
+.quick-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: #e4f2ff;
+
+    color: #0874df;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-heading h3 {
+    color: #064886;
+
+    font-size: 15px;
+}
+
+.quick-row {
+    display: grid;
+
+    grid-template-columns: 1fr 1.15fr;
+
+    min-height: 44px;
+
+    align-items: center;
+
+    border-bottom: 1px solid #e4edf5;
+
+    font-size: 13px;
+}
+
+.quick-row span {
+    color: #53769a;
+}
+
+.quick-row strong {
+    color: #174d85;
+
+    font-weight: 500;
+}
+
+
+/* =========================
+   ELIGIBLE
+========================= */
+
+.eligible-card {
+    background: white;
+
+    border: 1px solid #dce8f2;
+
+    border-radius: 9px;
+
+    padding: 14px;
+}
+
+.eligible-box {
+    min-height: 88px;
+
+    background: #eafaf4;
+
+    border: 1px solid #cfeee1;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    padding: 13px;
+}
+
+.eligible-icon {
+    min-width: 36px;
+    height: 36px;
+
+    border-radius: 50%;
+
+    background: #29b475;
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.eligible-box h3 {
+    color: #198d5b;
+
+    font-size: 14px;
+
+    margin-bottom: 6px;
+}
+
+.eligible-box p {
+    color: #4a806e;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+.arrow-right {
+    margin-left: auto;
+
+    color: #21976a;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
+
+.apply-btn,
+.save-btn {
+    width: 100%;
+
+    height: 45px;
+
+    margin-top: 14px;
+
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.apply-btn {
+    border: none;
+
+    background: #087cf0;
+
+    color: white;
+}
+
+.save-btn {
+    border: 1px solid #087cf0;
+
+    background: white;
+
+    color: #0764c4;
+}
+
+
+/* =========================
+   HELP
+========================= */
+
+.help-card {
+    background: #eef7ff;
+
+    border: 1px solid #d8eaf8;
+
+    border-radius: 9px;
+
+    padding: 16px;
+
+    display: flex;
+
+    gap: 15px;
+}
+
+.help-icon {
+    color: #0875df;
+
+    font-size: 23px;
+}
+
+.help-card h3 {
+    color: #0758a7;
+
+    font-size: 15px;
+
+    margin-bottom: 8px;
+}
+
+.help-card p {
+    color: #416b96;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 8px;
+}
+
+.help-card a {
+    color: #075fc1;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    text-decoration: none;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .main-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-card {
+        padding-right: 30px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    .search-box {
+        width: 180px;
+    }
+
+    .user-profile strong,
+    .user-profile > i {
+        display: none;
+    }
+
+    .content {
+        padding: 18px 12px;
+    }
+
+    .hero-card {
+        padding: 90px 20px 25px;
+    }
+
+    .hero-icon {
+        left: 20px;
+        top: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 21px;
+    }
+
+    .hero-image {
+        display: none;
+    }
+
+    .tabs {
+        overflow-x: auto;
+    }
+
+    .tab {
+        min-width: 120px;
+    }
+
+    .info-card p,
+    .check-list {
+        margin-left: 0;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- =================================
+         SIDEBAR
+    ================================= -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+
+            <div class="gov-logo">
+                ♕
+            </div>
+
+            <h2>
+                Scheme Finder
+            </h2>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="dashboard.html" class="menu-item">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a href="schemes.html" class="menu-item active">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <span>Schemes</span>
+
+            </a>
+
+
+            <a href="savedschemes.html" class="menu-item">
+
+                <i class="fa-regular fa-heart"></i>
+
+                <span>Saved Schemes</span>
+
+            </a>
+
+
+            <a href="alerts.html" class="menu-item">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>Alerts</span>
+
+            </a>
+
+
+            <a href="profile.html" class="menu-item">
+
+                <i class="fa-regular fa-user"></i>
+
+                <span>Profile</span>
+
+            </a>
+
+
+            <a href="settings.html" class="menu-item">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>Settings</span>
+
+            </a>
+
+
+            <a href="logout.html" class="menu-item">
+
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <div class="building">
+
+                <i class="fa-solid fa-landmark"></i>
+
+            </div>
+
+            <p>
+                Government Schemes<br>
+                for a Better Tomorrow
+            </p>
+
+            <div>
+                🇮🇳
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <!-- DARK OVERLAY -->
+
+    <div class="overlay" id="overlay"></div>
+
+
+
+    <!-- =================================
+         MAIN
+    ================================= -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+
+            <!-- HAMBURGER BUTTON -->
+
+            <button
+                class="menu-button"
+                id="menuButton"
+                onclick="toggleSidebar()"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search schemes..."
+                >
+
+            </div>
+
+
+            <!-- NOTIFICATION -->
+
+            <div class="notification">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>
+                    2
+                </span>
+
+            </div>
+
+
+            <!-- PROFILE -->
+
+            <div class="user-profile">
+
+                <div class="profile-icon">
+
+                    <i class="fa-regular fa-user"></i>
+
+                </div>
+
+                <strong>
+                    Sneha
+                </strong>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================
+             CONTENT
+        ================================= -->
+
+        <section class="content">
+
+
+            <div class="back">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>
+                    Back
+                </span>
+
+            </div>
+
+
+
+            <!-- HERO -->
+
+            <div class="hero-card">
+
+
+                <div class="hero-icon">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                </div>
+
+
+                <div class="hero-content">
+
+                    <h1>
+                        PM-YASASVI Scholarship Scheme
+                    </h1>
+
+
+                    <div class="hero-meta">
+
+                        <span>Education</span>
+
+                        <b>|</b>
+
+                        <span>
+                            Ministry of Social Justice &amp; Empowerment
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        The scheme provides financial assistance to
+                        meritorious students from Other Backward Classes
+                        (OBC), Economically Backward Classes (EBC) and
+                        DNT communities for higher education.
+                    </p>
+
+                </div>
+
+
+                <div class="match">
+                    <strong>95% Match</strong>
+                </div>
+
+            </div>
+
+
+
+            <!-- MAIN GRID -->
+
+            <div class="main-grid">
+
+
+                <!-- LEFT -->
+
+                <div class="left-content">
+
+
+                    <!-- TABS -->
+
+                    
+
+
+                    <!-- ABOUT -->
+
+                    <div class="info-card">
+
+                        <div class="section-heading">
+
+                            <div class="section-icon blue">
+
+                                <i class="fa-regular fa-file-lines"></i>
+
+                            </div>
+
+                            <h3>
+                                About the Scheme
+                            </h3>
+
+                        </div>
+
+                        <p>
+                            PM-YASASVI Scholarship Scheme (PM Young Achievers Scholarship Award Scheme for a Vibrant India for OBCs and Others) is a Government of India initiative under the Ministry of Social Justice and Empowerment that provides educational and financial support to students belonging to OBC, EBC, and DNT communities. The scheme aims to help eligible students continue their education by providing assistance for school and higher education, including scholarships and support for educational expenses. It covers components such as Pre-Matric Scholarship, Post-Matric Scholarship, Top Class School Education, Top Class College Education, and hostel facilities. The scheme helps reduce financial barriers and encourages students from disadvantaged communities to pursue their education.
+                        </p>
+
+                    </div>
+
+
+
+                    <!-- BENEFITS -->
+
+                    <div class="info-card">
+
+                        <div class="section-heading">
+
+                            <div class="section-icon green">
+
+                                <i class="fa-solid fa-gift"></i>
+
+                            </div>
+
+                            <h3>
+                                Benefits
+                            </h3>
+
+                        </div>
+
+
+                        <ul class="check-list">
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Financial assistance up to ₹75,000 per year
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Tuition fee and other academic expenses
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Support for professional and technical courses
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- ELIGIBILITY -->
+
+                    <div class="info-card">
+
+                        <div class="section-heading">
+
+                            <div class="section-icon purple">
+
+                                <i class="fa-solid fa-users"></i>
+
+                            </div>
+
+                            <h3>
+                                Eligibility
+                            </h3>
+
+                        </div>
+
+
+                        <ul class="check-list">
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Age: 18 – 30 years
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Family income: Below ₹6 Lakh per annum
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Resident of India
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Belongs to OBC / EBC / DNT category
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Enrolled in recognized institution
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+
+                    <!-- DOCUMENTS -->
+
+                    <div class="info-card">
+
+                        <div class="section-heading">
+
+                            <div class="section-icon blue">
+
+                                <i class="fa-regular fa-file-lines"></i>
+
+                            </div>
+
+                            <h3>
+                                Required Documents
+                            </h3>
+
+                        </div>
+
+
+                        <ul class="check-list">
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Aadhaar Card
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Income Certificate
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Caste Certificate
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Bonafide Certificate from Institution
+                            </li>
+
+                            <li>
+                                <i class="fa-solid fa-circle-check"></i>
+                                Bank Account Details
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- RIGHT -->
+
+                <aside class="right-content">
+
+
+                    <!-- QUICK INFO -->
+
+                    <div class="quick-card">
+
+                        <div class="quick-heading">
+
+                            <div class="quick-icon">
+
+                                <i class="fa-regular fa-file-lines"></i>
+
+                            </div>
+
+                            <h3>
+                                Scheme Quick Info
+                            </h3>
+
+                        </div>
+
+
+                        <div class="quick-row">
+
+                            <span>Department</span>
+
+                            <strong>
+                                Ministry of Social Justice &amp;<br>
+                                Empowerment
+                            </strong>
+
+                        </div>
+
+
+                        <div class="quick-row">
+
+                            <span>Scheme Type</span>
+
+                            <strong>
+                                Scholarship
+                            </strong>
+
+                        </div>
+
+
+                        <div class="quick-row">
+
+                            <span>Applicable For</span>
+
+                            <strong>
+                                Students
+                            </strong>
+
+                        </div>
+
+
+                        <div class="quick-row">
+
+                            <span>State</span>
+
+                            <strong>
+                                All India
+                            </strong>
+
+                        </div>
+
+
+                        <div class="quick-row">
+
+                            <span>Last Date to Apply</span>
+
+                            <strong>
+                                31 Dec 2025
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ELIGIBLE -->
+
+                    <div class="eligible-card">
+
+                        <div class="eligible-box">
+
+                            <div class="eligible-icon">
+
+                                <i class="fa-solid fa-check"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <h3>
+                                    You are eligible!
+                                </h3>
+
+                                <p>
+                                    Based on your profile, you meet the
+                                    basic eligibility criteria for this
+                                    scheme.
+                                </p>
+
+                            </div>
+
+
+                            <i class="fa-solid fa-chevron-right arrow-right"></i>
+
+                        </div>
+
+
+                        <button class="apply-btn">
+
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+
+                            Apply on Official Portal
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </button>
+
+
+                        <button class="save-btn">
+
+                            <i class="fa-regular fa-heart"></i>
+
+                            Save Scheme
+
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- HELP -->
+
+                    <div class="help-card">
+
+                        <div class="help-icon">
+
+                            <i class="fa-solid fa-lightbulb"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h3>
+                                Need Help?
+                            </h3>
+
+                            <p>
+                                For any queries, contact the helpline
+                                at 1800-309-7676 or visit the official
+                                website.
+                            </p>
+
+                            <a href="#">
+                                Visit Website
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- =================================
+     JAVASCRIPT
+================================= -->
+
+<script>
+
+function toggleSidebar() {
+
+    const sidebar = document.getElementById("sidebar");
+
+    const overlay = document.getElementById("overlay");
+
+    const button = document.getElementById("menuButton");
+
+
+    sidebar.classList.toggle("open");
+
+    overlay.classList.toggle("active");
+
+    button.classList.toggle("active");
+
+}
+
+
+/* Close sidebar when clicking outside */
+
+document.getElementById("overlay").addEventListener(
+    "click",
+    function() {
+
+        document.getElementById("sidebar")
+            .classList.remove("open");
+
+        document.getElementById("overlay")
+            .classList.remove("active");
+
+        document.getElementById("menuButton")
+            .classList.remove("active");
+
+    }
+);
+ 
+</script>
+
+</body>
+</html> 

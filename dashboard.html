@@ -1,0 +1,1694 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scheme Finder Dashboard</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:#eef7ff;
+    color:#0b407d;
+}
+
+
+/* =========================
+   THREE LINE MENU BUTTON
+========================= */
+
+.menu-toggle{
+    position:fixed;
+
+    top:16px;
+    left:18px;
+
+    width:44px;
+    height:44px;
+
+    border:none;
+    border-radius:9px;
+
+    background:#0755a3;
+    color:white;
+
+    font-size:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    z-index:1200;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+
+    transition:.25s;
+}
+
+.menu-toggle:hover{
+    background:#064b91;
+    transform:scale(1.03);
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:257px;
+
+    background:linear-gradient(
+        180deg,
+        #07539a 0%,
+        #0755a3 55%,
+        #064b91 100%
+    );
+
+    z-index:1100;
+
+    overflow:hidden;
+
+    transform:translateX(-100%);
+
+    transition:transform .3s ease;
+}
+
+
+/* Sidebar open */
+
+.sidebar.open{
+    transform:translateX(0);
+}
+
+
+.sidebar::after{
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    left:-230px;
+    bottom:-160px;
+
+    border-radius:50%;
+
+    background:rgba(3,65,139,.55);
+}
+
+
+/* =========================
+   SIDEBAR LOGO
+========================= */
+
+.sidebar-logo{
+    height:85px;
+
+    display:flex;
+    align-items:center;
+
+    gap:13px;
+
+    padding-left:25px;
+
+    color:white;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.sidebar-logo-icon{
+    font-size:38px;
+}
+
+.sidebar-logo-text{
+    font-size:23px;
+
+    font-weight:700;
+}
+
+
+/* =========================
+   MENU
+========================= */
+
+.menu{
+    padding:20px 15px;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.menu-item{
+    height:53px;
+
+    margin-bottom:7px;
+
+    padding:0 15px;
+
+    display:flex;
+    align-items:center;
+
+    gap:18px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    border-radius:10px;
+
+    transition:.2s;
+}
+
+.menu-item i{
+    width:24px;
+
+    text-align:center;
+
+    font-size:22px;
+}
+
+.menu-item:hover{
+    background:rgba(255,255,255,.12);
+}
+
+.menu-item.active{
+    background:linear-gradient(
+        90deg,
+        #1684ec,
+        #1680e5
+    );
+
+    box-shadow:
+    0 5px 12px rgba(0,0,0,.08);
+}
+
+
+/* =========================
+   OVERLAY
+========================= */
+
+.sidebar-overlay{
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+
+    background:rgba(0,0,0,.25);
+
+    z-index:1000;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:.3s;
+}
+
+body.sidebar-open .sidebar-overlay{
+    opacity:1;
+    visibility:visible;
+}
+
+
+/* =========================
+   TOP HEADER
+========================= */
+
+.header{
+    position:fixed;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:74px;
+
+    background:#ffffff;
+
+    border-bottom:1px solid #dceaf5;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    padding:0 32px;
+
+    z-index:900;
+
+    transition:left .3s ease;
+}
+
+
+/* Header when sidebar open */
+
+body.sidebar-open .header{
+    left:257px;
+}
+
+
+/* =========================
+   HEADER RIGHT
+========================= */
+
+.header-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:25px;
+}
+
+
+/* =========================
+   NOTIFICATION
+========================= */
+
+.notification{
+    position:relative;
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#0755a0;
+
+    font-size:22px;
+
+    cursor:pointer;
+}
+
+.notification-dot{
+    position:absolute;
+
+    width:10px;
+    height:10px;
+
+    background:#ed3047;
+
+    border-radius:50%;
+
+    top:5px;
+    right:7px;
+
+    border:2px solid white;
+}
+
+
+/* =========================
+   PROFILE
+========================= */
+
+.profile{
+    display:flex;
+
+    align-items:center;
+
+    gap:11px;
+
+    cursor:pointer;
+
+    padding:5px 8px 5px 5px;
+
+    border-radius:30px;
+
+    transition:.2s;
+}
+
+.profile:hover{
+    background:#f1f7fc;
+}
+
+
+/* Circular Profile */
+
+.profile-avatar{
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #e6f4ff,
+            #cce7ff
+        );
+
+    border:2px solid #d7ebfa;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    color:#0965b9;
+
+    font-size:25px;
+}
+
+
+/* Female avatar */
+
+.avatar-face{
+    width:31px;
+    height:31px;
+
+    background:#f4b28d;
+
+    border-radius:50%;
+
+    position:relative;
+
+    margin-top:4px;
+}
+
+.avatar-face::before{
+    content:"";
+
+    position:absolute;
+
+    width:33px;
+    height:19px;
+
+    background:#172d4e;
+
+    border-radius:
+        50% 50% 40% 40%;
+
+    top:-7px;
+    left:-1px;
+}
+
+.avatar-face::after{
+    content:"";
+
+    position:absolute;
+
+    width:9px;
+    height:5px;
+
+    background:#ffffff;
+
+    border-radius:50%;
+
+    left:11px;
+    top:17px;
+}
+
+
+/* Profile name */
+
+.profile-name{
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#08457f;
+}
+
+
+/* Profile arrow */
+
+.profile-arrow{
+    color:#0755a0;
+
+    font-size:13px;
+
+    margin-left:1px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+.main{
+    margin-left:0;
+
+    padding-top:74px;
+
+    min-height:100vh;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eaf6ff,
+            #f5fbff
+        );
+
+    transition:margin-left .3s ease;
+}
+
+
+/* Main when sidebar open */
+
+body.sidebar-open .main{
+    margin-left:257px;
+}
+
+
+.dashboard{
+    width:100%;
+
+    padding:30px 32px 40px;
+}
+
+
+/* =========================
+   GREETING
+========================= */
+
+.greeting{
+    margin-bottom:22px;
+}
+
+.greeting h1{
+    font-size:31px;
+
+    color:#064581;
+
+    margin-bottom:6px;
+}
+
+.greeting h1 span{
+    color:#075eae;
+}
+
+.greeting p{
+    font-size:17px;
+
+    color:#536f91;
+}
+
+
+/* =========================
+   STATISTICS
+========================= */
+
+.stats{
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:18px;
+
+    margin-bottom:22px;
+}
+
+.stat-card{
+    min-height:160px;
+
+    padding:18px 20px;
+
+    border-radius:12px;
+
+    border:1px solid #d7e7f3;
+
+    background:#fff;
+}
+
+.stat-card.viewed{
+    background:#f1f8ff;
+}
+
+.stat-card.application{
+    background:#effcf8;
+}
+
+.stat-card.reminder{
+    background:#fff3fa;
+}
+
+.stat-card.saved{
+    background:#f5f2ff;
+}
+
+
+/* Stat Icon */
+
+.stat-icon{
+    width:51px;
+    height:51px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    margin-bottom:14px;
+}
+
+.viewed .stat-icon{
+    background:#d7ecff;
+    color:#0873d9;
+}
+
+.application .stat-icon{
+    background:#cdf7df;
+    color:#0eaf62;
+}
+
+.reminder .stat-icon{
+    background:#ffd7ed;
+    color:#ec2382;
+}
+
+.saved .stat-icon{
+    background:#e8dcff;
+    color:#6636d6;
+}
+
+.stat-number{
+    font-size:28px;
+
+    font-weight:700;
+
+    color:#08447f;
+
+    line-height:1;
+
+    margin-bottom:7px;
+}
+
+.stat-label{
+    font-size:15px;
+
+    color:#144d84;
+}
+
+
+/* =========================
+   SECTION
+========================= */
+
+.section{
+    background:#ffffff;
+
+    border-radius:13px;
+
+    padding:17px 18px 18px;
+
+    margin-bottom:22px;
+
+    border:1px solid #dfebf5;
+
+    box-shadow:
+    0 3px 12px rgba(38,101,150,.05);
+}
+
+.section-heading{
+    height:38px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    margin-bottom:8px;
+}
+
+.section-title{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    color:#07467f;
+
+    font-size:20px;
+
+    font-weight:700;
+}
+
+.section-title i{
+    color:#0871d5;
+
+    font-size:21px;
+}
+
+.view-all{
+    color:#0872d4;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+}
+
+
+/* =========================
+   RECOMMENDED
+========================= */
+
+.recommended-grid{
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:22px;
+}
+
+.scheme-card{
+    border:1px solid #d8e6f1;
+
+    border-radius:11px;
+
+    padding:16px 18px;
+
+    background:#fff;
+
+    min-height:265px;
+}
+
+.scheme-top{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+}
+
+.scheme-icon{
+    width:53px;
+    height:53px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+}
+
+.education-icon{
+    background:#d9efff;
+    color:#0872d6;
+}
+
+.employment-icon{
+    background:#d6f8e7;
+    color:#14995c;
+}
+
+.match{
+    background:#dcf8e9;
+
+    color:#168752;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    padding:7px 11px;
+
+    border-radius:9px;
+}
+
+.scheme-card h3{
+    color:#06447f;
+
+    font-size:17px;
+
+    margin-top:14px;
+
+    margin-bottom:7px;
+}
+
+.scheme-card p{
+    color:#58718e;
+
+    font-size:14px;
+
+    line-height:1.65;
+
+    min-height:48px;
+}
+
+.category{
+    display:inline-block;
+
+    padding:5px 10px;
+
+    border-radius:7px;
+
+    margin-top:8px;
+
+    margin-bottom:13px;
+
+    font-size:12px;
+}
+
+.category.blue{
+    background:#e7f4ff;
+    color:#1475ce;
+}
+
+.category.orange{
+    background:#fff4df;
+    color:#dc8b16;
+}
+
+.details{
+    height:41px;
+
+    border-radius:8px;
+
+    background:linear-gradient(
+        90deg,
+        #0875eb,
+        #0879e8
+    );
+
+    color:white;
+
+    border:none;
+
+    width:100%;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    font-weight:600;
+}
+
+.details i{
+    margin-left:8px;
+}
+
+
+/* =========================
+   POPULAR SCHEMES
+========================= */
+
+.popular-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(4,1fr);
+
+    gap:18px;
+}
+
+.popular-card{
+    border:1px solid #d9e6f1;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    min-height:175px;
+
+    background:#fff;
+}
+
+.popular-icon{
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:22px;
+
+    margin-bottom:12px;
+}
+
+.popular-card:nth-child(1)
+.popular-icon{
+    background:#d9efff;
+    color:#0873d7;
+}
+
+.popular-card:nth-child(2)
+.popular-icon{
+    background:#d7f8e7;
+    color:#159a5d;
+}
+
+.popular-card:nth-child(3)
+.popular-icon{
+    background:#ffdced;
+    color:#e92882;
+}
+
+.popular-card:nth-child(4)
+.popular-icon{
+    background:#ffdcdc;
+    color:#e52727;
+}
+
+.popular-card h4{
+    font-size:15px;
+
+    color:#0b467e;
+
+    margin-bottom:8px;
+}
+
+.popular-category{
+    display:inline-block;
+
+    background:#eef6fb;
+
+    color:#607c99;
+
+    padding:4px 8px;
+
+    border-radius:5px;
+
+    font-size:11px;
+
+    margin-bottom:9px;
+}
+
+.popular-match{
+    display:inline-block;
+
+    background:#dff8ea;
+
+    color:#15925a;
+
+    padding:5px 8px;
+
+    border-radius:6px;
+
+    font-size:11px;
+
+    font-weight:600;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+
+    .popular-grid{
+        grid-template-columns:
+        repeat(2,1fr);
+    }
+}
+
+
+@media(max-width:750px){
+
+    .sidebar{
+        width:257px;
+    }
+
+    body.sidebar-open .header{
+        left:0;
+    }
+
+    body.sidebar-open .main{
+        margin-left:0;
+    }
+
+    .recommended-grid{
+        grid-template-columns:1fr;
+    }
+
+    .dashboard{
+        padding:25px 20px 35px;
+    }
+
+    .menu-toggle{
+        top:15px;
+        left:15px;
+    }
+}
+
+
+@media(max-width:550px){
+
+    .header{
+        height:65px;
+
+        padding:0 15px;
+    }
+
+    .main{
+        padding-top:65px;
+    }
+
+    .dashboard{
+        padding:22px 15px;
+    }
+
+    .greeting h1{
+        font-size:24px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .popular-grid{
+        grid-template-columns:1fr;
+    }
+
+    .profile-name,
+    .profile-arrow{
+        display:none;
+    }
+
+    .profile{
+        padding:0;
+    }
+
+    .notification{
+        width:38px;
+        height:38px;
+    }
+
+    .profile-avatar{
+        width:43px;
+        height:43px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     THREE LINE BUTTON
+========================= -->
+
+<button class="menu-toggle" id="menuToggle">
+
+    <i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar" id="sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="sidebar-logo-icon">
+
+            <i class="fa-solid fa-landmark"></i>
+
+        </div>
+
+        <div class="sidebar-logo-text">
+
+            Scheme Finder
+
+        </div>
+
+    </div>
+
+
+    <nav class="menu">
+
+        <a href="dashboard.html" class="menu-item active">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="schemes.html" class="menu-item">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <span>Schemes</span>
+
+        </a>
+
+
+        <a href="savedschemes.html" class="menu-item">
+
+            <i class="fa-regular fa-heart"></i>
+
+            <span>Saved Schemes</span>
+
+        </a>
+
+
+        <a href="alerts.html" class="menu-item">
+
+            <i class="fa-regular fa-bell"></i>
+
+            <span>Alerts</span>
+
+        </a>
+
+
+        <a href="profile.html" class="menu-item">
+
+            <i class="fa-regular fa-user"></i>
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a href="settings.html" class="menu-item">
+
+            <i class="fa-solid fa-gear"></i>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a href="logout.html" class="menu-item">
+
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+    </nav>
+
+</aside>
+
+
+
+<!-- =========================
+     OVERLAY
+========================= -->
+
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+
+<!-- =========================
+     TOP HEADER
+========================= -->
+
+<header class="header">
+
+    <div class="header-right">
+
+
+        <!-- Notification -->
+
+        <div class="notification">
+
+            <i class="fa-regular fa-bell"></i>
+
+            <span class="notification-dot"></span>
+
+        </div>
+
+
+        <!-- Profile -->
+
+        <div class="profile">
+
+            <div class="profile-avatar">
+
+                <div class="avatar-face"></div>
+
+            </div>
+
+            <span class="profile-name" id="profileName">
+                User
+            </span>
+
+            <i class="fa-solid fa-chevron-down profile-arrow"></i>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main class="main">
+
+<div class="dashboard">
+
+
+    <!-- =====================
+         GREETING
+    ====================== -->
+
+    <div class="greeting">
+
+        <h1>
+
+            Good Morning,
+            <span id="greetingName">User</span> 👋
+
+        </h1>
+
+        <p>
+            Find schemes that match your profile.
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================
+         STATISTICS
+    ====================== -->
+
+    <div class="stats">
+
+
+        <div class="stat-card viewed">
+
+            <div class="stat-icon">
+
+                <i class="fa-solid fa-eye"></i>
+
+            </div>
+
+            <div class="stat-number">
+                12
+            </div>
+
+            <div class="stat-label">
+                Viewed Schemes
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card application">
+
+            <div class="stat-icon">
+
+                <i class="fa-regular fa-file-lines"></i>
+
+            </div>
+
+            <div class="stat-number">
+                3
+            </div>
+
+            <div class="stat-label">
+                Applications
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card reminder">
+
+            <div class="stat-icon">
+
+                <i class="fa-regular fa-bell"></i>
+
+            </div>
+
+            <div class="stat-number">
+                5
+            </div>
+
+            <div class="stat-label">
+                Reminders
+            </div>
+
+        </div>
+
+
+
+        <div class="stat-card saved">
+
+            <div class="stat-icon">
+
+                <i class="fa-regular fa-bookmark"></i>
+
+            </div>
+
+            <div class="stat-number">
+                7
+            </div>
+
+            <div class="stat-label">
+                Saved Schemes
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================
+         RECOMMENDED
+    ====================== -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+
+                <span>
+                    Recommended For You
+                </span>
+
+            </div>
+
+            <a href="#" class="view-all">
+
+                View All
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+
+        <div class="recommended-grid">
+
+
+            <!-- Education -->
+
+            <div class="scheme-card">
+
+                <div class="scheme-top">
+
+                    <div class="scheme-icon education-icon">
+
+                        <i class="fa-solid fa-graduation-cap"></i>
+
+                    </div>
+
+                    <div class="match">
+                        95% Match
+                    </div>
+
+                </div>
+
+
+                <h3>
+                    Education Support Scheme
+                </h3>
+
+
+                <p>
+                    Financial assistance for higher education
+                    and skill development.
+                </p>
+
+
+                <span class="category blue">
+                    Education
+                </span>
+
+
+                <button class="details">
+
+                    View Details
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Employment -->
+
+            <div class="scheme-card">
+
+                <div class="scheme-top">
+
+                    <div class="scheme-icon employment-icon">
+
+                        <i class="fa-solid fa-briefcase"></i>
+
+                    </div>
+
+                    <div class="match">
+                        88% Match
+                    </div>
+
+                </div>
+
+
+                <h3>
+                    Employment Generation Scheme
+                </h3>
+
+
+                <p>
+                    Support for self-employment and
+                    job creation.
+                </p>
+
+
+                <span class="category orange">
+                    Employment
+                </span>
+
+
+                <button class="details">
+
+                    View Details
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================
+         POPULAR
+    ====================== -->
+
+    <section class="section">
+
+        <div class="section-heading">
+
+            <div class="section-title">
+
+                <i class="fa-solid fa-fire"></i>
+
+                <span>
+                    Popular Schemes
+                </span>
+
+            </div>
+
+            <a href="#" class="view-all">
+
+                View All
+
+                <i class="fa-solid fa-arrow-right"></i>
+
+            </a>
+
+        </div>
+
+
+
+        <div class="popular-grid">
+
+
+            <!-- Card 1 -->
+
+            <div class="popular-card">
+
+                <div class="popular-icon">
+
+                    <i class="fa-solid fa-graduation-cap"></i>
+
+                </div>
+
+                <h4>
+                    Post Matric Scholarship
+                </h4>
+
+                <span class="popular-category">
+                    Education
+                </span>
+
+                <br>
+
+                <span class="popular-match">
+                    92% Match
+                </span>
+
+            </div>
+
+
+
+            <!-- Card 2 -->
+
+            <div class="popular-card">
+
+                <div class="popular-icon">
+
+                    <i class="fa-solid fa-seedling"></i>
+
+                </div>
+
+                <h4>
+                    Kisan Credit Card
+                </h4>
+
+                <span class="popular-category">
+                    Farmers
+                </span>
+
+                <br>
+
+                <span class="popular-match">
+                    78% Match
+                </span>
+
+            </div>
+
+
+
+            <!-- Card 3 -->
+
+            <div class="popular-card">
+
+                <div class="popular-icon">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+                <h4>
+                    Maternity Benefit Scheme
+                </h4>
+
+                <span class="popular-category">
+                    Women
+                </span>
+
+                <br>
+
+                <span class="popular-match">
+                    76% Match
+                </span>
+
+            </div>
+
+
+
+            <!-- Card 4 -->
+
+            <div class="popular-card">
+
+                <div class="popular-icon">
+
+                    <i class="fa-solid fa-plus"></i>
+
+                </div>
+
+                <h4>
+                    Ayushman Bharat
+                </h4>
+
+                <span class="popular-category">
+                    Healthcare
+                </span>
+
+                <br>
+
+                <span class="popular-match">
+                    70% Match
+                </span>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+</div>
+
+</main>
+
+
+
+<!-- =========================
+     JAVASCRIPT
+========================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+
+    /* =========================
+       USER NAME
+    ========================= */
+
+    const savedName =
+        localStorage.getItem("schemeFinderUserName");
+
+    if(savedName){
+
+        document.getElementById("profileName")
+        .textContent = savedName;
+
+        document.getElementById("greetingName")
+        .textContent = savedName;
+
+    }
+
+
+
+    /* =========================
+       SIDEBAR ELEMENTS
+    ========================= */
+
+    const menuToggle =
+        document.getElementById("menuToggle");
+
+    const sidebar =
+        document.getElementById("sidebar");
+
+    const overlay =
+        document.getElementById("sidebarOverlay");
+
+
+
+    /* =========================
+       OPEN / CLOSE SIDEBAR
+    ========================= */
+
+    menuToggle.addEventListener("click", function(){
+
+        sidebar.classList.toggle("open");
+
+        document.body.classList.toggle(
+            "sidebar-open"
+        );
+
+    });
+
+
+
+    /* =========================
+       CLOSE WHEN CLICKING OUTSIDE
+    ========================= */
+
+    overlay.addEventListener("click", function(){
+
+        sidebar.classList.remove("open");
+
+        document.body.classList.remove(
+            "sidebar-open"
+        );
+
+    });
+ const menuItems =
+        document.querySelectorAll(".menu-item");
+
+    menuItems.forEach(function(item){
+
+        item.addEventListener("click", function(){
+
+            menuItems.forEach(function(menu){
+
+                menu.classList.remove("active");
+
+            });
+
+            item.classList.add("active");
+
+        });
+
+    });
+
+
+});
+
+</script>
+</body>
+</html>

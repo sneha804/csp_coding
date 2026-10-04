@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scheme Finder - Alerts</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+/* =========================
+   BASIC RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    background: #eef7ff;
+    color: #16477f;
+}
+
+
+/* =========================
+   MAIN LAYOUT
+========================= */
+
+.page {
+    display: flex;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    width: 260px;
+    min-height: 100vh;
+    background: linear-gradient(180deg, #0754a6, #03499a);
+    color: white;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+}
+
+
+/* Logo */
+
+.logo-area {
+    height: 105px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 18px 25px;
+}
+
+.logo-symbol {
+    font-size: 43px;
+    color: white;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+/* Sidebar Menu */
+
+.menu {
+    margin-top: 8px;
+    padding: 0 15px;
+}
+
+.menu-item {
+    height: 54px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 0 14px;
+    margin-bottom: 8px;
+    border-radius: 9px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.menu-item i {
+    width: 26px;
+    text-align: center;
+    font-size: 23px;
+}
+
+.menu-item:hover {
+    background: rgba(255,255,255,0.12);
+}
+
+.menu-item.active {
+    background: #1688f5;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+
+/* Bottom decoration */
+
+.sidebar-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 390px;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.building {
+    position: absolute;
+    bottom: 70px;
+    left: 10px;
+    right: 0;
+    text-align: center;
+    opacity: 0.16;
+    font-size: 150px;
+}
+
+.bottom-text {
+    position: absolute;
+    bottom: 95px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.7;
+    color: white;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main {
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+}
+
+
+/* =========================
+   TOP HEADER
+========================= */
+
+.top-header {
+    height: 74px;
+    background: white;
+    border-bottom: 1px solid #dceafa;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    padding: 0 28px;
+    gap: 30px;
+}
+
+
+/* Search */
+
+.search-box {
+    width: 295px;
+    height: 42px;
+
+    border: 1px solid #d5e4f3;
+    border-radius: 25px;
+
+    display: flex;
+    align-items: center;
+    gap: 11px;
+
+    padding: 0 17px;
+
+    background: white;
+}
+
+.search-box i {
+    color: #1765ae;
+    font-size: 17px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+
+    font-family: Poppins;
+    font-size: 12px;
+    color: #345c87;
+}
+
+.search-box input::placeholder {
+    color: #7890aa;
+}
+
+
+/* Notification */
+
+.notification {
+    position: relative;
+    font-size: 23px;
+    color: #0754a6;
+    cursor: pointer;
+}
+
+.notification .badge {
+    position: absolute;
+    top: -7px;
+    right: -8px;
+
+    width: 17px;
+    height: 17px;
+
+    background: #e3293d;
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 10px;
+    font-weight: 600;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Profile */
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.profile-circle {
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: #e8f3ff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #0754a6;
+    font-size: 24px;
+}
+
+.profile-name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #123f73;
+}
+
+.profile i {
+    color: #0754a6;
+    font-size: 14px;
+}
+
+
+/* =========================
+   CONTENT AREA
+========================= */
+
+.content {
+    padding: 28px 30px 35px;
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+.heading-icon {
+    width: 68px;
+    height: 68px;
+
+    border-radius: 50%;
+
+    background: #dceeff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #0874e8;
+    font-size: 34px;
+}
+
+.page-heading h1 {
+    color: #07488d;
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.page-heading p {
+    margin-top: 2px;
+    color: #52729a;
+    font-size: 15px;
+}
+
+
+/* =========================
+   TWO COLUMN AREA
+========================= */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 410px;
+    gap: 24px;
+    align-items: start;
+}
+
+
+/* =========================
+   LEFT ALERT AREA
+========================= */
+
+.alert-container {
+    background: rgba(255,255,255,0.58);
+    border-radius: 12px;
+    padding: 0;
+}
+
+
+/* Tabs */
+
+.tabs {
+    height: 43px;
+    background: #e9f4fd;
+    border-radius: 9px;
+
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+
+    margin-bottom: 25px;
+    overflow: hidden;
+}
+
+.tab {
+    border: none;
+    background: transparent;
+
+    color: #52729a;
+
+    font-family: Poppins;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #087cf0;
+    color: white;
+    border-radius: 8px;
+}
+
+
+/* =========================
+   ALERT CARD
+========================= */
+
+.alert-card {
+    background: white;
+    border: 1px solid #dceafa;
+    border-radius: 11px;
+
+    min-height: 132px;
+
+    margin-bottom: 11px;
+    padding: 17px 19px;
+
+    display: flex;
+    align-items: flex-start;
+
+    gap: 18px;
+
+    box-shadow: 0 2px 7px rgba(40,100,160,0.04);
+}
+
+
+/* Alert Icon */
+
+.alert-icon {
+    width: 62px;
+    height: 62px;
+
+    min-width: 62px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 28px;
+}
+
+.red {
+    background: #ffe2e7;
+    color: #ed2847;
+}
+
+.green {
+    background: #dff8e9;
+    color: #20ad63;
+}
+
+.purple {
+    background: #eee4ff;
+    color: #7144d7;
+}
+
+.orange {
+    background: #fff0d8;
+    color: #f29a18;
+}
+
+.blue {
+    background: #dceeff;
+    color: #087cf0;
+}
+
+
+/* Alert Content */
+
+.alert-content {
+    flex: 1;
+}
+
+.alert-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.alert-title {
+    color: #07478b;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.alert-description {
+    color: #52729a;
+    font-size: 13px;
+    line-height: 1.7;
+
+    margin-top: 4px;
+    max-width: 700px;
+}
+
+
+/* Label */
+
+.alert-label {
+    padding: 5px 13px;
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+.label-red {
+    background: #ffe5e9;
+    color: #ed2847;
+}
+
+.label-green {
+    background: #e0f8e9;
+    color: #159955;
+}
+
+.label-blue {
+    background: #e2f0ff;
+    color: #0871db;
+}
+
+.label-orange {
+    background: #fff1d9;
+    color: #e99719;
+}
+
+
+/* Date */
+
+.alert-date {
+    margin-top: 7px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #52769d;
+
+    font-size: 11px;
+}
+
+.alert-date i {
+    color: #527aa4;
+}
+
+
+/* Arrow */
+
+.alert-arrow {
+    color: #4778a8;
+    font-size: 17px;
+    margin-top: 20px;
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+
+/* Stay informed */
+
+.info-card {
+    background: white;
+
+    border: 1px solid #dceafa;
+    border-radius: 11px;
+
+    min-height: 148px;
+
+    padding: 24px;
+
+    position: relative;
+    overflow: hidden;
+}
+
+.info-heading {
+    display: flex;
+    align-items: flex-start;
+    gap: 17px;
+}
+
+.info-heading i {
+    font-size: 31px;
+    color: #0874e8;
+}
+
+.info-heading h3 {
+    color: #0b4c91;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.info-heading p {
+    margin-top: 5px;
+    color: #597899;
+    font-size: 12px;
+    line-height: 1.8;
+    max-width: 240px;
+}
+
+
+/* Bell decoration */
+
+.info-decoration {
+    position: absolute;
+    right: 18px;
+    bottom: 17px;
+
+    color: #aed5fb;
+    font-size: 58px;
+    transform: rotate(-8deg);
+}
+
+
+/* =========================
+   QUICK ALERT SUMMARY
+========================= */
+
+.summary-card {
+    background: white;
+
+    border: 1px solid #dceafa;
+    border-radius: 11px;
+
+    padding: 22px 25px 12px;
+}
+
+.summary-title {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+
+    color: #0a4c91;
+    font-size: 17px;
+    font-weight: 600;
+
+    margin-bottom: 10px;
+}
+
+.summary-title i {
+    color: #0874e8;
+}
+
+
+/* Summary row */
+
+.summary-row {
+    height: 59px;
+
+    border-bottom: 1px solid #edf3f8;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.summary-row:last-child {
+    border-bottom: none;
+}
+
+.summary-icon {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.summary-text {
+    flex: 1;
+    font-size: 13px;
+    color: #1760a6;
+}
+
+.summary-number {
+    font-size: 18px;
+    color: #0c579e;
+    font-weight: 500;
+}
+
+.summary-arrow {
+    color: #3477ae;
+    font-size: 14px;
+}
+
+
+/* Summary icon colors */
+
+.summary-red {
+    background: #ffe3e8;
+    color: #ec3150;
+}
+
+.summary-green {
+    background: #dff8e9;
+    color: #19a65d;
+}
+
+.summary-blue {
+    background: #dceeff;
+    color: #087cf0;
+}
+
+.summary-orange {
+    background: #fff0d6;
+    color: #ef9c1c;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        margin-left: 220px;
+        width: calc(100% - 220px);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .right-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 75px;
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    .logo-area {
+        justify-content: center;
+        padding: 15px;
+    }
+
+    .menu-item {
+        justify-content: center;
+        padding: 0;
+    }
+
+    .menu-item span {
+        display: none;
+    }
+
+    .menu-item i {
+        font-size: 22px;
+    }
+
+    .main {
+        margin-left: 75px;
+        width: calc(100% - 75px);
+    }
+
+    .search-box {
+        width: 210px;
+    }
+
+    .profile-name,
+    .profile > i {
+        display: none;
+    }
+
+    .right-column {
+        display: block;
+    }
+
+    .info-card,
+    .summary-card {
+        margin-bottom: 20px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .top-header {
+        padding: 0 15px;
+        gap: 15px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .content {
+        padding: 20px 15px;
+    }
+
+    .page-heading h1 {
+        font-size: 24px;
+    }
+
+    .page-heading p {
+        font-size: 12px;
+    }
+
+    .alert-card {
+        padding: 13px;
+        gap: 10px;
+    }
+
+    .alert-icon {
+        width: 48px;
+        height: 48px;
+        min-width: 48px;
+        font-size: 20px;
+    }
+
+    .alert-title-row {
+        align-items: flex-start;
+    }
+
+    .alert-title {
+        font-size: 13px;
+    }
+
+    .alert-description {
+        font-size: 11px;
+    }
+
+    .alert-label {
+        display: none;
+    }
+
+    .tabs {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .tab {
+        height: 40px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo-area">
+
+            <div class="logo-symbol">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+
+            <div class="logo-text">
+                Scheme Finder
+            </div>
+
+        </div>
+
+
+        <nav class="menu">
+
+            <a href="dashboard.html" class="menu-item">
+                <i class="fa-solid fa-house"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="schemes.html" class="menu-item">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Schemes</span>
+            </a>
+
+            <a href="savedschemes.html" class="menu-item">
+                <i class="fa-regular fa-heart"></i>
+                <span>Saved Schemes</span>
+            </a>
+
+            <a href="alerts.html" class="menu-item active">
+                <i class="fa-regular fa-bell"></i>
+                <span>Alerts</span>
+            </a>
+
+            <a href="profile.html" class="menu-item">
+                <i class="fa-regular fa-user"></i>
+                <span>Profile</span>
+            </a>
+
+            <a href="settings.html" class="menu-item">
+                <i class="fa-solid fa-gear"></i>
+                <span>Settings</span>
+            </a>
+
+            <a href="logout.html" class="menu-item">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                <span>Logout</span>
+            </a>
+
+        </nav>
+
+
+        <!-- Bottom sidebar -->
+
+        <div class="sidebar-bottom">
+
+            <div class="building">
+                <i class="fa-solid fa-landmark"></i>
+            </div>
+
+            <div class="bottom-text">
+                Government Schemes<br>
+                for a Better Tomorrow
+            </div>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="main">
+
+
+        <!-- TOP HEADER -->
+
+        <header class="top-header">
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search schemes..."
+                >
+
+            </div>
+
+
+            <div class="notification">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span class="badge">3</span>
+
+            </div>
+
+
+            <div class="profile">
+
+                <div class="profile-circle">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+
+                <span class="profile-name">
+                    Sneha
+                </span>
+
+                <i class="fa-solid fa-chevron-down"></i>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             CONTENT
+        ========================== -->
+
+        <section class="content">
+
+
+            <!-- PAGE HEADING -->
+
+            <div class="page-heading">
+
+                <div class="heading-icon">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+
+                <div>
+                    <h1>Alerts</h1>
+
+                    <p>
+                        Stay updated with the latest scheme notifications,
+                        deadlines and important updates.
+                    </p>
+                </div>
+
+            </div>
+
+
+
+            <!-- TWO COLUMN -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- =========================
+                     LEFT
+                ========================== -->
+
+                <div class="alert-container">
+
+
+                    <!-- Tabs -->
+
+                    <div class="tabs">
+
+                        <button class="tab active">
+                            All Alerts (5)
+                        </button>
+
+                        <button class="tab">
+                            Important (3)
+                        </button>
+
+                        <button class="tab">
+                            General (2)
+                        </button>
+
+                    </div>
+
+
+
+                    <!-- ALERT 1 -->
+
+                    <div class="alert-card">
+
+                        <div class="alert-icon red">
+                            <i class="fa-regular fa-calendar"></i>
+                        </div>
+
+                        <div class="alert-content">
+
+                            <div class="alert-title-row">
+
+                                <div class="alert-title">
+                                    Application deadline approaching
+                                </div>
+
+                                <span class="alert-label label-red">
+                                    Important
+                                </span>
+
+                            </div>
+
+                            <p class="alert-description">
+                                The last date to apply for Education Support
+                                Scheme is 20 Oct 2025. Only 5 days left!
+                            </p>
+
+                            <div class="alert-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    15 Oct 2025&nbsp;&nbsp;·&nbsp;&nbsp;10:30 AM
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="alert-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ALERT 2 -->
+
+                    <div class="alert-card">
+
+                        <div class="alert-icon green">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+
+                        <div class="alert-content">
+
+                            <div class="alert-title-row">
+
+                                <div class="alert-title">
+                                    New scheme available
+                                </div>
+
+                                <span class="alert-label label-green">
+                                    New
+                                </span>
+
+                            </div>
+
+                            <p class="alert-description">
+                                Youth Development Scheme is now available
+                                for eligible candidates in your profile range.
+                            </p>
+
+                            <div class="alert-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    12 Oct 2025&nbsp;&nbsp;·&nbsp;&nbsp;02:15 PM
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="alert-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ALERT 3 -->
+
+                    <div class="alert-card">
+
+                        <div class="alert-icon purple">
+                            <i class="fa-regular fa-file-lines"></i>
+                        </div>
+
+                        <div class="alert-content">
+
+                            <div class="alert-title-row">
+
+                                <div class="alert-title">
+                                    Application status update
+                                </div>
+
+                                <span class="alert-label label-blue">
+                                    Update
+                                </span>
+
+                            </div>
+
+                            <p class="alert-description">
+                                Your application for Post Matric Scholarship
+                                has been approved.
+                            </p>
+
+                            <div class="alert-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    10 Oct 2025&nbsp;&nbsp;·&nbsp;&nbsp;11:20 AM
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="alert-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ALERT 4 -->
+
+                    <div class="alert-card">
+
+                        <div class="alert-icon orange">
+                            <i class="fa-regular fa-clock"></i>
+                        </div>
+
+                        <div class="alert-content">
+
+                            <div class="alert-title-row">
+
+                                <div class="alert-title">
+                                    Reminder
+                                </div>
+
+                                <span class="alert-label label-orange">
+                                    Reminder
+                                </span>
+
+                            </div>
+
+                            <p class="alert-description">
+                                Saved scheme application opens tomorrow
+                                (15 Oct 2025).
+                            </p>
+
+                            <div class="alert-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    14 Oct 2025&nbsp;&nbsp;·&nbsp;&nbsp;09:00 AM
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="alert-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- ALERT 5 -->
+
+                    <div class="alert-card">
+
+                        <div class="alert-icon blue">
+                            <i class="fa-solid fa-info"></i>
+                        </div>
+
+                        <div class="alert-content">
+
+                            <div class="alert-title-row">
+
+                                <div class="alert-title">
+                                    Scheme information
+                                </div>
+
+                                <span class="alert-label label-blue">
+                                    Information
+                                </span>
+
+                            </div>
+
+                            <p class="alert-description">
+                                Kisan Credit Card interest rate has been revised.
+                                Check the latest details in the Farmers category.
+                            </p>
+
+                            <div class="alert-date">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                                <span>
+                                    09 Oct 2025&nbsp;&nbsp;·&nbsp;&nbsp;04:45 PM
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="alert-arrow">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- =========================
+                     RIGHT COLUMN
+                ========================== -->
+
+                <div class="right-column">
+
+
+                    <!-- Stay Informed -->
+
+                    <div class="info-card">
+
+                        <div class="info-heading">
+
+                            <i class="fa-solid fa-bell"></i>
+
+                            <div>
+
+                                <h3>
+                                    Stay Informed
+                                </h3>
+
+                                <p>
+                                    Get notified about new schemes,
+                                    application deadlines and important
+                                    updates.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="info-decoration">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- Quick Alert Summary -->
+
+                    <div class="summary-card">
+
+                        <div class="summary-title">
+
+                            <i class="fa-solid fa-chart-column"></i>
+
+                            <span>
+                                Quick Alerts Summary
+                            </span>
+
+                        </div>
+
+
+
+                        <!-- Important -->
+
+                        <div class="summary-row">
+
+                            <div class="summary-icon summary-red">
+                                <i class="fa-regular fa-calendar"></i>
+                            </div>
+
+                            <div class="summary-text">
+                                Important Alerts
+                            </div>
+
+                            <div class="summary-number">
+                                3
+                            </div>
+
+                            <div class="summary-arrow">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- New Schemes -->
+
+                        <div class="summary-row">
+
+                            <div class="summary-icon summary-green">
+                                <i class="fa-solid fa-bullhorn"></i>
+                            </div>
+
+                            <div class="summary-text">
+                                New Schemes
+                            </div>
+
+                            <div class="summary-number">
+                                1
+                            </div>
+
+                            <div class="summary-arrow">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Updates -->
+
+                        <div class="summary-row">
+
+                            <div class="summary-icon summary-blue">
+                                <i class="fa-solid fa-info"></i>
+                            </div>
+
+                            <div class="summary-text">
+                                Updates
+                            </div>
+
+                            <div class="summary-number">
+                                1
+                            </div>
+
+                            <div class="summary-arrow">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+
+                        </div>
+
+
+
+                        <!-- Reminders -->
+
+                        <div class="summary-row">
+
+                            <div class="summary-icon summary-orange">
+                                <i class="fa-regular fa-clock"></i>
+                            </div>
+
+                            <div class="summary-text">
+                                Reminders
+                            </div>
+
+                            <div class="summary-number">
+                                1
+                            </div>
+
+                            <div class="summary-arrow">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+</html>

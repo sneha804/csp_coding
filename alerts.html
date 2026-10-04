@@ -1,0 +1,1834 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scheme Finder - Alerts</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+/* =====================================================
+   RESET
+===================================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Segoe UI", Arial, sans-serif;
+    background:#eef7ff;
+    color:#124b84;
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+
+    width:260px;
+    height:100vh;
+
+    background:linear-gradient(
+        180deg,
+        #064b91 0%,
+        #0755a5 65%,
+        #0866c4 100%
+    );
+
+    color:white;
+    z-index:1000;
+
+    overflow:hidden;
+
+    transition:transform .3s ease;
+}
+
+
+/* Bottom decorative shape */
+
+.sidebar::after{
+    content:"";
+
+    position:absolute;
+
+    width:500px;
+    height:350px;
+
+    left:-180px;
+    bottom:-110px;
+
+    border-radius:50%;
+
+    background:rgba(0,86,180,.65);
+}
+
+
+/* =====================================================
+   THREE LINE BUTTON
+===================================================== */
+
+.sidebar-toggle{
+    position:fixed;
+
+    top:18px;
+    left:18px;
+
+    width:42px;
+    height:42px;
+
+    border:none;
+    border-radius:8px;
+
+    background:#07529b;
+    color:white;
+
+    font-size:21px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    cursor:pointer;
+
+    z-index:2000;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.18);
+
+    transition:.3s;
+}
+
+.sidebar-toggle:hover{
+    background:#086ac4;
+}
+
+
+/* =====================================================
+   SIDEBAR CLOSED
+===================================================== */
+
+body.sidebar-closed .sidebar{
+    transform:translateX(-100%);
+}
+
+body.sidebar-closed .header{
+    left:0;
+}
+
+body.sidebar-closed .main{
+    margin-left:0;
+}
+
+
+/* =====================================================
+   LOGO
+===================================================== */
+
+.logo{
+    height:88px;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+
+    padding-left:75px;
+
+    position:relative;
+    z-index:2;
+}
+
+.logo-icon{
+    font-size:42px;
+}
+
+.logo-text{
+    font-size:23px;
+    font-weight:700;
+    white-space:nowrap;
+}
+
+
+/* =====================================================
+   SIDEBAR MENU
+===================================================== */
+
+.menu{
+    padding:15px 15px;
+
+    position:relative;
+    z-index:2;
+}
+
+.menu a{
+    height:54px;
+
+    display:flex;
+    align-items:center;
+
+    gap:18px;
+
+    padding:0 14px;
+
+    margin-bottom:6px;
+
+    border-radius:9px;
+
+    color:white;
+
+    text-decoration:none;
+
+    font-size:16px;
+
+    transition:.2s;
+}
+
+.menu a i{
+    width:27px;
+
+    text-align:center;
+
+    font-size:23px;
+}
+
+.menu a:hover{
+    background:rgba(255,255,255,.12);
+}
+
+.menu a.active{
+    background:#1385ed;
+
+    box-shadow:
+    0 5px 15px rgba(0,0,0,.12);
+}
+
+
+/* =====================================================
+   SIDEBAR BOTTOM
+===================================================== */
+
+.sidebar-bottom{
+    position:absolute;
+
+    bottom:55px;
+    left:0;
+
+    width:100%;
+
+    text-align:center;
+
+    z-index:2;
+}
+
+.sidebar-bottom p{
+    color:white;
+
+    font-size:14px;
+
+    line-height:1.55;
+}
+
+.india-line{
+    width:70px;
+    height:5px;
+
+    margin:12px auto 0;
+
+    border-radius:10px;
+
+    background:
+    linear-gradient(
+        90deg,
+        #f5a623 0 33%,
+        white 33% 66%,
+        #28a745 66%
+    );
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    position:fixed;
+
+    top:0;
+    left:260px;
+    right:0;
+
+    height:73px;
+
+    background:white;
+
+    border-bottom:1px solid #dceaf5;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    padding:0 28px;
+
+    z-index:900;
+
+    transition:left .3s ease;
+}
+
+
+/* =====================================================
+   HEADER RIGHT
+===================================================== */
+
+.header-right{
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+}
+
+
+/* =====================================================
+   SEARCH
+===================================================== */
+
+.search-box{
+    width:295px;
+    height:42px;
+
+    border:1px solid #d8e5f1;
+
+    border-radius:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    padding:0 16px;
+
+    background:#fff;
+}
+
+.search-box i{
+    color:#3974aa;
+
+    font-size:16px;
+
+    margin-right:11px;
+}
+
+.search-box input{
+    width:100%;
+
+    border:none;
+    outline:none;
+
+    color:#315b84;
+
+    font-size:13px;
+}
+
+.search-box input::placeholder{
+    color:#7188a0;
+}
+
+
+/* =====================================================
+   NOTIFICATION
+===================================================== */
+
+.notification{
+    width:35px;
+    height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+
+    color:#0755a0;
+
+    font-size:23px;
+}
+
+.notification-number{
+    position:absolute;
+
+    top:0;
+    right:-3px;
+
+    width:17px;
+    height:17px;
+
+    background:#e51f36;
+
+    color:white;
+
+    font-size:10px;
+
+    font-weight:bold;
+
+    border-radius:50%;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:2px solid white;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+.profile{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    cursor:pointer;
+}
+
+.profile-circle{
+    width:46px;
+    height:46px;
+
+    border-radius:50%;
+
+    background:#e4f1ff;
+
+    border:2px solid #d7eafa;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:#0759a5;
+
+    font-size:25px;
+}
+
+.profile-name{
+    font-size:16px;
+
+    font-weight:600;
+
+    color:#08457f;
+}
+
+.profile-arrow{
+    font-size:13px;
+
+    color:#0756a0;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.main{
+    margin-left:260px;
+
+    padding-top:73px;
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        135deg,
+        #edf7ff,
+        #f6fbff
+    );
+
+    transition:margin-left .3s ease;
+}
+
+.content{
+    padding:27px 25px 40px;
+}
+
+
+/* =====================================================
+   PAGE TITLE
+===================================================== */
+
+.page-heading{
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+    margin-bottom:20px;
+}
+
+.page-icon{
+    width:66px;
+    height:66px;
+
+    border-radius:50%;
+
+    background:#dceeff;
+
+    color:#0876df;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:34px;
+}
+
+.page-title h1{
+    color:#06447f;
+
+    font-size:30px;
+
+    margin-bottom:3px;
+}
+
+.page-title p{
+    color:#547395;
+
+    font-size:15px;
+}
+
+
+/* =====================================================
+   MAIN LAYOUT
+===================================================== */
+
+.alert-layout{
+    display:grid;
+
+    grid-template-columns:
+    minmax(600px, 1fr)
+    410px;
+
+    gap:22px;
+
+    align-items:start;
+}
+
+
+/* =====================================================
+   LEFT ALERT AREA
+===================================================== */
+
+.alert-container{
+    background:rgba(255,255,255,.55);
+
+    border-radius:12px;
+
+    padding:0;
+}
+
+
+/* =====================================================
+   TABS
+===================================================== */
+
+.alert-tabs{
+    height:43px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr 1fr;
+
+    background:#eaf4fc;
+
+    border-radius:10px;
+
+    overflow:hidden;
+
+    margin-bottom:25px;
+}
+
+.alert-tab{
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:14px;
+
+    color:#456a93;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.alert-tab.active{
+    background:#0879ed;
+
+    color:white;
+
+    font-weight:600;
+
+    border-radius:9px;
+}
+
+
+/* =====================================================
+   ALERT CARD
+===================================================== */
+
+.alert-card{
+    min-height:126px;
+
+    background:white;
+
+    border:1px solid #d9e8f4;
+
+    border-radius:11px;
+
+    margin-bottom:10px;
+
+    padding:18px 20px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+    box-shadow:
+    0 2px 7px rgba(28,94,143,.035);
+
+    transition:.2s;
+}
+
+.alert-card:hover{
+    transform:translateY(-1px);
+
+    box-shadow:
+    0 5px 15px rgba(28,94,143,.08);
+}
+
+
+/* =====================================================
+   ALERT ICON
+===================================================== */
+
+.alert-icon{
+    width:60px;
+    height:60px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:26px;
+}
+
+.alert-icon.red{
+    background:#ffe1e9;
+    color:#ef2349;
+}
+
+.alert-icon.green{
+    background:#d8f8e8;
+    color:#0ca866;
+}
+
+.alert-icon.purple{
+    background:#e7dcff;
+    color:#7135d7;
+}
+
+.alert-icon.orange{
+    background:#ffedcf;
+    color:#ed9210;
+}
+
+.alert-icon.blue{
+    background:#dcefff;
+    color:#0875dd;
+}
+
+
+/* =====================================================
+   ALERT CONTENT
+===================================================== */
+
+.alert-content{
+    flex:1;
+
+    min-width:0;
+}
+
+.alert-title-row{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+}
+
+.alert-title{
+    color:#06447f;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+}
+
+.alert-description{
+    color:#547395;
+
+    font-size:13.5px;
+
+    line-height:1.6;
+
+    max-width:680px;
+}
+
+
+/* =====================================================
+   ALERT TYPE
+===================================================== */
+
+.alert-type{
+    flex-shrink:0;
+
+    padding:6px 13px;
+
+    border-radius:18px;
+
+    font-size:12px;
+
+    font-weight:600;
+}
+
+.alert-type.important{
+    color:#ed2346;
+    background:#ffe4eb;
+}
+
+.alert-type.new{
+    color:#13965a;
+    background:#e1f8eb;
+}
+
+.alert-type.update{
+    color:#0872d7;
+    background:#e2f1ff;
+}
+
+.alert-type.reminder{
+    color:#ed9210;
+    background:#fff0d9;
+}
+
+.alert-type.information{
+    color:#0872d7;
+    background:#e2f1ff;
+}
+
+
+/* =====================================================
+   ALERT DATE
+===================================================== */
+
+.alert-date{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    margin-top:9px;
+
+    color:#547395;
+
+    font-size:12px;
+}
+
+.alert-date i{
+    color:#397bb4;
+}
+
+
+/* =====================================================
+   ARROW
+===================================================== */
+
+.alert-arrow{
+    width:20px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    align-self:center;
+
+    color:#5782a8;
+
+    font-size:17px;
+}
+
+
+/* =====================================================
+   RIGHT SIDE BOXES
+===================================================== */
+
+.right-panel{
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+}
+
+
+/* =====================================================
+   STAY INFORMED
+===================================================== */
+
+.informed-box{
+    min-height:148px;
+
+    background:white;
+
+    border:1px solid #d9e8f4;
+
+    border-radius:11px;
+
+    padding:22px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 2px 8px rgba(28,94,143,.04);
+}
+
+.informed-content{
+    display:flex;
+
+    gap:18px;
+}
+
+.informed-icon{
+    color:#0875dc;
+
+    font-size:30px;
+
+    padding-top:2px;
+}
+
+.informed-text h2{
+    color:#06447f;
+
+    font-size:17px;
+
+    margin-bottom:7px;
+}
+
+.informed-text p{
+    color:#5c7897;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    max-width:225px;
+}
+
+
+/* Bell illustration */
+
+.informed-illustration{
+    width:95px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    position:relative;
+}
+
+.big-bell{
+    color:#83b7e8;
+
+    font-size:57px;
+
+    transform:rotate(-10deg);
+}
+
+.paper-plane{
+    position:absolute;
+
+    right:0;
+    bottom:12px;
+
+    color:#087ce8;
+
+    font-size:25px;
+
+    transform:rotate(-20deg);
+}
+
+
+/* =====================================================
+   QUICK SUMMARY
+===================================================== */
+
+.summary-box{
+    background:white;
+
+    border:1px solid #d9e8f4;
+
+    border-radius:11px;
+
+    overflow:hidden;
+
+    box-shadow:
+    0 2px 8px rgba(28,94,143,.04);
+}
+
+.summary-header{
+    height:60px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:0 22px;
+
+    color:#06447f;
+
+    font-size:17px;
+
+    font-weight:700;
+}
+
+.summary-header i{
+    color:#0875dc;
+
+    font-size:22px;
+}
+
+
+/* Summary rows */
+
+.summary-row{
+    min-height:64px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    padding:0 22px;
+
+    border-top:1px solid #edf3f8;
+}
+
+.summary-row-icon{
+    width:38px;
+    height:38px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:18px;
+}
+
+.summary-row-icon.red{
+    background:#ffe1e9;
+    color:#ef2349;
+}
+
+.summary-row-icon.green{
+    background:#d8f8e8;
+    color:#0ca866;
+}
+
+.summary-row-icon.blue{
+    background:#dcefff;
+    color:#0875dd;
+}
+
+.summary-row-icon.orange{
+    background:#ffedcf;
+    color:#ed9210;
+}
+
+.summary-row-title{
+    flex:1;
+
+    color:#28639a;
+
+    font-size:13px;
+}
+
+.summary-count{
+    color:#145aa0;
+
+    font-size:17px;
+
+    font-weight:600;
+}
+
+.summary-arrow{
+    color:#527da4;
+
+    font-size:15px;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1100px){
+
+    .alert-layout{
+        grid-template-columns:1fr;
+    }
+
+    .right-panel{
+        display:grid;
+
+        grid-template-columns:1fr 1fr;
+    }
+
+    .search-box{
+        width:220px;
+    }
+}
+
+
+@media(max-width:800px){
+
+    .sidebar{
+        width:260px;
+    }
+
+    .header{
+        left:0;
+    }
+
+    .main{
+        margin-left:0;
+    }
+
+    .alert-layout{
+        grid-template-columns:1fr;
+    }
+
+    .right-panel{
+        display:flex;
+    }
+
+    .alert-title-row{
+        align-items:flex-start;
+    }
+}
+
+
+@media(max-width:600px){
+
+    .header{
+        padding:0 15px;
+    }
+
+    .search-box{
+        display:none;
+    }
+
+    .profile-name,
+    .profile-arrow{
+        display:none;
+    }
+
+    .content{
+        padding:22px 14px;
+    }
+
+    .page-heading{
+        gap:13px;
+    }
+
+    .page-icon{
+        width:53px;
+        height:53px;
+
+        font-size:28px;
+    }
+
+    .page-title h1{
+        font-size:25px;
+    }
+
+    .page-title p{
+        font-size:13px;
+    }
+
+    .alert-tabs{
+        font-size:12px;
+    }
+
+    .alert-card{
+        padding:15px;
+
+        gap:12px;
+    }
+
+    .alert-icon{
+        width:48px;
+        height:48px;
+
+        font-size:21px;
+    }
+
+    .alert-title{
+        font-size:15px;
+    }
+
+    .alert-description{
+        font-size:12.5px;
+    }
+
+    .alert-title-row{
+        flex-direction:column;
+
+        gap:5px;
+    }
+
+    .alert-arrow{
+        display:none;
+    }
+
+    .informed-box{
+        padding:18px;
+    }
+
+    .informed-illustration{
+        display:none;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     THREE LINE BUTTON
+===================================================== -->
+
+<button class="sidebar-toggle" onclick="toggleSidebar()">
+
+    <i class="fa-solid fa-bars"></i>
+
+</button>
+
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+
+    <div class="logo">
+
+        <div class="logo-icon">
+
+            <i class="fa-solid fa-landmark"></i>
+
+        </div>
+
+        <div class="logo-text">
+
+            Scheme Finder
+
+        </div>
+
+    </div>
+
+
+
+    <nav class="menu">
+
+
+        <a href="dashboard.html">
+
+            <i class="fa-solid fa-house"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="schemes.html">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <span>Schemes</span>
+
+        </a>
+
+
+        <a href="savedschemes.html">
+
+            <i class="fa-regular fa-heart"></i>
+
+            <span>Saved Schemes</span>
+
+        </a>
+
+
+        <a href="alerts.html" class="active">
+
+            <i class="fa-regular fa-bell"></i>
+
+            <span>Alerts</span>
+
+        </a>
+
+
+        <a href="profile.html">
+
+            <i class="fa-regular fa-user"></i>
+
+            <span>Profile</span>
+
+        </a>
+
+
+        <a href="settings.html">
+
+            <i class="fa-solid fa-gear"></i>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a href="logout.html">
+
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+
+    </nav>
+
+
+
+    <div class="sidebar-bottom">
+
+        <p>
+
+            Government Schemes<br>
+
+            for a Better Tomorrow
+
+        </p>
+
+        <div class="india-line"></div>
+
+    </div>
+
+
+</aside>
+
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+
+    <div class="header-right">
+
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                placeholder="Search schemes..."
+            >
+
+        </div>
+
+
+
+        <!-- NOTIFICATION -->
+
+        <div class="notification">
+
+            <i class="fa-regular fa-bell"></i>
+
+            <span class="notification-number">
+                3
+            </span>
+
+        </div>
+
+
+
+        <!-- PROFILE -->
+
+        <div class="profile">
+
+            <div class="profile-circle">
+
+                <i class="fa-regular fa-user"></i>
+
+            </div>
+
+            <span class="profile-name">
+                Sneha
+            </span>
+
+            <i class="fa-solid fa-chevron-down profile-arrow"></i>
+
+        </div>
+
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+
+<div class="content">
+
+
+    <!-- PAGE HEADING -->
+
+    <div class="page-heading">
+
+
+        <div class="page-icon">
+
+            <i class="fa-regular fa-bell"></i>
+
+        </div>
+
+
+        <div class="page-title">
+
+            <h1>
+                Alerts
+            </h1>
+
+            <p>
+                Stay updated with the latest scheme notifications,
+                deadlines and important updates.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         ALERT LAYOUT
+    ================================================== -->
+
+    <div class="alert-layout">
+
+
+        <!-- =================================================
+             LEFT SIDE
+        ================================================== -->
+
+        <section class="alert-container">
+
+
+            <!-- TABS -->
+
+            <div class="alert-tabs">
+
+                <div class="alert-tab active">
+                    All Alerts (5)
+                </div>
+
+                <div class="alert-tab">
+                    Important (3)
+                </div>
+
+                <div class="alert-tab">
+                    General (2)
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ALERT 1
+            ================================================== -->
+
+            <div class="alert-card">
+
+
+                <div class="alert-icon red">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                </div>
+
+
+                <div class="alert-content">
+
+
+                    <div class="alert-title-row">
+
+                        <div>
+
+                            <div class="alert-title">
+                                Application deadline approaching
+                            </div>
+
+                            <p class="alert-description">
+
+                                The last date to apply for Education Support
+                                Scheme is 20 Oct 2025. Only 5 days left!
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="alert-type important">
+                            Important
+                        </span>
+
+                    </div>
+
+
+                    <div class="alert-date">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        15 Oct 2025 &nbsp;·&nbsp; 10:30 AM
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="alert-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ALERT 2
+            ================================================== -->
+
+            <div class="alert-card">
+
+
+                <div class="alert-icon green">
+
+                    <i class="fa-solid fa-bullhorn"></i>
+
+                </div>
+
+
+                <div class="alert-content">
+
+
+                    <div class="alert-title-row">
+
+                        <div>
+
+                            <div class="alert-title">
+                                New scheme available
+                            </div>
+
+                            <p class="alert-description">
+
+                                Youth Development Scheme is now available
+                                for eligible candidates in your profile range.
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="alert-type new">
+                            New
+                        </span>
+
+                    </div>
+
+
+                    <div class="alert-date">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        12 Oct 2025 &nbsp;·&nbsp; 02:15 PM
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="alert-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ALERT 3
+            ================================================== -->
+
+            <div class="alert-card">
+
+
+                <div class="alert-icon purple">
+
+                    <i class="fa-regular fa-file-lines"></i>
+
+                </div>
+
+
+                <div class="alert-content">
+
+
+                    <div class="alert-title-row">
+
+                        <div>
+
+                            <div class="alert-title">
+                                Application status update
+                            </div>
+
+                            <p class="alert-description">
+
+                                Your application for Post Matric Scholarship
+                                has been approved.
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="alert-type update">
+                            Update
+                        </span>
+
+                    </div>
+
+
+                    <div class="alert-date">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        10 Oct 2025 &nbsp;·&nbsp; 11:20 AM
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="alert-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ALERT 4
+            ================================================== -->
+
+            <div class="alert-card">
+
+
+                <div class="alert-icon orange">
+
+                    <i class="fa-regular fa-clock"></i>
+
+                </div>
+
+
+                <div class="alert-content">
+
+
+                    <div class="alert-title-row">
+
+                        <div>
+
+                            <div class="alert-title">
+                                Reminder
+                            </div>
+
+                            <p class="alert-description">
+
+                                Saved scheme application opens tomorrow
+                                (15 Oct 2025).
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="alert-type reminder">
+                            Reminder
+                        </span>
+
+                    </div>
+
+
+                    <div class="alert-date">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        14 Oct 2025 &nbsp;·&nbsp; 09:00 AM
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="alert-arrow">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 ALERT 5
+            ================================================== -->
+
+            <div class="alert-card">
+
+
+                <div class="alert-icon blue">
+
+                    <i class="fa-solid fa-info"></i>
+
+                </div>
+
+
+                <div class="alert-content">
+
+
+                    <div class="alert-title-row">
+
+                        <div>
+
+                            <div class="alert-title">
+                                Scheme information
+                            </div>
+
+                            <p class="alert-description">
+
+                                Kisan Credit Card interest rate has been
+                                revised. Check the latest details in the
+                                Farmers' category.
+
+                            </p>
+
+                        </div>
+
+
+                        <span class="alert-type information">
+                            Information
+                        </span>
+
+                    </div>
+                    <div class="alert-date">
+                        <i class="fa-regular fa-calendar"></i>
+                        09 Oct 2025 &nbsp;·&nbsp; 04:45 PM
+                    </div>
+                </div>
+                <div class="alert-arrow">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </div>
+        </section>
+
+        <aside class="right-panel">
+            <div class="informed-box">
+                <div class="informed-content">
+                    <div class="informed-icon">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <div class="informed-text">
+                        <h2>
+                            Stay Informed
+                        </h2>
+                        <p>
+                            Get notified about new schemes,
+                            application deadlines and important updates.
+                        </p>
+                    </div>
+                </div>
+                <div class="informed-illustration">
+                    <i class="fa-solid fa-bell big-bell"></i>
+                    <i class="fa-solid fa-paper-plane paper-plane"></i>
+                </div>
+            </div>
+            <div class="summary-box">
+                <div class="summary-header">
+                    <i class="fa-solid fa-chart-column"></i>
+                    Quick Alerts Summary
+                </div>
+                <div class="summary-row">
+                    <div class="summary-row-icon red">
+                        <i class="fa-regular fa-calendar"></i>
+                    </div>
+                    <div class="summary-row-title">
+                        Important Alerts
+                    </div>
+                    <div class="summary-count">
+                        3
+                    </div>
+                    <div class="summary-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-row-icon green">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+                    <div class="summary-row-title">
+                        New Schemes
+                    </div>
+                    <div class="summary-count">
+                        1
+                    </div>
+                    <div class="summary-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-row-icon blue">
+                        <i class="fa-solid fa-info"></i>
+                    </div>
+                    <div class="summary-row-title">
+                        Updates
+                    </div>
+                    <div class="summary-count">
+                        1
+                    </div>
+                    <div class="summary-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+                <div class="summary-row">
+                    <div class="summary-row-icon orange">
+                        <i class="fa-regular fa-clock"></i>
+                    </div>
+                    <div class="summary-row-title">
+                        Reminders
+                    </div>
+                    <div class="summary-count">
+                        1
+                    </div>
+                    <div class="summary-arrow">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
+</main>
+<script>
+function toggleSidebar(){
+    document.body.classList.toggle("sidebar-closed");
+}
+</script>
+</body>
+</html>
