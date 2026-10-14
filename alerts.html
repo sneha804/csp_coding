@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,8 +9,13 @@
 
 <title>Scheme Finder - Alerts</title>
 
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet">
+
+<!-- Font Awesome -->
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
@@ -24,7 +30,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
 }
 
 body{
-    font-family:"Segoe UI", Arial, sans-serif;
+    font-family:"Poppins", sans-serif;
     background:#eef7ff;
     color:#124b84;
 }
@@ -44,92 +50,47 @@ body{
 
     background:linear-gradient(
         180deg,
-        #064b91 0%,
-        #0755a5 65%,
-        #0866c4 100%
+        #07509d 0%,
+        #064b98 55%,
+        #063f82 100%
     );
 
     color:white;
+
+    padding:18px 15px;
+
     z-index:1000;
 
     overflow:hidden;
-
-    transition:transform .3s ease;
 }
 
 
-/* Bottom decorative shape */
+/* =====================================================
+   SIDEBAR DECORATION
+===================================================== */
 
 .sidebar::after{
     content:"";
 
     position:absolute;
 
-    width:500px;
-    height:350px;
+    left:-70px;
+    bottom:60px;
 
-    left:-180px;
-    bottom:-110px;
+    width:350px;
+    height:300px;
 
-    border-radius:50%;
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.01)
+        );
 
-    background:rgba(0,86,180,.65);
-}
+    border-radius:50% 50% 0 0;
 
+    transform:translateY(80px);
 
-/* =====================================================
-   THREE LINE BUTTON
-===================================================== */
-
-.sidebar-toggle{
-    position:fixed;
-
-    top:18px;
-    left:18px;
-
-    width:42px;
-    height:42px;
-
-    border:none;
-    border-radius:8px;
-
-    background:#07529b;
-    color:white;
-
-    font-size:21px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-
-    z-index:2000;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.18);
-
-    transition:.3s;
-}
-
-.sidebar-toggle:hover{
-    background:#086ac4;
-}
-
-
-/* =====================================================
-   SIDEBAR CLOSED
-===================================================== */
-
-body.sidebar-closed .sidebar{
-    transform:translateX(-100%);
-}
-
-body.sidebar-closed .header{
-    left:0;
-}
-
-body.sidebar-closed .main{
-    margin-left:0;
+    z-index:1;
 }
 
 
@@ -138,26 +99,39 @@ body.sidebar-closed .main{
 ===================================================== */
 
 .logo{
-    height:88px;
-
     display:flex;
+
     align-items:center;
 
     gap:15px;
 
-    padding-left:75px;
+    height:65px;
+
+    padding-left:10px;
+
+    margin-bottom:25px;
 
     position:relative;
-    z-index:2;
+
+    z-index:3;
 }
 
-.logo-icon{
-    font-size:42px;
+.logo img{
+    width:42px;
+    height:52px;
+
+    object-fit:contain;
+
+    filter:brightness(0) invert(1);
 }
 
 .logo-text{
-    font-size:23px;
-    font-weight:700;
+    font-size:24px;
+
+    font-weight:600;
+
+    color:white;
+
     white-space:nowrap;
 }
 
@@ -167,25 +141,31 @@ body.sidebar-closed .main{
 ===================================================== */
 
 .menu{
-    padding:15px 15px;
+    display:flex;
+
+    flex-direction:column;
+
+    gap:8px;
+
+    padding:0;
 
     position:relative;
-    z-index:2;
+
+    z-index:3;
 }
 
 .menu a{
-    height:54px;
+    width:100%;
+
+    height:52px;
 
     display:flex;
+
     align-items:center;
 
-    gap:18px;
+    gap:20px;
 
     padding:0 14px;
-
-    margin-bottom:6px;
-
-    border-radius:9px;
 
     color:white;
 
@@ -193,44 +173,52 @@ body.sidebar-closed .main{
 
     font-size:16px;
 
-    transition:.2s;
+    font-weight:500;
+
+    border-radius:9px;
+
+    transition:.25s ease;
 }
 
 .menu a i{
-    width:27px;
+    width:26px;
 
     text-align:center;
 
-    font-size:23px;
+    font-size:24px;
 }
 
 .menu a:hover{
-    background:rgba(255,255,255,.12);
+    background:rgba(255,255,255,0.12);
 }
 
 .menu a.active{
-    background:#1385ed;
+    background:linear-gradient(
+        90deg,
+        #168cff,
+        #1685f4
+    );
 
     box-shadow:
-    0 5px 15px rgba(0,0,0,.12);
+        0 5px 15px rgba(0,126,255,0.25);
 }
 
 
 /* =====================================================
-   SIDEBAR BOTTOM
+   SIDEBAR FOOTER
 ===================================================== */
 
 .sidebar-bottom{
     position:absolute;
 
-    bottom:55px;
+    bottom:25px;
     left:0;
 
     width:100%;
 
     text-align:center;
 
-    z-index:2;
+    z-index:3;
 }
 
 .sidebar-bottom p{
@@ -238,24 +226,59 @@ body.sidebar-closed .main{
 
     font-size:14px;
 
-    line-height:1.55;
+    line-height:1.6;
+
+    opacity:0.95;
 }
 
+
+/* =====================================================
+   INDIAN TRICOLOR
+===================================================== */
+
 .india-line{
-    width:70px;
+    width:90px;
+    height:20px;
+
+    margin:8px auto 0;
+
+    position:relative;
+}
+
+.india-line::before{
+    content:"";
+
+    position:absolute;
+
+    width:75px;
     height:5px;
 
-    margin:12px auto 0;
+    background:#ff9933;
 
-    border-radius:10px;
+    border-radius:50%;
 
-    background:
-    linear-gradient(
-        90deg,
-        #f5a623 0 33%,
-        white 33% 66%,
-        #28a745 66%
-    );
+    left:8px;
+    top:2px;
+
+    transform:rotate(-10deg);
+}
+
+.india-line::after{
+    content:"";
+
+    position:absolute;
+
+    width:75px;
+    height:5px;
+
+    background:#138808;
+
+    border-radius:50%;
+
+    left:8px;
+    top:11px;
+
+    transform:rotate(-10deg);
 }
 
 
@@ -285,8 +308,6 @@ body.sidebar-closed .main{
     padding:0 28px;
 
     z-index:900;
-
-    transition:left .3s ease;
 }
 
 
@@ -336,6 +357,7 @@ body.sidebar-closed .main{
     width:100%;
 
     border:none;
+
     outline:none;
 
     color:#315b84;
@@ -357,6 +379,7 @@ body.sidebar-closed .main{
     height:40px;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -387,6 +410,7 @@ body.sidebar-closed .main{
     border-radius:50%;
 
     display:flex;
+
     align-items:center;
     justify-content:center;
 
@@ -455,13 +479,11 @@ body.sidebar-closed .main{
     min-height:100vh;
 
     background:
-    linear-gradient(
-        135deg,
-        #edf7ff,
-        #f6fbff
-    );
-
-    transition:margin-left .3s ease;
+        linear-gradient(
+            135deg,
+            #edf7ff,
+            #f6fbff
+        );
 }
 
 .content{
@@ -470,7 +492,7 @@ body.sidebar-closed .main{
 
 
 /* =====================================================
-   PAGE TITLE
+   PAGE HEADING
 ===================================================== */
 
 .page-heading{
@@ -524,8 +546,8 @@ body.sidebar-closed .main{
     display:grid;
 
     grid-template-columns:
-    minmax(600px, 1fr)
-    410px;
+        minmax(600px,1fr)
+        410px;
 
     gap:22px;
 
@@ -616,7 +638,7 @@ body.sidebar-closed .main{
     gap:20px;
 
     box-shadow:
-    0 2px 7px rgba(28,94,143,.035);
+        0 2px 7px rgba(28,94,143,.035);
 
     transition:.2s;
 }
@@ -625,7 +647,7 @@ body.sidebar-closed .main{
     transform:translateY(-1px);
 
     box-shadow:
-    0 5px 15px rgba(28,94,143,.08);
+        0 5px 15px rgba(28,94,143,.08);
 }
 
 
@@ -802,7 +824,7 @@ body.sidebar-closed .main{
 
 
 /* =====================================================
-   RIGHT SIDE BOXES
+   RIGHT SIDE
 ===================================================== */
 
 .right-panel{
@@ -836,7 +858,7 @@ body.sidebar-closed .main{
     overflow:hidden;
 
     box-shadow:
-    0 2px 8px rgba(28,94,143,.04);
+        0 2px 8px rgba(28,94,143,.04);
 }
 
 .informed-content{
@@ -872,7 +894,9 @@ body.sidebar-closed .main{
 }
 
 
-/* Bell illustration */
+/* =====================================================
+   BELL ILLUSTRATION
+===================================================== */
 
 .informed-illustration{
     width:95px;
@@ -921,7 +945,7 @@ body.sidebar-closed .main{
     overflow:hidden;
 
     box-shadow:
-    0 2px 8px rgba(28,94,143,.04);
+        0 2px 8px rgba(28,94,143,.04);
 }
 
 .summary-header{
@@ -949,7 +973,9 @@ body.sidebar-closed .main{
 }
 
 
-/* Summary rows */
+/* =====================================================
+   SUMMARY ROWS
+===================================================== */
 
 .summary-row{
     min-height:64px;
@@ -1047,15 +1073,15 @@ body.sidebar-closed .main{
 @media(max-width:800px){
 
     .sidebar{
-        width:260px;
+        width:220px;
     }
 
     .header{
-        left:0;
+        left:220px;
     }
 
     .main{
-        margin-left:0;
+        margin-left:220px;
     }
 
     .alert-layout{
@@ -1069,13 +1095,55 @@ body.sidebar-closed .main{
     .alert-title-row{
         align-items:flex-start;
     }
+
+    .logo-text{
+        font-size:20px;
+    }
+
+    .logo img{
+        width:38px;
+        height:48px;
+    }
 }
 
 
 @media(max-width:600px){
 
+    body{
+        overflow:auto;
+    }
+
+    .sidebar{
+        position:relative;
+
+        width:100%;
+        height:auto;
+
+        min-height:430px;
+    }
+
     .header{
-        padding:0 15px;
+        position:relative;
+
+        left:0;
+
+        width:100%;
+
+        height:73px;
+    }
+
+    .main{
+        margin-left:0;
+
+        padding-top:0;
+    }
+
+    .menu{
+        display:none;
+    }
+
+    .sidebar-bottom{
+        display:none;
     }
 
     .search-box{
@@ -1152,6 +1220,7 @@ body.sidebar-closed .main{
     .informed-illustration{
         display:none;
     }
+
 }
 
 </style>
@@ -1163,41 +1232,28 @@ body.sidebar-closed .main{
 
 
 <!-- =====================================================
-     THREE LINE BUTTON
-===================================================== -->
-
-<button class="sidebar-toggle" onclick="toggleSidebar()">
-
-    <i class="fa-solid fa-bars"></i>
-
-</button>
-
-
-
-<!-- =====================================================
      SIDEBAR
 ===================================================== -->
 
 <aside class="sidebar">
 
 
+    <!-- LOGO -->
+
     <div class="logo">
 
-        <div class="logo-icon">
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="Government of India">
 
-            <i class="fa-solid fa-landmark"></i>
-
-        </div>
-
-        <div class="logo-text">
-
+        <span class="logo-text">
             Scheme Finder
-
-        </div>
+        </span>
 
     </div>
 
 
+    <!-- NAVIGATION -->
 
     <nav class="menu">
 
@@ -1258,7 +1314,7 @@ body.sidebar-closed .main{
 
         <a href="logout.html">
 
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            <i class="fa-solid fa-right-from-bracket"></i>
 
             <span>Logout</span>
 
@@ -1268,15 +1324,13 @@ body.sidebar-closed .main{
     </nav>
 
 
+    <!-- SIDEBAR FOOTER -->
 
     <div class="sidebar-bottom">
 
         <p>
-
             Government Schemes<br>
-
             for a Better Tomorrow
-
         </p>
 
         <div class="india-line"></div>
@@ -1312,7 +1366,6 @@ body.sidebar-closed .main{
         </div>
 
 
-
         <!-- NOTIFICATION -->
 
         <div class="notification">
@@ -1324,7 +1377,6 @@ body.sidebar-closed .main{
             </span>
 
         </div>
-
 
 
         <!-- PROFILE -->
@@ -1426,9 +1478,7 @@ body.sidebar-closed .main{
 
 
 
-            <!-- =================================================
-                 ALERT 1
-            ================================================== -->
+            <!-- ALERT 1 -->
 
             <div class="alert-card">
 
@@ -1452,10 +1502,8 @@ body.sidebar-closed .main{
                             </div>
 
                             <p class="alert-description">
-
                                 The last date to apply for Education Support
                                 Scheme is 20 Oct 2025. Only 5 days left!
-
                             </p>
 
                         </div>
@@ -1491,9 +1539,7 @@ body.sidebar-closed .main{
 
 
 
-            <!-- =================================================
-                 ALERT 2
-            ================================================== -->
+            <!-- ALERT 2 -->
 
             <div class="alert-card">
 
@@ -1517,10 +1563,8 @@ body.sidebar-closed .main{
                             </div>
 
                             <p class="alert-description">
-
                                 Youth Development Scheme is now available
                                 for eligible candidates in your profile range.
-
                             </p>
 
                         </div>
@@ -1556,9 +1600,7 @@ body.sidebar-closed .main{
 
 
 
-            <!-- =================================================
-                 ALERT 3
-            ================================================== -->
+            <!-- ALERT 3 -->
 
             <div class="alert-card">
 
@@ -1582,10 +1624,8 @@ body.sidebar-closed .main{
                             </div>
 
                             <p class="alert-description">
-
                                 Your application for Post Matric Scholarship
                                 has been approved.
-
                             </p>
 
                         </div>
@@ -1621,9 +1661,7 @@ body.sidebar-closed .main{
 
 
 
-            <!-- =================================================
-                 ALERT 4
-            ================================================== -->
+            <!-- ALERT 4 -->
 
             <div class="alert-card">
 
@@ -1647,10 +1685,8 @@ body.sidebar-closed .main{
                             </div>
 
                             <p class="alert-description">
-
                                 Saved scheme application opens tomorrow
                                 (15 Oct 2025).
-
                             </p>
 
                         </div>
@@ -1686,9 +1722,7 @@ body.sidebar-closed .main{
 
 
 
-            <!-- =================================================
-                 ALERT 5
-            ================================================== -->
+            <!-- ALERT 5 -->
 
             <div class="alert-card">
 
@@ -1712,11 +1746,9 @@ body.sidebar-closed .main{
                             </div>
 
                             <p class="alert-description">
-
                                 Kisan Credit Card interest rate has been
                                 revised. Check the latest details in the
                                 Farmers' category.
-
                             </p>
 
                         </div>
@@ -1727,108 +1759,218 @@ body.sidebar-closed .main{
                         </span>
 
                     </div>
+
+
                     <div class="alert-date">
+
                         <i class="fa-regular fa-calendar"></i>
+
                         09 Oct 2025 &nbsp;·&nbsp; 04:45 PM
+
                     </div>
+
+
                 </div>
+
+
                 <div class="alert-arrow">
+
                     <i class="fa-solid fa-chevron-right"></i>
+
                 </div>
+
+
             </div>
+
+
         </section>
 
+
+
+        <!-- =================================================
+             RIGHT SIDE
+        ================================================== -->
+
         <aside class="right-panel">
+
+
+            <!-- STAY INFORMED -->
+
             <div class="informed-box">
+
+
                 <div class="informed-content">
+
+
                     <div class="informed-icon">
+
                         <i class="fa-solid fa-bell"></i>
+
                     </div>
+
+
                     <div class="informed-text">
+
                         <h2>
                             Stay Informed
                         </h2>
+
                         <p>
                             Get notified about new schemes,
                             application deadlines and important updates.
                         </p>
+
                     </div>
+
+
                 </div>
+
+
                 <div class="informed-illustration">
+
                     <i class="fa-solid fa-bell big-bell"></i>
+
                     <i class="fa-solid fa-paper-plane paper-plane"></i>
+
                 </div>
+
+
             </div>
+
+
+
+            <!-- QUICK SUMMARY -->
+
             <div class="summary-box">
+
+
                 <div class="summary-header">
+
                     <i class="fa-solid fa-chart-column"></i>
+
                     Quick Alerts Summary
+
                 </div>
+
+
+
                 <div class="summary-row">
+
                     <div class="summary-row-icon red">
+
                         <i class="fa-regular fa-calendar"></i>
+
                     </div>
+
                     <div class="summary-row-title">
                         Important Alerts
                     </div>
+
                     <div class="summary-count">
                         3
                     </div>
+
                     <div class="summary-arrow">
+
                         <i class="fa-solid fa-chevron-right"></i>
+
                     </div>
+
                 </div>
+
+
+
                 <div class="summary-row">
+
                     <div class="summary-row-icon green">
+
                         <i class="fa-solid fa-bullhorn"></i>
+
                     </div>
+
                     <div class="summary-row-title">
                         New Schemes
                     </div>
+
                     <div class="summary-count">
                         1
                     </div>
+
                     <div class="summary-arrow">
+
                         <i class="fa-solid fa-chevron-right"></i>
+
                     </div>
+
                 </div>
+
+
+
                 <div class="summary-row">
+
                     <div class="summary-row-icon blue">
+
                         <i class="fa-solid fa-info"></i>
+
                     </div>
+
                     <div class="summary-row-title">
                         Updates
                     </div>
+
                     <div class="summary-count">
                         1
                     </div>
+
                     <div class="summary-arrow">
+
                         <i class="fa-solid fa-chevron-right"></i>
+
                     </div>
+
                 </div>
+
+
+
                 <div class="summary-row">
+
                     <div class="summary-row-icon orange">
+
                         <i class="fa-regular fa-clock"></i>
+
                     </div>
+
                     <div class="summary-row-title">
                         Reminders
                     </div>
+
                     <div class="summary-count">
                         1
                     </div>
+
                     <div class="summary-arrow">
+
                         <i class="fa-solid fa-chevron-right"></i>
+
                     </div>
+
                 </div>
+
+
             </div>
+
+
         </aside>
+
+
     </div>
+
+
 </div>
+
 </main>
-<script>
-function toggleSidebar(){
-    document.body.classList.toggle("sidebar-closed");
-}
-</script>
+
+
 </body>
 </html>
+```

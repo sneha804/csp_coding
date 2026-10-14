@@ -6,7 +6,7 @@
 
 <title>Scheme Finder - Settings</title>
 
-<!-- Font -->
+<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Font Awesome -->
@@ -27,7 +27,9 @@ body{
     color:#123f78;
 }
 
-/* ================= SIDEBAR ================= */
+/* =====================================================
+   SIDEBAR - SAME AS LOGOUT PAGE
+===================================================== */
 
 .sidebar{
     position:fixed;
@@ -35,119 +37,236 @@ body{
     top:0;
     width:260px;
     height:100vh;
-    background:linear-gradient(180deg,#07509e,#06458e);
+
+    background:linear-gradient(
+        180deg,
+        #07509d 0%,
+        #064b98 55%,
+        #063f82 100%
+    );
+
     color:white;
     padding:18px 15px;
+
+    z-index:1000;
     overflow:hidden;
 }
 
-/* Logo */
+/* Decorative shape */
+
+.sidebar::after{
+    content:"";
+
+    position:absolute;
+    left:-70px;
+    bottom:60px;
+
+    width:350px;
+    height:300px;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.01)
+        );
+
+    border-radius:50% 50% 0 0;
+
+    transform:translateY(80px);
+}
+
+/* =====================================================
+   LOGO
+===================================================== */
 
 .logo{
     display:flex;
     align-items:center;
-    gap:12px;
-    padding:0 12px 25px;
+    gap:15px;
+
+    height:65px;
+    padding-left:10px;
+
+    margin-bottom:25px;
+
+    position:relative;
+    z-index:2;
 }
 
-.logo-icon{
+.logo img{
     width:42px;
-    height:50px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:36px;
-    color:white;
+    height:52px;
+
+    object-fit:contain;
+
+    filter:brightness(0) invert(1);
 }
 
-.logo h2{
+.logo-text{
     font-size:24px;
     font-weight:600;
+
+    color:white;
     white-space:nowrap;
 }
 
-/* Sidebar menu */
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
-.menu{
-    margin-top:20px;
+.nav-menu{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+
+    position:relative;
+    z-index:2;
 }
 
-.menu a{
+.nav-item{
+    width:100%;
     height:52px;
-    margin:7px 0;
-    padding:0 14px;
+
     display:flex;
     align-items:center;
-    gap:18px;
+
+    gap:20px;
+
+    padding:0 14px;
+
     color:white;
     text-decoration:none;
-    border-radius:9px;
+
     font-size:16px;
-    transition:0.2s;
+    font-weight:500;
+
+    border-radius:9px;
+
+    transition:0.25s ease;
 }
 
-.menu a i{
-    width:25px;
-    font-size:23px;
-}
-
-.menu a:hover{
-    background:#167cf1;
-}
-
-.menu a.active{
-    background:linear-gradient(90deg,#1688ff,#1680ed);
-    box-shadow:0 4px 12px rgba(0,0,0,0.12);
-}
-
-/* Bottom sidebar */
-
-.sidebar-bottom{
-    position:absolute;
-    bottom:28px;
-    left:0;
-    width:100%;
+.nav-item i{
+    width:26px;
     text-align:center;
+    font-size:24px;
 }
 
-.sidebar-bottom p{
-    font-size:13px;
-    line-height:1.6;
-    color:#e5f2ff;
+.nav-item:hover{
+    background:rgba(255,255,255,0.12);
 }
 
-.india-line{
-    margin:10px auto 0;
-    width:75px;
-    height:5px;
-    border-radius:50%;
+/* Active Settings */
+
+.nav-item.active{
     background:linear-gradient(
         90deg,
-        #ff9933 0%,
-        #ff9933 33%,
-        white 33%,
-        white 66%,
-        #138808 66%
+        #168cff,
+        #1685f4
     );
+
+    box-shadow:
+        0 5px 15px rgba(0,126,255,0.25);
 }
 
-/* ================= MAIN ================= */
+/* =====================================================
+   SIDEBAR FOOTER
+===================================================== */
+
+.sidebar-footer{
+    position:absolute;
+
+    bottom:25px;
+    left:0;
+
+    width:100%;
+
+    text-align:center;
+
+    z-index:3;
+}
+
+.sidebar-footer p{
+    color:white;
+
+    font-size:14px;
+    line-height:1.6;
+
+    opacity:0.95;
+}
+
+/* Indian tricolor curve */
+
+.tricolor{
+    width:90px;
+    height:20px;
+
+    margin:8px auto 0;
+
+    position:relative;
+}
+
+.tricolor::before{
+    content:"";
+
+    position:absolute;
+
+    width:75px;
+    height:5px;
+
+    background:#ff9933;
+
+    border-radius:50%;
+
+    left:8px;
+    top:2px;
+
+    transform:rotate(-10deg);
+}
+
+.tricolor::after{
+    content:"";
+
+    position:absolute;
+
+    width:75px;
+    height:5px;
+
+    background:#138808;
+
+    border-radius:50%;
+
+    left:8px;
+    top:11px;
+
+    transform:rotate(-10deg);
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
 
 .main{
     margin-left:260px;
     min-height:100vh;
 }
 
-/* ================= TOP BAR ================= */
+/* =====================================================
+   TOP BAR
+===================================================== */
 
 .topbar{
     height:74px;
+
     background:white;
+
     border-bottom:1px solid #dbeaf7;
+
     display:flex;
     align-items:center;
     justify-content:flex-end;
+
     padding:0 28px;
+
     gap:27px;
 }
 
@@ -156,11 +275,15 @@ body{
 .search-box{
     width:285px;
     height:44px;
+
     border:1px solid #d9e7f4;
     border-radius:25px;
+
     display:flex;
     align-items:center;
+
     padding:0 16px;
+
     background:white;
 }
 
@@ -171,10 +294,14 @@ body{
 
 .search-box input{
     width:100%;
+
     border:none;
     outline:none;
+
     margin-left:10px;
+
     font-family:Poppins;
+
     color:#31557c;
 }
 
@@ -186,24 +313,35 @@ body{
 
 .notification{
     position:relative;
+
     font-size:25px;
+
     color:#07509e;
+
     cursor:pointer;
 }
 
 .notification .badge{
     position:absolute;
+
     top:-5px;
     right:-7px;
+
     width:16px;
     height:16px;
+
     background:#e9253f;
+
     color:white;
+
     font-size:9px;
+
     border-radius:50%;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     font-weight:600;
 }
 
@@ -212,19 +350,26 @@ body{
 .top-profile{
     display:flex;
     align-items:center;
+
     gap:12px;
+
     cursor:pointer;
 }
 
 .profile-circle{
     width:45px;
     height:45px;
+
     border-radius:50%;
+
     background:#e5f2ff;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     color:#07509e;
+
     font-size:24px;
 }
 
@@ -238,7 +383,9 @@ body{
     color:#07509e;
 }
 
-/* ================= CONTENT ================= */
+/* =====================================================
+   CONTENT
+===================================================== */
 
 .content{
     padding:25px 30px 40px;
@@ -249,39 +396,54 @@ body{
 .page-heading{
     display:flex;
     align-items:center;
+
     gap:18px;
+
     margin-bottom:20px;
 }
 
 .heading-icon{
     width:65px;
     height:65px;
+
     border-radius:50%;
+
     background:#dff0ff;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     color:#0865ca;
+
     font-size:30px;
 }
 
 .page-heading h1{
     font-size:30px;
+
     color:#0a4383;
+
     font-weight:700;
 }
 
 .page-heading p{
     margin-top:2px;
+
     font-size:15px;
+
     color:#52739a;
 }
 
-/* ================= SETTINGS LAYOUT ================= */
+/* =====================================================
+   SETTINGS LAYOUT
+===================================================== */
 
 .settings-layout{
     display:grid;
+
     grid-template-columns:275px 1fr;
+
     gap:22px;
 }
 
@@ -289,29 +451,44 @@ body{
 
 .settings-menu{
     background:white;
+
     border:1px solid #dceaf6;
+
     border-radius:10px;
+
     padding:14px 10px;
+
     min-height:790px;
+
     box-shadow:0 2px 10px rgba(40,100,160,0.04);
 }
 
 .settings-menu a{
     height:55px;
+
     display:flex;
     align-items:center;
+
     gap:18px;
+
     padding:0 15px;
+
     border-radius:8px;
+
     text-decoration:none;
+
     color:#365b83;
+
     font-size:15px;
+
     margin-bottom:4px;
 }
 
 .settings-menu a i{
     width:28px;
+
     text-align:center;
+
     font-size:22px;
 }
 
@@ -321,15 +498,21 @@ body{
 
 .settings-menu a.active{
     background:#dceeff;
+
     color:#1264b9;
+
     font-weight:600;
 }
 
-/* ================= RIGHT CONTENT ================= */
+/* =====================================================
+   RIGHT CONTENT
+===================================================== */
 
 .right-content{
     display:flex;
+
     flex-direction:column;
+
     gap:16px;
 }
 
@@ -337,8 +520,11 @@ body{
 
 .card{
     background:white;
+
     border:1px solid #dceaf6;
+
     border-radius:10px;
+
     box-shadow:0 2px 10px rgba(40,100,160,0.04);
 }
 
@@ -346,37 +532,51 @@ body{
 
 .card-heading{
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:18px 20px 10px;
 }
 
 .card-title{
     display:flex;
+
     align-items:center;
+
     gap:16px;
 }
 
 .card-title-icon{
     width:43px;
     height:43px;
+
     border-radius:50%;
+
     background:#e0f0ff;
+
     color:#0867c9;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     font-size:21px;
 }
 
 .card-title h2{
     font-size:19px;
+
     color:#0b4380;
 }
 
 .card-title p{
     font-size:13px;
+
     color:#6380a0;
+
     margin-top:2px;
 }
 
@@ -384,14 +584,23 @@ body{
 
 .edit-btn{
     height:42px;
+
     padding:0 20px;
+
     border-radius:9px;
+
     border:1px solid #c9e0f4;
+
     background:#f5faff;
+
     color:#0a68c9;
+
     font-family:Poppins;
+
     font-size:14px;
+
     font-weight:500;
+
     cursor:pointer;
 }
 
@@ -403,48 +612,67 @@ body{
     background:#e7f4ff;
 }
 
-/* Account profile */
+/* =====================================================
+   ACCOUNT PROFILE
+===================================================== */
 
 .account-profile{
     margin:0 18px 0;
+
     border:1px solid #dfebf6;
+
     border-radius:9px 9px 0 0;
+
     padding:12px 18px;
 }
 
 .profile-info{
     display:flex;
+
     align-items:center;
+
     gap:18px;
 }
 
 .large-profile{
     width:76px;
     height:76px;
+
     border-radius:50%;
+
     background:#dceeff;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     color:#0968c9;
+
     font-size:40px;
 }
 
 .profile-text h3{
     font-size:19px;
+
     color:#10457f;
 }
 
 .profile-text p{
     font-size:14px;
+
     color:#527394;
+
     margin-top:2px;
 }
 
 .location{
     display:flex;
+
     align-items:center;
+
     gap:7px;
+
     margin-top:5px;
 }
 
@@ -452,19 +680,29 @@ body{
 
 .account-details{
     margin:0 18px 18px;
+
     border:1px solid #dfebf6;
+
     border-top:none;
+
     border-radius:0 0 9px 9px;
+
     display:grid;
+
     grid-template-columns:1fr 1fr 1fr;
 }
 
 .detail{
     min-height:82px;
+
     display:flex;
+
     align-items:center;
+
     gap:14px;
+
     padding:15px 22px;
+
     border-right:1px solid #e1edf7;
 }
 
@@ -474,22 +712,29 @@ body{
 
 .detail i{
     font-size:22px;
+
     color:#0b66c5;
 }
 
 .detail label{
     display:block;
+
     color:#65809d;
+
     font-size:13px;
+
     margin-bottom:4px;
 }
 
 .detail strong{
     color:#174b83;
+
     font-size:14px;
 }
 
-/* ================= NOTIFICATION CARD ================= */
+/* =====================================================
+   NOTIFICATION CARD
+===================================================== */
 
 .notification-card{
     padding-bottom:10px;
@@ -497,13 +742,21 @@ body{
 
 .save-btn{
     background:#0878ed;
+
     color:white;
+
     border:none;
+
     border-radius:9px;
+
     height:42px;
+
     padding:0 22px;
+
     font-family:Poppins;
+
     font-weight:500;
+
     cursor:pointer;
 }
 
@@ -513,17 +766,25 @@ body{
 
 .notification-list{
     margin:5px 18px 8px;
+
     border:1px solid #dfebf6;
+
     border-radius:9px;
+
     overflow:hidden;
 }
 
 .notification-row{
     min-height:74px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:12px 18px;
+
     border-bottom:1px solid #e4eef7;
 }
 
@@ -533,31 +794,44 @@ body{
 
 .notification-left{
     display:flex;
+
     align-items:center;
+
     gap:17px;
 }
 
 .notification-icon{
     width:40px;
     height:40px;
+
     border-radius:50%;
+
     background:#e8f4ff;
+
     color:#0968c9;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     font-size:19px;
 }
 
 .notification-text h4{
     color:#174b83;
+
     font-size:14px;
+
     font-weight:600;
 }
 
 .notification-text p{
     color:#6380a0;
+
     font-size:12px;
+
     margin-top:2px;
 }
 
@@ -565,6 +839,7 @@ body{
 
 .switch{
     position:relative;
+
     width:50px;
     height:28px;
 }
@@ -575,22 +850,33 @@ body{
 
 .slider{
     position:absolute;
+
     inset:0;
+
     background:#b8cde3;
+
     border-radius:30px;
+
     cursor:pointer;
+
     transition:0.3s;
 }
 
 .slider:before{
     content:"";
+
     position:absolute;
+
     width:20px;
     height:20px;
+
     left:4px;
     top:4px;
+
     background:white;
+
     border-radius:50%;
+
     transition:0.3s;
 }
 
@@ -602,7 +888,9 @@ body{
     transform:translateX(22px);
 }
 
-/* ================= LANGUAGE ================= */
+/* =====================================================
+   LANGUAGE
+===================================================== */
 
 .language-card{
     min-height:82px;
@@ -610,53 +898,76 @@ body{
 
 .language-content{
     padding:8px 18px 15px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 }
 
 .language-left{
     display:flex;
+
     align-items:center;
+
     gap:17px;
 }
 
 .language-icon{
     width:43px;
     height:43px;
+
     border-radius:50%;
+
     background:#e2f2ff;
+
     color:#0867c9;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     font-size:21px;
 }
 
 .language-text h4{
     color:#174b83;
+
     font-size:15px;
 }
 
 .language-text p{
     color:#67829f;
+
     font-size:12px;
 }
 
 .language-select{
     width:230px;
     height:44px;
+
     border:1px solid #d7e6f3;
+
     border-radius:12px;
+
     background:white;
+
     padding:0 15px;
+
     color:#164b83;
+
     font-family:Poppins;
+
     outline:none;
+
     cursor:pointer;
 }
 
-/* ================= RESPONSIVE ================= */
+/* =====================================================
+   RESPONSIVE
+===================================================== */
 
 @media(max-width:1100px){
 
@@ -670,13 +981,13 @@ body{
 
     .detail{
         border-right:none;
+
         border-bottom:1px solid #e1edf7;
     }
 
     .detail:last-child{
         border-bottom:none;
     }
-
 }
 
 @media(max-width:850px){
@@ -685,23 +996,25 @@ body{
         width:80px;
     }
 
-    .logo h2,
-    .menu a span,
-    .sidebar-bottom{
+    .logo-text,
+    .nav-item span,
+    .sidebar-footer{
         display:none;
     }
 
     .logo{
         justify-content:center;
-        padding:0 0 20px;
+
+        padding-left:0;
     }
 
-    .menu a{
+    .nav-item{
         justify-content:center;
+
         padding:0;
     }
 
-    .menu a i{
+    .nav-item i{
         margin:0;
     }
 
@@ -719,6 +1032,7 @@ body{
 
     .settings-menu a{
         display:inline-flex;
+
         width:48%;
     }
 
@@ -729,7 +1043,6 @@ body{
     .search-box{
         width:220px;
     }
-
 }
 
 @media(max-width:600px){
@@ -748,7 +1061,9 @@ body{
 
     .card-heading{
         flex-direction:column;
+
         align-items:flex-start;
+
         gap:12px;
     }
 
@@ -762,14 +1077,15 @@ body{
 
     .language-content{
         flex-direction:column;
+
         align-items:flex-start;
+
         gap:15px;
     }
 
     .language-select{
         width:100%;
     }
-
 }
 
 </style>
@@ -777,70 +1093,86 @@ body{
 
 <body>
 
-<!-- ================= SIDEBAR ================= -->
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
 
 <aside class="sidebar">
 
     <div class="logo">
-        <div class="logo-icon">
-            🏛️
-        </div>
 
-        <h2>Scheme Finder</h2>
+        <!-- Government of India Emblem -->
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="Government of India">
+
+        <span class="logo-text">
+            Scheme Finder
+        </span>
+
     </div>
 
-    <nav class="menu">
 
-        <a href="dashboard.html">
+    <nav class="nav-menu">
+
+        <a href="dashboard.html" class="nav-item">
             <i class="fa-solid fa-house"></i>
             <span>Dashboard</span>
         </a>
 
-        <a href="schemes.html">
+        <a href="schemes.html" class="nav-item">
             <i class="fa-solid fa-magnifying-glass"></i>
             <span>Schemes</span>
         </a>
 
-        <a href="savedschemes.html">
+        <a href="savedschemes.html" class="nav-item">
             <i class="fa-regular fa-heart"></i>
             <span>Saved Schemes</span>
         </a>
 
-        <a href="alerts.html">
+        <a href="alerts.html" class="nav-item">
             <i class="fa-regular fa-bell"></i>
             <span>Alerts</span>
         </a>
 
-        <a href="profile.html">
+        <a href="profile.html" class="nav-item">
             <i class="fa-regular fa-user"></i>
             <span>Profile</span>
         </a>
 
-        <a href="settings.html" class="active">
+        <!-- ACTIVE SETTINGS -->
+        <a href="settings.html" class="nav-item active">
             <i class="fa-solid fa-gear"></i>
             <span>Settings</span>
         </a>
 
-        <a href="logout.html">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <a href="logout.html" class="nav-item">
+            <i class="fa-solid fa-right-from-bracket"></i>
             <span>Logout</span>
         </a>
 
     </nav>
 
-    <div class="sidebar-bottom">
+
+    <!-- Sidebar Footer -->
+
+    <div class="sidebar-footer">
+
         <p>
             Government Schemes<br>
             for a Better Tomorrow
         </p>
 
-        <div class="india-line"></div>
+        <div class="tricolor"></div>
+
     </div>
 
 </aside>
 
 
-<!-- ================= MAIN ================= -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main class="main">
 
@@ -849,19 +1181,31 @@ body{
     <header class="topbar">
 
         <div class="search-box">
+
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Search schemes...">
+
+            <input
+                type="text"
+                placeholder="Search schemes...">
+
         </div>
 
+
         <div class="notification">
+
             <i class="fa-regular fa-bell"></i>
+
             <span class="badge">3</span>
+
         </div>
+
 
         <div class="top-profile">
 
             <div class="profile-circle">
+
                 <i class="fa-regular fa-user"></i>
+
             </div>
 
             <span>Sneha</span>
@@ -873,21 +1217,31 @@ body{
     </header>
 
 
-    <!-- ================= CONTENT ================= -->
+    <!-- =================================================
+         CONTENT
+    ================================================= -->
 
     <section class="content">
+
 
         <!-- PAGE HEADING -->
 
         <div class="page-heading">
 
             <div class="heading-icon">
+
                 <i class="fa-solid fa-gear"></i>
+
             </div>
 
             <div>
+
                 <h1>Settings</h1>
-                <p>Manage your account and app preferences.</p>
+
+                <p>
+                    Manage your account and app preferences.
+                </p>
+
             </div>
 
         </div>
@@ -903,33 +1257,68 @@ body{
             <div class="settings-menu">
 
                 <a href="#" class="active">
+
                     <i class="fa-regular fa-user"></i>
-                    <span>Account Settings</span>
+
+                    <span>
+                        Account Settings
+                    </span>
+
                 </a>
 
+
                 <a href="#">
+
                     <i class="fa-regular fa-bell"></i>
-                    <span>Notification Settings</span>
+
+                    <span>
+                        Notification Settings
+                    </span>
+
                 </a>
 
+
                 <a href="#">
+
                     <i class="fa-solid fa-globe"></i>
-                    <span>Language</span>
+
+                    <span>
+                        Language
+                    </span>
+
                 </a>
 
+
                 <a href="#">
+
                     <i class="fa-solid fa-shield-halved"></i>
-                    <span>Privacy & Security</span>
+
+                    <span>
+                        Privacy & Security
+                    </span>
+
                 </a>
 
+
                 <a href="#">
+
                     <i class="fa-solid fa-palette"></i>
-                    <span>Appearance</span>
+
+                    <span>
+                        Appearance
+                    </span>
+
                 </a>
 
+
                 <a href="#">
+
                     <i class="fa-regular fa-circle-question"></i>
-                    <span>Help & Support</span>
+
+                    <span>
+                        Help & Support
+                    </span>
+
                 </a>
 
             </div>
@@ -949,21 +1338,32 @@ body{
                         <div class="card-title">
 
                             <div class="card-title-icon">
+
                                 <i class="fa-regular fa-user"></i>
+
                             </div>
 
                             <div>
-                                <h2>Account Settings</h2>
+
+                                <h2>
+                                    Account Settings
+                                </h2>
+
                                 <p>
                                     Update your personal information and account details.
                                 </p>
+
                             </div>
 
                         </div>
 
+
                         <button class="edit-btn">
+
                             <i class="fa-solid fa-pen"></i>
+
                             Edit
+
                         </button>
 
                     </div>
@@ -976,18 +1376,28 @@ body{
                         <div class="profile-info">
 
                             <div class="large-profile">
+
                                 <i class="fa-regular fa-user"></i>
+
                             </div>
+
 
                             <div class="profile-text">
 
-                                <h3>Sneha</h3>
+                                <h3>
+                                    Sneha
+                                </h3>
 
-                                <p>Student</p>
+                                <p>
+                                    Student
+                                </p>
 
                                 <p class="location">
+
                                     <i class="fa-solid fa-location-dot"></i>
+
                                     Andhra Pradesh
+
                                 </p>
 
                             </div>
@@ -1001,13 +1411,21 @@ body{
 
                     <div class="account-details">
 
+
                         <div class="detail">
 
                             <i class="fa-regular fa-envelope"></i>
 
                             <div>
-                                <label>Email Address</label>
-                                <strong>sneha@gmail.com</strong>
+
+                                <label>
+                                    Email Address
+                                </label>
+
+                                <strong>
+                                    sneha@gmail.com
+                                </strong>
+
                             </div>
 
                         </div>
@@ -1018,8 +1436,15 @@ body{
                             <i class="fa-solid fa-phone"></i>
 
                             <div>
-                                <label>Mobile Number</label>
-                                <strong>+91 98765 43210</strong>
+
+                                <label>
+                                    Mobile Number
+                                </label>
+
+                                <strong>
+                                    +91 98765 43210
+                                </strong>
+
                             </div>
 
                         </div>
@@ -1030,8 +1455,15 @@ body{
                             <i class="fa-regular fa-calendar"></i>
 
                             <div>
-                                <label>Date of Birth</label>
-                                <strong>12 May 2003</strong>
+
+                                <label>
+                                    Date of Birth
+                                </label>
+
+                                <strong>
+                                    12 May 2003
+                                </strong>
+
                             </div>
 
                         </div>
@@ -1050,21 +1482,32 @@ body{
                         <div class="card-title">
 
                             <div class="card-title-icon">
+
                                 <i class="fa-regular fa-bell"></i>
+
                             </div>
 
                             <div>
-                                <h2>Notification Settings</h2>
+
+                                <h2>
+                                    Notification Settings
+                                </h2>
+
                                 <p>
                                     Choose what kind of notifications you want to receive.
                                 </p>
+
                             </div>
 
                         </div>
 
+
                         <button class="save-btn">
+
                             <i class="fa-regular fa-floppy-disk"></i>
+
                             Save
+
                         </button>
 
                     </div>
@@ -1080,21 +1523,34 @@ body{
                             <div class="notification-left">
 
                                 <div class="notification-icon">
+
                                     <i class="fa-solid fa-bullhorn"></i>
+
                                 </div>
 
                                 <div class="notification-text">
-                                    <h4>Scheme Updates</h4>
+
+                                    <h4>
+                                        Scheme Updates
+                                    </h4>
+
                                     <p>
                                         Get notified about new schemes and updates.
                                     </p>
+
                                 </div>
 
                             </div>
 
+
                             <label class="switch">
-                                <input type="checkbox" checked>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
                                 <span class="slider"></span>
+
                             </label>
 
                         </div>
@@ -1107,21 +1563,34 @@ body{
                             <div class="notification-left">
 
                                 <div class="notification-icon">
+
                                     <i class="fa-regular fa-file-lines"></i>
+
                                 </div>
 
                                 <div class="notification-text">
-                                    <h4>Application Status</h4>
+
+                                    <h4>
+                                        Application Status
+                                    </h4>
+
                                     <p>
                                         Receive alerts on your application status.
                                     </p>
+
                                 </div>
 
                             </div>
 
+
                             <label class="switch">
-                                <input type="checkbox" checked>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
                                 <span class="slider"></span>
+
                             </label>
 
                         </div>
@@ -1134,21 +1603,34 @@ body{
                             <div class="notification-left">
 
                                 <div class="notification-icon">
+
                                     <i class="fa-regular fa-bell"></i>
+
                                 </div>
 
                                 <div class="notification-text">
-                                    <h4>Reminders</h4>
+
+                                    <h4>
+                                        Reminders
+                                    </h4>
+
                                     <p>
                                         Get reminders for important dates and deadlines.
                                     </p>
+
                                 </div>
 
                             </div>
 
+
                             <label class="switch">
-                                <input type="checkbox" checked>
+
+                                <input
+                                    type="checkbox"
+                                    checked>
+
                                 <span class="slider"></span>
+
                             </label>
 
                         </div>
@@ -1161,21 +1643,32 @@ body{
                             <div class="notification-left">
 
                                 <div class="notification-icon">
+
                                     <i class="fa-solid fa-gift"></i>
+
                                 </div>
 
                                 <div class="notification-text">
-                                    <h4>Promotional Notifications</h4>
+
+                                    <h4>
+                                        Promotional Notifications
+                                    </h4>
+
                                     <p>
                                         Receive useful tips and announcements.
                                     </p>
+
                                 </div>
 
                             </div>
 
+
                             <label class="switch">
+
                                 <input type="checkbox">
+
                                 <span class="slider"></span>
+
                             </label>
 
                         </div>
@@ -1194,12 +1687,16 @@ body{
                         <div class="language-left">
 
                             <div class="language-icon">
+
                                 <i class="fa-solid fa-globe"></i>
+
                             </div>
 
                             <div class="language-text">
 
-                                <h4>Language</h4>
+                                <h4>
+                                    Language
+                                </h4>
 
                                 <p>
                                     Select your preferred language for the application.

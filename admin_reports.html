@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Scheme Finder - Reports & Analytics</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Font Awesome -->
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: #f4f8fc;
+    color: #172b4d;
+}
+
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    width: 260px;
+    height: 100vh;
+
+    background: linear-gradient(
+        180deg,
+        #064b91,
+        #0755a5,
+        #0866c4
+    );
+
+    color: white;
+    padding: 22px 15px;
+
+    z-index: 1000;
+}
+
+
+/* Sidebar Logo */
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    padding: 5px 10px 25px;
+
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+}
+
+.sidebar-logo i {
+    font-size: 28px;
+}
+
+.sidebar-logo span {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+/* Sidebar Menu */
+
+.sidebar-menu {
+    margin-top: 25px;
+}
+
+.sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    text-decoration: none;
+    color: white;
+
+    padding: 13px 15px;
+    margin-bottom: 6px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+
+    transition: 0.3s;
+}
+
+.sidebar-menu a i {
+    width: 20px;
+    text-align: center;
+}
+
+.sidebar-menu a:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+.sidebar-menu a.active {
+    background: white;
+    color: #0755a5;
+    font-weight: 600;
+}
+
+
+/* Sidebar Bottom */
+
+.sidebar-bottom {
+    position: absolute;
+
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+
+    text-align: center;
+
+    font-size: 11px;
+
+    color: rgba(255,255,255,0.85);
+}
+
+.tricolor {
+    display: flex;
+
+    height: 3px;
+
+    margin-top: 8px;
+}
+
+.tricolor span {
+    flex: 1;
+}
+
+.orange {
+    background: #ff9933;
+}
+
+.white {
+    background: white;
+}
+
+.green {
+    background: #138808;
+}
+
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.main {
+    margin-left: 260px;
+
+    min-height: 100vh;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+    height: 72px;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    border-bottom: 1px solid #e4eaf1;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 900;
+}
+
+
+/* Search */
+
+.header-search {
+    display: flex;
+    align-items: center;
+
+    width: 360px;
+
+    background: #f5f8fc;
+
+    border: 1px solid #e3eaf2;
+
+    border-radius: 8px;
+
+    padding: 9px 14px;
+
+    margin-left: auto;
+    margin-right: 30px;
+}
+
+.header-search i {
+    color: #8291a5;
+
+    margin-right: 9px;
+}
+
+.header-search input {
+    width: 100%;
+
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    font-size: 13px;
+}
+
+
+/* Header Right */
+
+.header-right {
+    display: flex;
+    align-items: center;
+
+    gap: 22px;
+}
+
+.notification {
+    position: relative;
+
+    font-size: 19px;
+
+    color: #526579;
+
+    cursor: pointer;
+}
+
+.notification span {
+    position: absolute;
+
+    top: -8px;
+    right: -8px;
+
+    width: 17px;
+    height: 17px;
+
+    background: #e63946;
+
+    color: white;
+
+    border-radius: 50%;
+
+    font-size: 9px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+/* Admin Profile */
+
+.admin-profile {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.profile-circle {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    background: #0755a5;
+
+    color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-profile strong {
+    display: block;
+
+    color: #172b4d;
+
+    font-size: 12px;
+}
+
+.admin-profile small {
+    color: #7b899b;
+
+    font-size: 10px;
+}
+
+
+/* =========================
+   CONTENT
+========================= */
+
+.content {
+    padding: 28px;
+}
+
+
+/* Page Heading */
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    font-size: 25px;
+
+    color: #12345b;
+}
+
+.page-heading p {
+    font-size: 13px;
+
+    color: #7b899b;
+
+    margin-top: 4px;
+}
+
+
+/* Export Button */
+
+.export-btn {
+    border: none;
+
+    background: #0755a5;
+
+    color: white;
+
+    padding: 10px 17px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 13px;
+}
+
+.export-btn i {
+    margin-right: 7px;
+}
+
+.export-btn:hover {
+    background: #064682;
+}
+
+
+/* =========================
+   SUMMARY CARDS
+========================= */
+
+.summary-grid {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.summary-card {
+    background: white;
+
+    border: 1px solid #e2e9f1;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+}
+
+.summary-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.summary-top p {
+    font-size: 12px;
+
+    color: #7b899b;
+}
+
+.summary-icon {
+    width: 42px;
+    height: 42px;
+
+    border-radius: 9px;
+
+    background: #eaf2ff;
+
+    color: #0755a5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 18px;
+}
+
+.summary-card h3 {
+    font-size: 25px;
+
+    margin-top: 15px;
+
+    color: #173b65;
+}
+
+.growth {
+    font-size: 11px;
+
+    color: #159447;
+
+    margin-top: 5px;
+}
+
+
+/* =========================
+   ANALYTICS GRID
+========================= */
+
+.analytics-grid {
+    display: grid;
+
+    grid-template-columns: 2fr 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.card {
+    background: white;
+
+    border: 1px solid #e2e9f1;
+
+    border-radius: 10px;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+
+    padding: 20px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.card-header h2 {
+    font-size: 16px;
+
+    color: #173b65;
+}
+
+.card-header p {
+    font-size: 11px;
+
+    color: #8996a8;
+
+    margin-top: 3px;
+}
+
+
+/* =========================
+   BAR CHART
+========================= */
+
+.chart {
+    height: 260px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+
+    padding: 15px 10px 5px;
+
+    border-bottom: 1px solid #dce4ed;
+}
+
+.bar-item {
+    height: 100%;
+
+    width: 45px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.bar {
+    width: 30px;
+
+    background: linear-gradient(
+        180deg,
+        #2582df,
+        #0755a5
+    );
+
+    border-radius: 5px 5px 0 0;
+
+    transition: 0.3s;
+}
+
+.bar:hover {
+    opacity: 0.8;
+}
+
+.bar-label {
+    margin-top: 8px;
+
+    font-size: 10px;
+
+    color: #7d8b9c;
+}
+
+
+/* =========================
+   DONUT CHART
+========================= */
+
+.donut-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 220px;
+
+    position: relative;
+}
+
+.donut {
+    width: 160px;
+    height: 160px;
+
+    border-radius: 50%;
+
+    background:
+        conic-gradient(
+            #0755a5 0deg 125deg,
+            #2f80ed 125deg 225deg,
+            #52b788 225deg 300deg,
+            #f4a261 300deg 345deg,
+            #d9e2ec 345deg 360deg
+        );
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.donut::after {
+    content: "";
+
+    width: 95px;
+    height: 95px;
+
+    background: white;
+
+    border-radius: 50%;
+}
+
+.donut-center {
+    position: absolute;
+
+    text-align: center;
+}
+
+.donut-center strong {
+    display: block;
+
+    font-size: 22px;
+
+    color: #173b65;
+}
+
+.donut-center span {
+    font-size: 10px;
+
+    color: #7b899b;
+}
+
+
+/* Legend */
+
+.legend {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+
+    margin-top: 5px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 10px;
+
+    color: #66778a;
+}
+
+.legend-dot {
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table-card {
+    margin-bottom: 22px;
+}
+
+.report-table {
+    width: 100%;
+
+    border-collapse: collapse;
+}
+
+.report-table th {
+    text-align: left;
+
+    background: #f5f8fc;
+
+    color: #627489;
+
+    font-size: 11px;
+
+    padding: 12px;
+}
+
+.report-table td {
+    padding: 13px 12px;
+
+    border-bottom: 1px solid #edf1f5;
+
+    font-size: 12px;
+
+    color: #536579;
+}
+
+.report-table tr:hover {
+    background: #fafcff;
+}
+
+
+/* Status */
+
+.status {
+    padding: 4px 9px;
+
+    border-radius: 20px;
+
+    font-size: 10px;
+
+    font-weight: 500;
+}
+
+.status.high {
+    background: #e5f7ec;
+
+    color: #15803d;
+}
+
+.status.medium {
+    background: #fff4dc;
+
+    color: #b7791f;
+}
+
+.status.low {
+    background: #eef2f7;
+
+    color: #66778a;
+}
+
+
+/* =========================
+   REPORT CARDS
+========================= */
+
+.report-grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+.report-box {
+    background: white;
+
+    border: 1px solid #e2e9f1;
+
+    border-radius: 10px;
+
+    padding: 20px;
+
+    box-shadow: 0 3px 12px rgba(0,0,0,0.04);
+}
+
+.report-box > i {
+    width: 40px;
+    height: 40px;
+
+    border-radius: 8px;
+
+    background: #edf4ff;
+
+    color: #0755a5;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 13px;
+}
+
+.report-box h3 {
+    font-size: 14px;
+
+    color: #173b65;
+
+    margin-bottom: 5px;
+}
+
+.report-box p {
+    font-size: 11px;
+
+    line-height: 1.6;
+
+    color: #7b899b;
+
+    margin-bottom: 13px;
+}
+
+.view-report {
+    border: none;
+
+    background: transparent;
+
+    color: #0755a5;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.view-report i {
+    margin-left: 4px;
+}
+
+
+/* =========================
+   TOAST
+========================= */
+
+.toast {
+    position: fixed;
+
+    right: 25px;
+    bottom: 25px;
+
+    background: #173b65;
+
+    color: white;
+
+    padding: 12px 18px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+
+    display: none;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+
+    z-index: 2000;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1100px) {
+
+    .summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main {
+        margin-left: 220px;
+    }
+
+    .header-search {
+        width: 220px;
+    }
+
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .report-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+
+        gap: 15px;
+
+        flex-direction: column;
+    }
+
+    .content {
+        padding: 18px;
+    }
+
+    .table-card {
+        overflow-x: auto;
+    }
+
+    .report-table {
+        min-width: 700px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .main {
+        margin-left: 190px;
+    }
+
+    .sidebar-logo span {
+        font-size: 15px;
+    }
+
+    .sidebar-menu a {
+        font-size: 12px;
+        padding: 11px;
+    }
+
+    .header {
+        padding: 0 15px;
+    }
+
+    .header-search {
+        display: none;
+    }
+
+    .admin-profile div:last-child {
+        display: none;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+
+<!-- ==================================================
+     SIDEBAR
+================================================== -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <i class="fa-solid fa-landmark"></i>
+
+        <span>Scheme Finder</span>
+
+    </div>
+
+
+    <div class="sidebar-menu">
+
+        <a href="admin_dashboard.html">
+
+            <i class="fa-solid fa-chart-line"></i>
+
+            <span>Dashboard</span>
+
+        </a>
+
+
+        <a href="admin_schemes.html">
+
+            <i class="fa-solid fa-file-lines"></i>
+
+            <span>Schemes</span>
+
+        </a>
+
+
+        <a href="admin_users.html">
+
+            <i class="fa-solid fa-users"></i>
+
+            <span>Users</span>
+
+        </a>
+
+
+        <a href="admin_applications.html">
+
+            <i class="fa-solid fa-clipboard-list"></i>
+
+            <span>Applications</span>
+
+        </a>
+
+
+        <a href="admin_alerts.html">
+
+            <i class="fa-solid fa-bell"></i>
+
+            <span>Alerts & Notifications</span>
+
+        </a>
+
+
+        <a href="admin_reports.html" class="active">
+
+            <i class="fa-solid fa-chart-pie"></i>
+
+            <span>Reports</span>
+
+        </a>
+
+
+        <a href="admin_settings.html">
+
+            <i class="fa-solid fa-gear"></i>
+
+            <span>Settings</span>
+
+        </a>
+
+
+        <a href="admin_logout.html">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+    </div>
+
+
+    <div class="sidebar-bottom">
+
+        <div>Government of India</div>
+
+        <div>Scheme Finder Admin Portal</div>
+
+
+        <div class="tricolor">
+
+            <span class="orange"></span>
+
+            <span class="white"></span>
+
+            <span class="green"></span>
+
+        </div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- ==================================================
+     MAIN
+================================================== -->
+
+<main class="main">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+
+        <div class="header-search">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                placeholder="Search reports..."
+            >
+
+        </div>
+
+
+        <div class="header-right">
+
+
+            <div class="notification">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>4</span>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="profile-circle">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>Admin</strong>
+
+                    <small>Administrator</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- ==================================================
+         CONTENT
+    ================================================== -->
+
+    <section class="content">
+
+
+        <!-- PAGE HEADING -->
+
+        <div class="page-heading">
+
+            <div>
+
+                <h1>Reports & Analytics</h1>
+
+                <p>
+                    Monitor scheme performance, applications and user activity.
+                </p>
+
+            </div>
+
+
+            <button
+                class="export-btn"
+                onclick="exportReport()"
+            >
+
+                <i class="fa-solid fa-download"></i>
+
+                Export Report
+
+            </button>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             SUMMARY CARDS
+        ================================================== -->
+
+        <div class="summary-grid">
+
+
+            <!-- Users -->
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <p>Total Users</p>
+
+                    <div class="summary-icon">
+
+                        <i class="fa-solid fa-users"></i>
+
+                    </div>
+
+                </div>
+
+
+                <h3>12,580</h3>
+
+
+                <div class="growth">
+
+                    <i class="fa-solid fa-arrow-up"></i>
+
+                    12.5% this month
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Applications -->
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <p>Total Applications</p>
+
+                    <div class="summary-icon">
+
+                        <i class="fa-solid fa-file-circle-check"></i>
+
+                    </div>
+
+                </div>
+
+
+                <h3>8,426</h3>
+
+
+                <div class="growth">
+
+                    <i class="fa-solid fa-arrow-up"></i>
+
+                    8.7% this month
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Views -->
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <p>Schemes Viewed</p>
+
+                    <div class="summary-icon">
+
+                        <i class="fa-solid fa-eye"></i>
+
+                    </div>
+
+                </div>
+
+
+                <h3>34,892</h3>
+
+
+                <div class="growth">
+
+                    <i class="fa-solid fa-arrow-up"></i>
+
+                    15.2% this month
+
+                </div>
+
+            </div>
+
+
+
+            <!-- Success -->
+
+            <div class="summary-card">
+
+                <div class="summary-top">
+
+                    <p>Success Rate</p>
+
+                    <div class="summary-icon">
+
+                        <i class="fa-solid fa-chart-simple"></i>
+
+                    </div>
+
+                </div>
+
+
+                <h3>76.4%</h3>
+
+
+                <div class="growth">
+
+                    <i class="fa-solid fa-arrow-up"></i>
+
+                    4.3% this month
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             CHARTS
+        ================================================== -->
+
+        <div class="analytics-grid">
+
+
+            <!-- MONTHLY APPLICATIONS -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>Monthly Applications</h2>
+
+                        <p>
+                            Applications received over the last 6 months
+                        </p>
+
+                    </div>
+
+
+                    <i
+                        class="fa-solid fa-chart-column"
+                        style="color:#0755a5;"
+                    ></i>
+
+                </div>
+
+
+                <div class="chart">
+
+
+                    <div class="bar-item">
+
+                        <div
+                            class="bar"
+                            style="height:45%;"
+                        ></div>
+
+                        <div class="bar-label">
+                            May
+                        </div>
+
+                    </div>
+
+
+                    <div class="bar-item">
+
+                        <div
+                            class="bar"
+                            style="height:58%;"
+                        ></div>
+
+                        <div class="bar-label">
+                            Jun
+                        </div>
+
+                    </div>
+
+
+                    <div class="bar-item">
+
+                        <div
+                            class="bar"
+                            style="height:65%;"
+                        ></div>
+
+                        <div class="bar-label">
+                            Jul
+                        </div>
+
+                    </div>
+
+
+                    <div class="bar-item">
+
+                        <div
+                            class="bar"
+                            style="height:72%;"
+                        ></div>
+
+                        <div class="bar-label">
+                            Aug
+                        </div>
+
+                    </div>
+
+
+                    <div class="bar-item">
+
+                        <div
+                            class="bar"
+                            style="height:83%;"
+                        ></div>
+
+                        <div class="bar-label">
+                            Sep
+                        </div>
+
+                    </div>
+
+
+                    <div class="bar-item">
+
+                        <div
+                            class="bar"
+                            style="height:94%;"
+                        ></div>
+
+                        <div class="bar-label">
+                            Oct
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CATEGORY DONUT -->
+
+            <div class="card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>Applications by Category</h2>
+
+                        <p>
+                            Distribution of applications
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="donut-wrapper">
+
+                    <div class="donut"></div>
+
+
+                    <div class="donut-center">
+
+                        <strong>8.4K</strong>
+
+                        <span>Applications</span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="legend">
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#0755a5;"
+                        ></span>
+
+                        Education
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#2f80ed;"
+                        ></span>
+
+                        Employment
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#52b788;"
+                        ></span>
+
+                        Entrepreneurship
+
+                    </div>
+
+
+                    <div class="legend-item">
+
+                        <span
+                            class="legend-dot"
+                            style="background:#f4a261;"
+                        ></span>
+
+                        Internship
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             TOP PERFORMING SCHEMES
+        ================================================== -->
+
+        <div class="card table-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>Top Performing Schemes</h2>
+
+                    <p>
+                        Schemes with the highest user engagement
+                    </p>
+
+                </div>
+
+
+                <i
+                    class="fa-solid fa-ranking-star"
+                    style="color:#0755a5;"
+                ></i>
+
+            </div>
+
+
+
+            <table class="report-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>Scheme Name</th>
+
+                        <th>Category</th>
+
+                        <th>Views</th>
+
+                        <th>Applications</th>
+
+                        <th>Success Rate</th>
+
+                        <th>Performance</th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <tbody>
+
+
+                    <tr>
+
+                        <td>
+                            PM-YASASVI Scholarship
+                        </td>
+
+                        <td>
+                            Education
+                        </td>
+
+                        <td>
+                            8,942
+                        </td>
+
+                        <td>
+                            2,186
+                        </td>
+
+                        <td>
+                            84.6%
+                        </td>
+
+                        <td>
+
+                            <span class="status high">
+                                High
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            PM Employment Scheme
+                        </td>
+
+                        <td>
+                            Employment
+                        </td>
+
+                        <td>
+                            7,820
+                        </td>
+
+                        <td>
+                            1,842
+                        </td>
+
+                        <td>
+                            79.2%
+                        </td>
+
+                        <td>
+
+                            <span class="status high">
+                                High
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Startup India Support
+                        </td>
+
+                        <td>
+                            Entrepreneurship
+                        </td>
+
+                        <td>
+                            6,514
+                        </td>
+
+                        <td>
+                            1,426
+                        </td>
+
+                        <td>
+                            73.8%
+                        </td>
+
+                        <td>
+
+                            <span class="status medium">
+                                Medium
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            National Internship Scheme
+                        </td>
+
+                        <td>
+                            Internship
+                        </td>
+
+                        <td>
+                            5,286
+                        </td>
+
+                        <td>
+                            1,192
+                        </td>
+
+                        <td>
+                            69.4%
+                        </td>
+
+                        <td>
+
+                            <span class="status medium">
+                                Medium
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                    <tr>
+
+                        <td>
+                            Skill Development Scheme
+                        </td>
+
+                        <td>
+                            Employment
+                        </td>
+
+                        <td>
+                            3,940
+                        </td>
+
+                        <td>
+                            782
+                        </td>
+
+                        <td>
+                            61.7%
+                        </td>
+
+                        <td>
+
+                            <span class="status low">
+                                Low
+                            </span>
+
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+
+
+        <!-- ==================================================
+             REPORT TYPES
+        ================================================== -->
+
+        <div class="report-grid">
+
+
+            <!-- USER ACTIVITY -->
+
+            <div class="report-box">
+
+                <i class="fa-solid fa-users"></i>
+
+                <h3>User Activity Report</h3>
+
+                <p>
+                    View user registrations, login activity,
+                    scheme searches and overall engagement.
+                </p>
+
+
+                <button
+                    class="view-report"
+                    onclick="viewReport('User Activity Report')"
+                >
+
+                    View Report
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- APPLICATION -->
+
+            <div class="report-box">
+
+                <i class="fa-solid fa-file-circle-check"></i>
+
+                <h3>Application Report</h3>
+
+                <p>
+                    Analyze application submissions,
+                    approvals, pending applications and rejections.
+                </p>
+
+
+                <button
+                    class="view-report"
+                    onclick="viewReport('Application Report')"
+                >
+
+                    View Report
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <!-- SCHEME PERFORMANCE -->
+
+            <div class="report-box">
+
+                <i class="fa-solid fa-layer-group"></i>
+
+                <h3>Scheme Performance Report</h3>
+
+                <p>
+                    Compare scheme views, applications,
+                    success rates and user engagement.
+                </p>
+
+
+                <button
+                    class="view-report"
+                    onclick="viewReport('Scheme Performance Report')"
+                >
+
+                    View Report
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+</main>
+
+
+
+<!-- ==================================================
+     TOAST
+================================================== -->
+
+<div class="toast" id="toast">
+    Report generated successfully.
+</div>
+
+
+
+<script>
+
+/* =========================
+   EXPORT REPORT
+========================= */
+
+function exportReport() {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        "Report exported successfully.";
+
+    toast.style.display = "block";
+
+
+    setTimeout(function() {
+
+        toast.style.display = "none";
+
+    }, 2500);
+
+}
+
+
+/* =========================
+   VIEW REPORT
+========================= */
+
+function viewReport(reportName) {
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        reportName + " opened successfully.";
+
+    toast.style.display = "block";
+
+
+    setTimeout(function() {
+
+        toast.style.display = "none";
+
+    }, 2500);
+
+}
+
+</script>
+
+
+</body>
+</html>

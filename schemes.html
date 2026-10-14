@@ -4,1016 +4,939 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Scheme Finder</title>
+<title>PM-YASASVI Scholarship Scheme | Scheme Finder</title>
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: #f5faff;
-    color: #315b88;
-}
-
-
-/* =========================
-   APP
-========================= */
-
-.app {
-    min-height: 100vh;
+body{
+    font-family:"Poppins",Arial,Helvetica,sans-serif;
+    background:#f5f8fc;
+    color:#1e293b;
 }
 
 
-/* =========================
-   SIDEBAR
-========================= */
+/* =========================================================
+   SIDEBAR — SAME AS LOGOUT PAGE
+========================================================= */
 
-.sidebar {
-    position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
 
-    width: 260px;
+    width:260px;
+    height:100vh;
 
-    background: linear-gradient(
+    background:linear-gradient(
         180deg,
-        #07529e,
-        #006bcf
+        #07509d 0%,
+        #064b98 55%,
+        #063f82 100%
     );
 
-    color: white;
+    color:white;
 
-    z-index: 1000;
+    padding:18px 15px;
 
-    transform: translateX(-100%);
-
-    transition: transform 0.3s ease;
-
-    overflow: hidden;
+    z-index:1000;
+    overflow:hidden;
 }
 
 
-/* SIDEBAR OPEN */
+/* Decorative building inside sidebar */
 
-.sidebar.open {
-    transform: translateX(0);
-}
+.sidebar::after{
+    content:"";
 
+    position:absolute;
 
-/* =========================
-   SIDEBAR HEADER
-========================= */
+    left:-70px;
+    bottom:60px;
 
-.sidebar-header {
-    height: 90px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 0 25px;
-}
-
-.gov-logo {
-    font-size: 35px;
-}
-
-.sidebar-header h2 {
-    font-size: 21px;
-}
-
-
-/* =========================
-   SIDEBAR MENU
-========================= */
-
-.sidebar-menu {
-    padding: 20px 15px;
-}
-
-.menu-item {
-    height: 54px;
-
-    display: flex;
-    align-items: center;
-
-    gap: 18px;
-
-    padding: 0 16px;
-
-    margin-bottom: 7px;
-
-    color: white;
-
-    text-decoration: none;
-
-    border-radius: 9px;
-
-    font-size: 15px;
-
-    transition: 0.2s;
-}
-
-.menu-item i {
-    width: 25px;
-
-    text-align: center;
-
-    font-size: 22px;
-}
-
-.menu-item:hover {
-    background: rgba(255,255,255,0.12);
-}
-
-.menu-item.active {
-    background: #087cf4;
-}
-
-
-/* =========================
-   SIDEBAR BOTTOM
-========================= */
-
-.sidebar-bottom {
-    position: absolute;
-
-    bottom: 0;
-    left: 0;
-    right: 0;
-
-    height: 300px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: flex-end;
-
-    flex-direction: column;
-
-    padding-bottom: 50px;
-
-    text-align: center;
-}
-
-.building {
-    font-size: 85px;
-
-    opacity: 0.12;
-
-    margin-bottom: 15px;
-}
-
-.sidebar-bottom p {
-    font-size: 13px;
-
-    line-height: 1.7;
-}
-
-
-/* =========================
-   OVERLAY
-========================= */
-
-.overlay {
-    position: fixed;
-
-    inset: 0;
-
-    background: rgba(0,0,0,0.35);
-
-    z-index: 900;
-
-    opacity: 0;
-
-    visibility: hidden;
-
-    transition: 0.3s;
-}
-
-.overlay.active {
-    opacity: 1;
-
-    visibility: visible;
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-.main {
-    width: 100%;
-
-    min-height: 100vh;
-}
-
-
-/* =========================
-   TOP BAR
-========================= */
-
-.topbar {
-    height: 72px;
-
-    background: white;
-
-    border-bottom: 1px solid #e1ebf4;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 0 28px;
-
-    gap: 25px;
-}
-
-
-/* =========================
-   HAMBURGER
-========================= */
-
-.menu-button {
-    width: 45px;
-    height: 45px;
-
-    border: none;
-
-    background: transparent;
-
-    cursor: pointer;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-
-    align-items: center;
-
-    gap: 5px;
-
-    border-radius: 8px;
-}
-
-.menu-button:hover {
-    background: #edf6ff;
-}
-
-
-/* THREE LINES */
-
-.menu-button span {
-    display: block;
-
-    width: 25px;
-    height: 3px;
-
-    background: #0757a5;
-
-    border-radius: 5px;
-
-    transition: 0.3s;
-}
-
-
-/* ANIMATION TO X */
-
-.menu-button.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
-}
-
-.menu-button.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-button.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
-}
-
-
-/* =========================
-   SEARCH
-========================= */
-
-.search-box {
-    width: 285px;
-
-    height: 42px;
-
-    border: 1px solid #d7e4ef;
-
-    border-radius: 25px;
-
-    display: flex;
-
-    align-items: center;
-
-    padding: 0 16px;
-
-    margin-left: auto;
-}
-
-.search-box i {
-    color: #6483a5;
-
-    margin-right: 10px;
-}
-
-.search-box input {
-    width: 100%;
-
-    border: none;
-
-    outline: none;
-
-    font-size: 13px;
-}
-
-
-/* =========================
-   NOTIFICATION
-========================= */
-
-.notification {
-    position: relative;
-
-    font-size: 25px;
-
-    color: #064c99;
-}
-
-.notification span {
-    position: absolute;
-
-    top: -5px;
-    right: -6px;
-
-    width: 16px;
-    height: 16px;
-
-    background: #e52d35;
-
-    color: white;
-
-    border-radius: 50%;
-
-    font-size: 9px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-}
-
-
-/* =========================
-   PROFILE
-========================= */
-
-.user-profile {
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    color: #064582;
-}
-
-.profile-icon {
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    background: #e6f2ff;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    color: #0755a3;
-
-    font-size: 23px;
-}
-
-
-/* =========================
-   CONTENT
-========================= */
-
-.content {
-    padding: 25px 28px;
+    width:350px;
+    height:300px;
 
     background:
-        radial-gradient(
-            circle at 60% 20%,
-            #eaf6ff,
-            transparent 30%
-        ),
-        #f5faff;
+        linear-gradient(
+            rgba(255,255,255,0.06),
+            rgba(255,255,255,0.01)
+        );
 
-    min-height: calc(100vh - 72px);
+    border-radius:50% 50% 0 0;
+
+    transform:translateY(80px);
 }
 
 
-/* =========================
-   BACK
-========================= */
+/* =========================================================
+   LOGO — SAME AS LOGOUT PAGE
+========================================================= */
 
-.back {
-    display: flex;
+.logo{
+    display:flex;
 
-    align-items: center;
+    align-items:center;
 
-    gap: 10px;
+    gap:15px;
 
-    color: #0864c8;
+    height:65px;
 
-    font-weight: bold;
+    padding-left:10px;
 
-    margin-bottom: 15px;
+    margin-bottom:25px;
+
+    position:relative;
+    z-index:2;
+}
+
+.logo img{
+    width:42px;
+    height:52px;
+
+    object-fit:contain;
+
+    filter:brightness(0) invert(1);
+}
+
+.logo-text{
+    font-size:24px;
+    font-weight:600;
+
+    color:white;
+
+    white-space:nowrap;
 }
 
 
-/* =========================
-   HERO CARD
-========================= */
+/* =========================================================
+   NAVIGATION — SAME AS LOGOUT PAGE
+========================================================= */
 
-.hero-card {
-    position: relative;
+.nav-menu{
+    display:flex;
 
-    min-height: 181px;
+    flex-direction:column;
 
-    background: white;
+    gap:8px;
 
-    border: 1px solid #dbe8f3;
-
-    border-radius: 10px;
-
-    padding: 25px 135px;
-
-    overflow: hidden;
+    position:relative;
+    z-index:2;
 }
 
-.hero-icon {
-    position: absolute;
+.nav-item{
+    width:100%;
+    height:52px;
 
-    left: 24px;
-    top: 29px;
+    display:flex;
 
-    width: 80px;
-    height: 80px;
+    align-items:center;
 
-    border-radius: 50%;
+    gap:20px;
 
-    background: #0879ea;
+    padding:0 14px;
 
-    color: white;
+    color:white;
 
-    display: flex;
+    text-decoration:none;
 
-    align-items: center;
-    justify-content: center;
+    font-size:16px;
+    font-weight:500;
 
-    font-size: 38px;
+    border-radius:9px;
+
+    transition:0.25s ease;
 }
 
-.hero-content h1 {
-    color: #06488e;
+.nav-item i{
+    width:26px;
 
-    font-size: 25px;
+    text-align:center;
 
-    margin-bottom: 9px;
+    font-size:24px;
 }
 
-.hero-meta {
-    display: flex;
-
-    gap: 10px;
-
-    color: #4c729c;
-
-    font-size: 14px;
-
-    margin-bottom: 14px;
+.nav-item:hover{
+    background:rgba(255,255,255,0.12);
 }
 
-.hero-content p {
-    color: #41678f;
+.nav-item.active{
+    background:linear-gradient(
+        90deg,
+        #168cff,
+        #1685f4
+    );
 
-    font-size: 14px;
-
-    line-height: 1.6;
-
-    max-width: 680px;
-}
-
-.match {
-    position: absolute;
-
-    top: 17px;
-    right: 20px;
-
-    padding: 9px 14px;
-
-    border-radius: 20px;
-
-    background: #e4f8ed;
-
-    color: #19945d;
-
-    font-size: 13px;
+    box-shadow:
+        0 5px 15px rgba(0,126,255,0.25);
 }
 
 
-/* =========================
-   MAIN GRID
-========================= */
+/* =========================================================
+   SIDEBAR FOOTER — SAME AS LOGOUT PAGE
+========================================================= */
 
-.main-grid {
-    display: grid;
+.sidebar-footer{
+    position:absolute;
 
-    grid-template-columns:
-        minmax(600px, 1fr)
-        445px;
+    bottom:25px;
+    left:0;
 
-    gap: 24px;
+    width:100%;
 
-    margin-top: 12px;
+    text-align:center;
+
+    z-index:3;
+}
+
+.sidebar-footer p{
+    color:white;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    opacity:0.95;
 }
 
 
-/* =========================
-   TABS
-========================= */
+/* Indian tricolor curve */
 
-.tabs {
-    height: 45px;
+.tricolor{
+    width:90px;
+    height:20px;
 
-    background: white;
+    margin:8px auto 0;
 
-    border: 1px solid #e1ebf4;
-
-    border-radius: 8px;
-
-    display: flex;
-
-    margin-bottom: 13px;
-
-    overflow: hidden;
+    position:relative;
 }
 
-.tab {
-    border: none;
+.tricolor::before{
+    content:"";
 
-    background: transparent;
+    position:absolute;
 
-    padding: 0 26px;
+    width:75px;
+    height:5px;
 
-    color: #315b88;
+    background:#ff9933;
 
-    cursor: pointer;
+    border-radius:50%;
 
-    position: relative;
+    left:8px;
+    top:2px;
+
+    transform:rotate(-10deg);
 }
 
-.tab.active {
-    color: #0873df;
+.tricolor::after{
+    content:"";
 
-    font-weight: bold;
-}
+    position:absolute;
 
-.tab.active::after {
-    content: "";
+    width:75px;
+    height:5px;
 
-    position: absolute;
+    background:#138808;
 
-    left: 10px;
-    right: 10px;
+    border-radius:50%;
 
-    bottom: 0;
+    left:8px;
+    top:11px;
 
-    height: 3px;
-
-    background: #087cf0;
+    transform:rotate(-10deg);
 }
 
 
-/* =========================
-   INFO CARDS
-========================= */
+/* =========================================================
+   TOP BAR
+========================================================= */
 
-.info-card {
-    background: white;
+.topbar{
+    position:fixed;
 
-    border: 1px solid #dce8f2;
+    top:0;
+    left:260px;
+    right:0;
 
-    border-radius: 9px;
+    height:73px;
 
-    padding: 18px;
+    background:white;
 
-    margin-bottom: 9px;
-}
+    display:flex;
+    align-items:center;
 
-.section-heading {
-    display: flex;
+    padding:0 28px;
 
-    align-items: center;
+    border-bottom:1px solid #e5e7eb;
 
-    gap: 16px;
-
-    margin-bottom: 10px;
-}
-
-.section-heading h3 {
-    color: #064886;
-
-    font-size: 15px;
-}
-
-.section-icon {
-    width: 48px;
-    height: 48px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 21px;
-}
-
-.blue {
-    background: #e4f2ff;
-
-    color: #0874df;
-}
-
-.green {
-    background: #dcf7e9;
-
-    color: #18a465;
-}
-
-.purple {
-    background: #eee2ff;
-
-    color: #6929d5;
-}
-
-.info-card p {
-    margin-left: 64px;
-
-    font-size: 14px;
-
-    line-height: 1.65;
-}
-
-.check-list {
-    list-style: none;
-
-    margin-left: 64px;
-}
-
-.check-list li {
-    margin-bottom: 9px;
-
-    font-size: 13px;
-}
-
-.check-list i {
-    color: #20a66a;
-
-    margin-right: 10px;
+    z-index:900;
 }
 
 
-/* =========================
-   RIGHT SIDE
-========================= */
+/* =========================================================
+   SEARCH
+========================================================= */
 
-.right-content {
-    display: flex;
+.search-box{
+    margin-left:auto;
 
-    flex-direction: column;
+    width:340px;
+    height:42px;
 
-    gap: 10px;
+    background:#f8fafc;
+
+    border:1px solid #dbe3ec;
+
+    border-radius:9px;
+
+    display:flex;
+    align-items:center;
+
+    padding:0 15px;
+
+    gap:10px;
+}
+
+.search-box i{
+    color:#64748b;
+}
+
+.search-box input{
+    width:100%;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:14px;
+
+    color:#334155;
+}
+
+.search-box input::placeholder{
+    color:#94a3b8;
 }
 
 
-/* QUICK CARD */
+/* =========================================================
+   MAIN
+========================================================= */
 
-.quick-card {
-    background: white;
+.main{
+    margin-left:260px;
 
-    border: 1px solid #dce8f2;
+    padding-top:73px;
 
-    border-radius: 9px;
-
-    padding: 15px;
-}
-
-.quick-heading {
-    display: flex;
-
-    align-items: center;
-
-    gap: 13px;
-
-    margin-bottom: 12px;
-}
-
-.quick-icon {
-    width: 42px;
-    height: 42px;
-
-    border-radius: 50%;
-
-    background: #e4f2ff;
-
-    color: #0874df;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-}
-
-.quick-heading h3 {
-    color: #064886;
-
-    font-size: 15px;
-}
-
-.quick-row {
-    display: grid;
-
-    grid-template-columns: 1fr 1.15fr;
-
-    min-height: 44px;
-
-    align-items: center;
-
-    border-bottom: 1px solid #e4edf5;
-
-    font-size: 13px;
-}
-
-.quick-row span {
-    color: #53769a;
-}
-
-.quick-row strong {
-    color: #174d85;
-
-    font-weight: 500;
+    min-height:100vh;
 }
 
 
-/* =========================
-   ELIGIBLE
-========================= */
+/* =========================================================
+   CONTENT
+========================================================= */
 
-.eligible-card {
-    background: white;
+.content{
+    padding:35px 45px 50px;
 
-    border: 1px solid #dce8f2;
-
-    border-radius: 9px;
-
-    padding: 14px;
-}
-
-.eligible-box {
-    min-height: 88px;
-
-    background: #eafaf4;
-
-    border: 1px solid #cfeee1;
-
-    border-radius: 9px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 13px;
-}
-
-.eligible-icon {
-    min-width: 36px;
-    height: 36px;
-
-    border-radius: 50%;
-
-    background: #29b475;
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-}
-
-.eligible-box h3 {
-    color: #198d5b;
-
-    font-size: 14px;
-
-    margin-bottom: 6px;
-}
-
-.eligible-box p {
-    color: #4a806e;
-
-    font-size: 12px;
-
-    line-height: 1.5;
-}
-
-.arrow-right {
-    margin-left: auto;
-
-    color: #21976a;
+    min-height:calc(100vh - 73px);
 }
 
 
-/* =========================
+/* =========================================================
+   PAGE TITLE
+========================================================= */
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:30px;
+
+    color:#0f3f78;
+
+    margin-bottom:7px;
+}
+
+.page-title p{
+    color:#64748b;
+
+    font-size:15px;
+}
+
+
+/* =========================================================
+   HERO SECTION
+========================================================= */
+
+.scheme-hero{
+    background:linear-gradient(
+        135deg,
+        #07529b,
+        #1285ed
+    );
+
+    border-radius:18px;
+
+    padding:35px;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:25px;
+}
+
+.scheme-hero::after{
+    content:"";
+
+    position:absolute;
+
+    width:300px;
+    height:300px;
+
+    right:-100px;
+    top:-130px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+}
+
+.scheme-hero-content{
+    position:relative;
+
+    z-index:2;
+}
+
+.scheme-tag{
+    display:inline-block;
+
+    padding:7px 15px;
+
+    background:rgba(255,255,255,.16);
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    margin-bottom:15px;
+}
+
+.scheme-hero h2{
+    font-size:31px;
+
+    line-height:1.3;
+
+    margin-bottom:12px;
+}
+
+.scheme-hero p{
+    max-width:850px;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    opacity:.95;
+}
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
+.details-grid{
+    display:grid;
+
+    grid-template-columns:2fr 1fr;
+
+    gap:25px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.card{
+    background:white;
+
+    border-radius:15px;
+
+    padding:27px;
+
+    border:1px solid #e5eaf0;
+
+    box-shadow:
+        0 4px 15px rgba(15,23,42,.05);
+
+    margin-bottom:25px;
+}
+
+.card h3{
+    font-size:21px;
+
+    color:#0f3f78;
+
+    margin-bottom:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+.card h3 i{
+    color:#1285ed;
+}
+
+.card p{
+    font-size:14px;
+
+    line-height:1.8;
+
+    color:#475569;
+}
+
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.benefits-list{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:14px;
+}
+
+.benefit{
+    background:#f5f9ff;
+
+    border:1px solid #e1ecfa;
+
+    border-radius:10px;
+
+    padding:15px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:12px;
+}
+
+.benefit i{
+    color:#1285ed;
+
+    font-size:19px;
+
+    margin-top:2px;
+}
+
+.benefit span{
+    font-size:14px;
+
+    line-height:1.5;
+
+    color:#334155;
+}
+
+
+/* =========================================================
+   ELIGIBILITY
+========================================================= */
+
+.eligibility-list{
+    list-style:none;
+}
+
+.eligibility-list li{
+    display:flex;
+
+    gap:12px;
+
+    margin-bottom:14px;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    color:#475569;
+}
+
+.eligibility-list li i{
+    color:#16a34a;
+
+    margin-top:4px;
+}
+
+
+/* =========================================================
+   DOCUMENTS
+========================================================= */
+
+.documents-list{
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:12px;
+}
+
+.document{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    background:#f8fafc;
+
+    padding:13px;
+
+    border-radius:9px;
+
+    border:1px solid #e5e7eb;
+
+    font-size:14px;
+
+    color:#475569;
+}
+
+.document i{
+    color:#07529b;
+}
+
+
+/* =========================================================
+   QUICK INFO
+========================================================= */
+
+.info-item{
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:13px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid #edf0f4;
+}
+
+.info-item:last-child{
+    border-bottom:none;
+}
+
+.info-icon{
+    width:38px;
+    height:38px;
+
+    border-radius:9px;
+
+    background:#eff6ff;
+
+    color:#07529b;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.info-text strong{
+    display:block;
+
+    font-size:13px;
+
+    color:#64748b;
+
+    margin-bottom:3px;
+}
+
+.info-text span{
+    font-size:14px;
+
+    color:#1e293b;
+}
+
+
+/* =========================================================
+   ELIGIBLE CARD
+========================================================= */
+
+.eligible-card{
+    background:linear-gradient(
+        135deg,
+        #eff6ff,
+        #f8fbff
+    );
+
+    border:1px solid #d9eaff;
+}
+
+.eligible-icon{
+    width:55px;
+    height:55px;
+
+    border-radius:50%;
+
+    background:#dbeafe;
+
+    color:#07529b;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:24px;
+
+    margin-bottom:15px;
+}
+
+.eligible-card h3{
+    margin-bottom:8px;
+}
+
+.eligible-card p{
+    margin-bottom:20px;
+}
+
+
+/* =========================================================
    BUTTONS
-========================= */
+========================================================= */
 
-.apply-btn,
-.save-btn {
-    width: 100%;
+.action-buttons{
+    display:flex;
 
-    height: 45px;
+    gap:12px;
 
-    margin-top: 14px;
-
-    border-radius: 8px;
-
-    cursor: pointer;
-
-    font-weight: 600;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 10px;
+    flex-wrap:wrap;
 }
 
-.apply-btn {
-    border: none;
+.btn{
+    display:inline-flex;
 
-    background: #087cf0;
+    align-items:center;
 
-    color: white;
+    justify-content:center;
+
+    gap:9px;
+
+    padding:12px 20px;
+
+    border-radius:9px;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    border:none;
+
+    cursor:pointer;
+
+    transition:.2s;
 }
 
-.save-btn {
-    border: 1px solid #087cf0;
+.btn-primary{
+    background:#07529b;
 
-    background: white;
-
-    color: #0764c4;
+    color:white;
 }
 
-
-/* =========================
-   HELP
-========================= */
-
-.help-card {
-    background: #eef7ff;
-
-    border: 1px solid #d8eaf8;
-
-    border-radius: 9px;
-
-    padding: 16px;
-
-    display: flex;
-
-    gap: 15px;
+.btn-primary:hover{
+    background:#06437e;
 }
 
-.help-icon {
-    color: #0875df;
+.btn-secondary{
+    background:white;
 
-    font-size: 23px;
+    color:#07529b;
+
+    border:1px solid #b9d2ed;
 }
 
-.help-card h3 {
-    color: #0758a7;
-
-    font-size: 15px;
-
-    margin-bottom: 8px;
-}
-
-.help-card p {
-    color: #416b96;
-
-    font-size: 12px;
-
-    line-height: 1.6;
-
-    margin-bottom: 8px;
-}
-
-.help-card a {
-    color: #075fc1;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    text-decoration: none;
+.btn-secondary:hover{
+    background:#eff6ff;
 }
 
 
-/* =========================
+/* =========================================================
+   HELP CARD
+========================================================= */
+
+.help-card{
+    background:#fff;
+
+    border-left:4px solid #1285ed;
+}
+
+.help-card h3{
+    font-size:18px;
+}
+
+.help-card p{
+    margin-bottom:12px;
+}
+
+
+/* =========================================================
    RESPONSIVE
-========================= */
+========================================================= */
 
-@media (max-width: 1100px) {
+@media(max-width:1100px){
 
-    .main-grid {
-        grid-template-columns: 1fr;
+    .details-grid{
+        grid-template-columns:1fr;
     }
 
-    .hero-card {
-        padding-right: 30px;
+    .search-box{
+        width:280px;
+    }
+
+    .content{
+        padding:30px;
     }
 }
 
 
-@media (max-width: 700px) {
+@media(max-width:800px){
 
-    .search-box {
-        width: 180px;
+    .sidebar{
+        width:260px;
     }
 
-    .user-profile strong,
-    .user-profile > i {
-        display: none;
+    .topbar{
+        left:260px;
     }
 
-    .content {
-        padding: 18px 12px;
+    .main{
+        margin-left:260px;
     }
 
-    .hero-card {
-        padding: 90px 20px 25px;
+    .content{
+        padding:25px 20px 35px;
     }
 
-    .hero-icon {
-        left: 20px;
-        top: 20px;
+    .search-box{
+        width:260px;
     }
 
-    .hero-content h1 {
-        font-size: 21px;
+    .scheme-hero{
+        padding:28px;
     }
 
-    .hero-image {
-        display: none;
+    .scheme-hero h2{
+        font-size:26px;
+    }
+}
+
+
+@media(max-width:700px){
+
+    .topbar{
+        padding:0 18px;
     }
 
-    .tabs {
-        overflow-x: auto;
+    .search-box{
+        width:100%;
+        max-width:260px;
     }
 
-    .tab {
-        min-width: 120px;
+    .page-title h1{
+        font-size:25px;
     }
 
-    .info-card p,
-    .check-list {
-        margin-left: 0;
+    .scheme-hero h2{
+        font-size:23px;
+    }
+
+    .benefits-list,
+    .documents-list{
+        grid-template-columns:1fr;
+    }
+
+    .card{
+        padding:21px;
+    }
+
+    .content{
+        padding:25px 15px 30px;
+    }
+}
+
+
+@media(max-width:500px){
+
+    .sidebar{
+        width:230px;
+    }
+
+    .topbar{
+        left:230px;
+    }
+
+    .main{
+        margin-left:230px;
+    }
+
+    .logo-text{
+        font-size:20px;
+    }
+
+    .logo img{
+        width:38px;
+        height:48px;
+    }
+
+    .search-box{
+        max-width:200px;
+    }
+
+    .search-box input{
+        font-size:12px;
+    }
+
+    .scheme-hero{
+        padding:23px;
+    }
+
+    .scheme-hero h2{
+        font-size:21px;
+    }
+
+    .action-buttons{
+        flex-direction:column;
+    }
+
+    .btn{
+        width:100%;
     }
 }
 
@@ -1024,682 +947,643 @@ body {
 <body>
 
 
-<div class="app">
+<!-- =====================================================
+     SIDEBAR — MATCHED TO LOGOUT PAGE
+===================================================== -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <!-- Government of India Emblem -->
+        <img
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="Government of India">
+
+        <span class="logo-text">
+            Scheme Finder
+        </span>
+
+    </div>
 
 
-    <!-- =================================
-         SIDEBAR
-    ================================= -->
+    <nav class="nav-menu">
 
-    <aside class="sidebar" id="sidebar">
+        <a href="dashboard.html" class="nav-item">
 
-        <div class="sidebar-header">
+            <i class="fa-solid fa-house"></i>
 
-            <div class="gov-logo">
-                ♕
-            </div>
+            <span>Dashboard</span>
 
-            <h2>
-                Scheme Finder
-            </h2>
-
-        </div>
+        </a>
 
 
-        <nav class="sidebar-menu">
+        <a href="schemes.html" class="nav-item active">
 
-            <a href="dashboard.html" class="menu-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
 
-                <i class="fa-solid fa-house"></i>
+            <span>Schemes</span>
 
-                <span>Dashboard</span>
-
-            </a>
+        </a>
 
 
-            <a href="schemes.html" class="menu-item active">
+        <a href="savedschemes.html" class="nav-item">
 
-                <i class="fa-solid fa-magnifying-glass"></i>
+            <i class="fa-regular fa-heart"></i>
 
-                <span>Schemes</span>
+            <span>Saved Schemes</span>
 
-            </a>
-
-
-            <a href="savedschemes.html" class="menu-item">
-
-                <i class="fa-regular fa-heart"></i>
-
-                <span>Saved Schemes</span>
-
-            </a>
+        </a>
 
 
-            <a href="alerts.html" class="menu-item">
+        <a href="alerts.html" class="nav-item">
 
-                <i class="fa-regular fa-bell"></i>
+            <i class="fa-regular fa-bell"></i>
 
-                <span>Alerts</span>
+            <span>Alerts</span>
 
-            </a>
-
-
-            <a href="profile.html" class="menu-item">
-
-                <i class="fa-regular fa-user"></i>
-
-                <span>Profile</span>
-
-            </a>
+        </a>
 
 
-            <a href="settings.html" class="menu-item">
+        <a href="profile.html" class="nav-item">
 
-                <i class="fa-solid fa-gear"></i>
+            <i class="fa-regular fa-user"></i>
 
-                <span>Settings</span>
+            <span>Profile</span>
 
-            </a>
-
-
-            <a href="logout.html" class="menu-item">
-
-                <i class="fa-solid fa-arrow-right-from-bracket"></i>
-
-                <span>Logout</span>
-
-            </a>
-
-        </nav>
+        </a>
 
 
-        <div class="sidebar-bottom">
+        <a href="settings.html" class="nav-item">
 
-            <div class="building">
+            <i class="fa-solid fa-gear"></i>
 
-                <i class="fa-solid fa-landmark"></i>
+            <span>Settings</span>
 
-            </div>
+        </a>
+
+
+        <a href="logout.html" class="nav-item">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>Logout</span>
+
+        </a>
+
+    </nav>
+
+
+    <!-- Sidebar Bottom -->
+
+    <div class="sidebar-footer">
+
+        <p>
+            Government Schemes<br>
+            for a Better Tomorrow
+        </p>
+
+        <div class="tricolor"></div>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     TOP BAR
+===================================================== -->
+
+<header class="topbar">
+
+    <div class="search-box">
+
+        <i class="fa-solid fa-magnifying-glass"></i>
+
+        <input
+            type="text"
+            placeholder="Search for schemes..."
+        >
+
+    </div>
+
+</header>
+
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="main">
+
+    <div class="content">
+
+
+        <!-- PAGE TITLE -->
+
+        <div class="page-title">
+
+            <h1>Scheme Details</h1>
 
             <p>
-                Government Schemes<br>
-                for a Better Tomorrow
+                Explore complete information about this government scheme.
             </p>
-
-            <div>
-                🇮🇳
-            </div>
 
         </div>
 
-    </aside>
 
 
-    <!-- DARK OVERLAY -->
+        <!-- =================================================
+             HERO
+        ================================================== -->
 
-    <div class="overlay" id="overlay"></div>
+        <section class="scheme-hero">
 
+            <div class="scheme-hero-content">
 
-
-    <!-- =================================
-         MAIN
-    ================================= -->
-
-    <main class="main">
-
-
-        <!-- TOP BAR -->
-
-        <header class="topbar">
-
-
-            <!-- HAMBURGER BUTTON -->
-
-            <button
-                class="menu-button"
-                id="menuButton"
-                onclick="toggleSidebar()"
-            >
-
-                <span></span>
-                <span></span>
-                <span></span>
-
-            </button>
-
-
-            <!-- SEARCH -->
-
-            <div class="search-box">
-
-                <i class="fa-solid fa-magnifying-glass"></i>
-
-                <input
-                    type="text"
-                    placeholder="Search schemes..."
-                >
-
-            </div>
-
-
-            <!-- NOTIFICATION -->
-
-            <div class="notification">
-
-                <i class="fa-regular fa-bell"></i>
-
-                <span>
-                    2
+                <span class="scheme-tag">
+                    Education
                 </span>
 
-            </div>
-
-
-            <!-- PROFILE -->
-
-            <div class="user-profile">
-
-                <div class="profile-icon">
-
-                    <i class="fa-regular fa-user"></i>
-
-                </div>
-
-                <strong>
-                    Sneha
-                </strong>
-
-                <i class="fa-solid fa-chevron-down"></i>
-
-            </div>
-
-        </header>
-
-
-
-        <!-- =================================
-             CONTENT
-        ================================= -->
-
-        <section class="content">
-
-
-            <div class="back">
-
-                <i class="fa-solid fa-arrow-left"></i>
-
-                <span>
-                    Back
-                </span>
-
-            </div>
-
-
-
-            <!-- HERO -->
-
-            <div class="hero-card">
-
-
-                <div class="hero-icon">
-
-                    <i class="fa-solid fa-graduation-cap"></i>
-
-                </div>
-
-
-                <div class="hero-content">
-
-                    <h1>
-                        PM-YASASVI Scholarship Scheme
-                    </h1>
-
-
-                    <div class="hero-meta">
-
-                        <span>Education</span>
-
-                        <b>|</b>
-
-                        <span>
-                            Ministry of Social Justice &amp; Empowerment
-                        </span>
-
-                    </div>
-
-
-                    <p>
-                        The scheme provides financial assistance to
-                        meritorious students from Other Backward Classes
-                        (OBC), Economically Backward Classes (EBC) and
-                        DNT communities for higher education.
-                    </p>
-
-                </div>
-
-
-                <div class="match">
-                    <strong>95% Match</strong>
-                </div>
-
-            </div>
-
-
-
-            <!-- MAIN GRID -->
-
-            <div class="main-grid">
-
-
-                <!-- LEFT -->
-
-                <div class="left-content">
-
-
-                    <!-- TABS -->
-
-                    
-
-
-                    <!-- ABOUT -->
-
-                    <div class="info-card">
-
-                        <div class="section-heading">
-
-                            <div class="section-icon blue">
-
-                                <i class="fa-regular fa-file-lines"></i>
-
-                            </div>
-
-                            <h3>
-                                About the Scheme
-                            </h3>
-
-                        </div>
-
-                        <p>
-                            PM-YASASVI Scholarship Scheme (PM Young Achievers Scholarship Award Scheme for a Vibrant India for OBCs and Others) is a Government of India initiative under the Ministry of Social Justice and Empowerment that provides educational and financial support to students belonging to OBC, EBC, and DNT communities. The scheme aims to help eligible students continue their education by providing assistance for school and higher education, including scholarships and support for educational expenses. It covers components such as Pre-Matric Scholarship, Post-Matric Scholarship, Top Class School Education, Top Class College Education, and hostel facilities. The scheme helps reduce financial barriers and encourages students from disadvantaged communities to pursue their education.
-                        </p>
-
-                    </div>
-
-
-
-                    <!-- BENEFITS -->
-
-                    <div class="info-card">
-
-                        <div class="section-heading">
-
-                            <div class="section-icon green">
-
-                                <i class="fa-solid fa-gift"></i>
-
-                            </div>
-
-                            <h3>
-                                Benefits
-                            </h3>
-
-                        </div>
-
-
-                        <ul class="check-list">
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Financial assistance up to ₹75,000 per year
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Tuition fee and other academic expenses
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Support for professional and technical courses
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-
-                    <!-- ELIGIBILITY -->
-
-                    <div class="info-card">
-
-                        <div class="section-heading">
-
-                            <div class="section-icon purple">
-
-                                <i class="fa-solid fa-users"></i>
-
-                            </div>
-
-                            <h3>
-                                Eligibility
-                            </h3>
-
-                        </div>
-
-
-                        <ul class="check-list">
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Age: 18 – 30 years
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Family income: Below ₹6 Lakh per annum
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Resident of India
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Belongs to OBC / EBC / DNT category
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Enrolled in recognized institution
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-
-
-                    <!-- DOCUMENTS -->
-
-                    <div class="info-card">
-
-                        <div class="section-heading">
-
-                            <div class="section-icon blue">
-
-                                <i class="fa-regular fa-file-lines"></i>
-
-                            </div>
-
-                            <h3>
-                                Required Documents
-                            </h3>
-
-                        </div>
-
-
-                        <ul class="check-list">
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Aadhaar Card
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Income Certificate
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Caste Certificate
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Bonafide Certificate from Institution
-                            </li>
-
-                            <li>
-                                <i class="fa-solid fa-circle-check"></i>
-                                Bank Account Details
-                            </li>
-
-                        </ul>
-
-                    </div>
-
-                </div>
-
-
-
-                <!-- RIGHT -->
-
-                <aside class="right-content">
-
-
-                    <!-- QUICK INFO -->
-
-                    <div class="quick-card">
-
-                        <div class="quick-heading">
-
-                            <div class="quick-icon">
-
-                                <i class="fa-regular fa-file-lines"></i>
-
-                            </div>
-
-                            <h3>
-                                Scheme Quick Info
-                            </h3>
-
-                        </div>
-
-
-                        <div class="quick-row">
-
-                            <span>Department</span>
-
-                            <strong>
-                                Ministry of Social Justice &amp;<br>
-                                Empowerment
-                            </strong>
-
-                        </div>
-
-
-                        <div class="quick-row">
-
-                            <span>Scheme Type</span>
-
-                            <strong>
-                                Scholarship
-                            </strong>
-
-                        </div>
-
-
-                        <div class="quick-row">
-
-                            <span>Applicable For</span>
-
-                            <strong>
-                                Students
-                            </strong>
-
-                        </div>
-
-
-                        <div class="quick-row">
-
-                            <span>State</span>
-
-                            <strong>
-                                All India
-                            </strong>
-
-                        </div>
-
-
-                        <div class="quick-row">
-
-                            <span>Last Date to Apply</span>
-
-                            <strong>
-                                31 Dec 2025
-                            </strong>
-
-                        </div>
-
-                    </div>
-
-
-
-                    <!-- ELIGIBLE -->
-
-                    <div class="eligible-card">
-
-                        <div class="eligible-box">
-
-                            <div class="eligible-icon">
-
-                                <i class="fa-solid fa-check"></i>
-
-                            </div>
-
-
-                            <div>
-
-                                <h3>
-                                    You are eligible!
-                                </h3>
-
-                                <p>
-                                    Based on your profile, you meet the
-                                    basic eligibility criteria for this
-                                    scheme.
-                                </p>
-
-                            </div>
-
-
-                            <i class="fa-solid fa-chevron-right arrow-right"></i>
-
-                        </div>
-
-
-                        <button class="apply-btn">
-
-                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
-
-                            Apply on Official Portal
-
-                            <i class="fa-solid fa-arrow-right"></i>
-
-                        </button>
-
-
-                        <button class="save-btn">
-
-                            <i class="fa-regular fa-heart"></i>
-
-                            Save Scheme
-
-                        </button>
-
-                    </div>
-
-
-
-                    <!-- HELP -->
-
-                    <div class="help-card">
-
-                        <div class="help-icon">
-
-                            <i class="fa-solid fa-lightbulb"></i>
-
-                        </div>
-
-
-                        <div>
-
-                            <h3>
-                                Need Help?
-                            </h3>
-
-                            <p>
-                                For any queries, contact the helpline
-                                at 1800-309-7676 or visit the official
-                                website.
-                            </p>
-
-                            <a href="#">
-                                Visit Website
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </aside>
+                <h2>
+                    PM-YASASVI Scholarship Scheme
+                </h2>
+
+                <p>
+                    A government scholarship scheme designed to support
+                    students from socially and economically disadvantaged
+                    communities in pursuing quality education.
+                </p>
 
             </div>
 
         </section>
 
-    </main>
-
-</div>
 
 
-<!-- =================================
-     JAVASCRIPT
-================================= -->
+        <!-- =================================================
+             DETAILS GRID
+        ================================================== -->
 
-<script>
-
-function toggleSidebar() {
-
-    const sidebar = document.getElementById("sidebar");
-
-    const overlay = document.getElementById("overlay");
-
-    const button = document.getElementById("menuButton");
+        <div class="details-grid">
 
 
-    sidebar.classList.toggle("open");
+            <!-- LEFT COLUMN -->
 
-    overlay.classList.toggle("active");
-
-    button.classList.toggle("active");
-
-}
+            <div>
 
 
-/* Close sidebar when clicking outside */
+                <!-- ABOUT -->
 
-document.getElementById("overlay").addEventListener(
-    "click",
-    function() {
+                <div class="card">
 
-        document.getElementById("sidebar")
-            .classList.remove("open");
+                    <h3>
+                        <i class="fa-solid fa-circle-info"></i>
+                        About the Scheme
+                    </h3>
 
-        document.getElementById("overlay")
-            .classList.remove("active");
+                    <p>
+                        The PM-YASASVI Scholarship Scheme is a Government
+                        of India initiative aimed at providing financial
+                        assistance to students belonging to eligible
+                        disadvantaged communities. The scheme supports
+                        students in continuing their education and helps
+                        reduce financial barriers to quality schooling.
+                    </p>
 
-        document.getElementById("menuButton")
-            .classList.remove("active");
+                </div>
 
-    }
-);
- 
-</script>
+
+
+                <!-- BENEFITS -->
+
+                <div class="card">
+
+                    <h3>
+                        <i class="fa-solid fa-gift"></i>
+                        Benefits
+                    </h3>
+
+                    <div class="benefits-list">
+
+                        <div class="benefit">
+
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+
+                            <span>
+                                Financial assistance for eligible students.
+                            </span>
+
+                        </div>
+
+
+                        <div class="benefit">
+
+                            <i class="fa-solid fa-school"></i>
+
+                            <span>
+                                Supports continuation of school education.
+                            </span>
+
+                        </div>
+
+
+                        <div class="benefit">
+
+                            <i class="fa-solid fa-book-open"></i>
+
+                            <span>
+                                Helps students meet educational expenses.
+                            </span>
+
+                        </div>
+
+
+                        <div class="benefit">
+
+                            <i class="fa-solid fa-graduation-cap"></i>
+
+                            <span>
+                                Encourages students to pursue higher education.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ELIGIBILITY -->
+
+                <div class="card">
+
+                    <h3>
+                        <i class="fa-solid fa-user-check"></i>
+                        Eligibility
+                    </h3>
+
+                    <ul class="eligibility-list">
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+
+                            <span>
+                                Students must belong to the eligible
+                                beneficiary categories specified under
+                                the scheme.
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+
+                            <span>
+                                Applicants must satisfy the prescribed
+                                educational requirements.
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+
+                            <span>
+                                Family income must fall within the
+                                applicable income limit.
+                            </span>
+                        </li>
+
+
+                        <li>
+                            <i class="fa-solid fa-check"></i>
+
+                            <span>
+                                Other conditions specified by the
+                                implementing authority must be fulfilled.
+                            </span>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <!-- DOCUMENTS -->
+
+                <div class="card">
+
+                    <h3>
+                        <i class="fa-solid fa-file-lines"></i>
+                        Required Documents
+                    </h3>
+
+                    <div class="documents-list">
+
+                        <div class="document">
+
+                            <i class="fa-solid fa-id-card"></i>
+
+                            <span>
+                                Aadhaar Card
+                            </span>
+
+                        </div>
+
+
+                        <div class="document">
+
+                            <i class="fa-solid fa-certificate"></i>
+
+                            <span>
+                                Caste Certificate
+                            </span>
+
+                        </div>
+
+
+                        <div class="document">
+
+                            <i class="fa-solid fa-file-invoice-dollar"></i>
+
+                            <span>
+                                Income Certificate
+                            </span>
+
+                        </div>
+
+
+                        <div class="document">
+
+                            <i class="fa-solid fa-school"></i>
+
+                            <span>
+                                School / College Certificate
+                            </span>
+
+                        </div>
+
+
+                        <div class="document">
+
+                            <i class="fa-solid fa-building-columns"></i>
+
+                            <span>
+                                Bank Account Details
+                            </span>
+
+                        </div>
+
+
+                        <div class="document">
+
+                            <i class="fa-solid fa-image"></i>
+
+                            <span>
+                                Passport Size Photograph
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- RIGHT COLUMN -->
+
+            <div>
+
+
+                <!-- QUICK INFO -->
+
+                <div class="card">
+
+                    <h3>
+                        <i class="fa-solid fa-circle-info"></i>
+                        Quick Info
+                    </h3>
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-building-columns"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <strong>
+                                Ministry / Department
+                            </strong>
+
+                            <span>
+                                Ministry of Social Justice and Empowerment
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <strong>
+                                Beneficiaries
+                            </strong>
+
+                            <span>
+                                Eligible school students
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <strong>
+                                Location
+                            </strong>
+
+                            <span>
+                                Across India
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-item">
+
+                        <div class="info-icon">
+                            <i class="fa-solid fa-indian-rupee-sign"></i>
+                        </div>
+
+                        <div class="info-text">
+
+                            <strong>
+                                Financial Support
+                            </strong>
+
+                            <span>
+                                As per applicable scheme guidelines
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- ELIGIBLE -->
+
+                <div class="card eligible-card">
+
+                    <div class="eligible-icon">
+
+                        <i class="fa-solid fa-circle-check"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Check Your Eligibility
+                    </h3>
+
+
+                    <p>
+                        Find out whether you are eligible for this
+                        government scheme based on your personal,
+                        educational and financial details.
+                    </p>
+
+
+                    <div class="action-buttons">
+
+                        <a
+                            href="user-details.html"
+                            class="btn btn-primary"
+                        >
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                            Check Eligibility
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- APPLY / SAVE -->
+
+                <div class="card">
+
+                    <h3>
+                        <i class="fa-solid fa-bolt"></i>
+                        Take Action
+                    </h3>
+
+
+                    <div class="action-buttons">
+
+                        <a
+                            href="https://scholarships.gov.in/"
+                            target="_blank"
+                            class="btn btn-primary"
+                        >
+
+                            <i class="fa-solid fa-up-right-from-square"></i>
+
+                            Apply Now
+
+                        </a>
+
+
+                        <a
+                            href="#"
+                            class="btn btn-secondary"
+                        >
+
+                            <i class="fa-regular fa-bookmark"></i>
+
+                            Save Scheme
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- HELP -->
+
+                <div class="card help-card">
+
+                    <h3>
+
+                        <i class="fa-solid fa-circle-question"></i>
+
+                        Need Help?
+
+                    </h3>
+
+
+                    <p>
+                        If you need assistance understanding eligibility,
+                        documents or the application process, visit the
+                        Help section.
+                    </p>
+
+
+                    <a
+                        href="help.html"
+                        class="btn btn-secondary"
+                    >
+
+                        <i class="fa-solid fa-headset"></i>
+
+                        Visit Help
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
 
 </body>
-</html> 
+</html>
