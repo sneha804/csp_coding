@@ -1,178 +1,290 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Scheme Finder - User Details</title>
+
+<!-- Font Awesome -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 <style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
 }
 
+
+/* =========================================================
+   BODY
+========================================================= */
+
 body{
     font-family:"Segoe UI", Arial, sans-serif;
     background:#eef8ff;
     color:#123d70;
 }
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
 .header{
     height:74px;
     background:#ffffff;
+
     display:flex;
     align-items:center;
     justify-content:space-between;
+
     padding:0 32px;
+
     border-bottom:1px solid #dfeaf4;
+
     position:fixed;
     top:0;
     left:0;
     right:0;
+
     z-index:1000;
 }
+
+
+/* =========================================================
+   HEADER LEFT
+========================================================= */
+
 .header-left{
     display:flex;
     align-items:center;
     gap:18px;
 }
-.menu-toggle{
-    width:42px;
-    height:42px;
-    border:none;
-    background:#eaf5ff;
-    border-radius:9px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    color:#0759a5;
-    font-size:21px;
-    transition:.2s;
-}
-.menu-toggle:hover{
-    background:#dceeff;
-}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
 .logo{
     display:flex;
     align-items:center;
     gap:12px;
 }
+
 .logo-emblem{
     width:43px;
     height:53px;
+
     display:flex;
     align-items:center;
     justify-content:center;
 }
+
 .logo-emblem img{
     width:40px;
     height:50px;
+
     object-fit:contain;
     display:block;
 }
+
 .logo-text{
     font-size:29px;
     font-weight:700;
     color:#06427f;
 }
+
+
+/* =========================================================
+   HEADER RIGHT
+========================================================= */
+
 .header-right{
     display:flex;
     align-items:center;
-    gap:28px;
+    gap:22px;
 }
-.notification{
-    position:relative;
-    font-size:21px;
-    color:#174d88;
-    cursor:pointer;
-}
-.notification .dot{
-    position:absolute;
-    width:9px;
-    height:9px;
-    background:#ed334d;
-    border-radius:50%;
-    top:-2px;
-    right:-3px;
-    border:1px solid white;
-}
-.profile{
+
+
+/* =========================================================
+   INDIA FLAG + LANGUAGE DROPDOWN
+========================================================= */
+
+.language-selector{
+    height:42px;
+
+    min-width:150px;
+
+    padding:0 10px;
+
     display:flex;
     align-items:center;
+
+    gap:9px;
+
+    background:#ffffff;
+
+    border:1px solid #d8e3ef;
+
+    border-radius:22px;
+
+    box-shadow:0 2px 6px rgba(0,0,0,.04);
+
+    transition:.2s;
+}
+
+
+/* REAL INDIAN FLAG */
+
+.india-flag{
+    width:32px;
+    height:22px;
+
+    object-fit:cover;
+
+    display:block;
+
+    flex-shrink:0;
+}
+
+
+/* LANGUAGE SELECT */
+
+.language-selector select{
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    color:#123d70;
+
+    font-family:"Segoe UI", Arial, sans-serif;
+
+    font-size:14px;
+
+    font-weight:500;
+
+    cursor:pointer;
+
+    padding:2px 4px;
+
+    flex:1;
+}
+
+.language-selector select option{
+    color:#123d70;
+
+    background:#ffffff;
+
+    font-size:14px;
+}
+
+
+/* HOVER */
+
+.language-selector:hover{
+    border-color:#2581df;
+
+    box-shadow:
+        0 3px 10px rgba(37,129,223,.10);
+}
+
+
+/* =========================================================
+   NOTIFICATION
+========================================================= */
+
+.notification{
+    position:relative;
+
+    font-size:21px;
+
+    color:#174d88;
+
+    cursor:pointer;
+}
+
+.notification .dot{
+    position:absolute;
+
+    width:9px;
+    height:9px;
+
+    background:#ed334d;
+
+    border-radius:50%;
+
+    top:-2px;
+    right:-3px;
+
+    border:1px solid white;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile{
+    display:flex;
+
+    align-items:center;
+
     gap:10px;
+
     color:#123e72;
+
     font-size:16px;
+
     font-weight:600;
 }
+
 .profile-circle{
     width:43px;
     height:43px;
+
     border-radius:50%;
+
     background:#e8f4ff;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     color:#075db5;
+
     font-size:20px;
 }
+
 .profile .arrow{
     font-size:11px;
+
     margin-left:3px;
 }
-.menu{
-    padding:32px 17px;
-    position:relative;
-    z-index:2;
-}
-.menu-item{
-    height:52px;
-    display:flex;
-    align-items:center;
-    gap:17px;
-    padding:0 18px;
-    margin-bottom:7px;
-    border-radius:10px;
-    color:white;
-    text-decoration:none;
-    font-size:16px;
-    transition:.2s;
-}
-.menu-item i{
-    width:18px;
-    font-size:20px;
-    text-align:center;
-}
-.menu-item:hover{
-    background:rgba(255,255,255,.10);
-}
-.menu-item.active{
-    background:
-        linear-gradient(
-            90deg,
-            #147de3,
-            #1678d7
-        );
-    box-shadow:
-        0 4px 10px rgba(0,0,0,.08);
-}
-.overlay{
-    position:fixed;
-    top:74px;
-    left:0;
-    right:0;
-    bottom:0;
-    background:rgba(0,0,0,.25);
-    z-index:850;
-    display:none;
-}
-.overlay.show{
-    display:block;
-}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
 .main{
     padding-top:74px;
+
     min-height:100vh;
+
     background:
         linear-gradient(
             135deg,
@@ -180,351 +292,627 @@ body{
             #f4fbff 48%,
             #e7f5ff 100%
         );
+
     position:relative;
+
     overflow:hidden;
 }
+
+
+/* BACKGROUND CIRCLES */
+
 .main::before{
     content:"";
+
     position:absolute;
+
     width:470px;
     height:470px;
+
     left:-300px;
     bottom:-230px;
+
     border-radius:50%;
+
     background:rgba(36,117,207,.08);
 }
+
 .main::after{
     content:"";
+
     position:absolute;
+
     width:390px;
     height:390px;
+
     right:-200px;
     bottom:-200px;
+
     border-radius:50%;
+
     background:rgba(39,128,219,.07);
 }
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
 .content{
     position:relative;
+
     z-index:2;
+
     margin:32px 30px 40px;
+
     background:#ffffff;
+
     border-radius:14px;
+
     min-height:843px;
+
     padding:0 40px 34px;
+
     box-shadow:
         0 5px 25px rgba(30,96,155,.08);
 }
-.back-button{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    padding:10px 18px;
-    background:#eaf5ff;
-    border-radius:10px;
-    color:#1263b6;
-    font-size:15px;
-    font-weight:600;
-    text-decoration:none;
-}
-.back-button i{
-    font-size:16px;
-}
+
+
+/* =========================================================
+   PAGE HEADING
+========================================================= */
+
 .page-heading{
     height:150px;
+
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
+
     padding:5px 8px 0 0;
 }
+
 .heading-left{
     display:flex;
+
     align-items:center;
+
     gap:20px;
 }
+
 .heading-icon{
     width:82px;
     height:82px;
+
     border-radius:50%;
+
     background:#e2f1ff;
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     color:#0968c7;
+
     font-size:38px;
 }
+
 .heading-text h1{
     font-size:32px;
+
     color:#07457f;
+
     font-weight:700;
+
     margin-bottom:7px;
 }
+
 .heading-text p{
     color:#617b99;
+
     font-size:17px;
 }
+
+
+/* =========================================================
+   ILLUSTRATION
+========================================================= */
+
 .illustration{
     width:280px;
     height:120px;
+
     position:relative;
+
     overflow:hidden;
 }
+
 .illustration .circle{
     position:absolute;
+
     width:115px;
     height:90px;
+
     right:55px;
     top:12px;
+
     border-radius:50%;
+
     background:#dceeff;
 }
+
 .illustration .circle2{
     position:absolute;
+
     width:105px;
     height:80px;
+
     right:0;
     top:27px;
+
     border-radius:50%;
+
     background:#d6ecff;
 }
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
 .laptop{
     position:absolute;
+
     right:10px;
     bottom:9px;
+
     width:105px;
     height:58px;
+
     background:#0d4b89;
+
     border-radius:5px 5px 2px 2px;
+
     transform:skew(-5deg);
 }
+
 .laptop::after{
     content:"";
+
     position:absolute;
+
     bottom:-7px;
     left:-12px;
+
     width:130px;
     height:7px;
+
     background:#7eafd6;
+
     border-radius:5px;
 }
+
 .screen{
     position:absolute;
+
     width:72px;
     height:43px;
+
     background:#d9efff;
+
     top:7px;
     left:17px;
+
     border-radius:3px;
 }
+
+
+/* =========================================================
+   PERSON
+========================================================= */
+
 .person-head{
     position:absolute;
+
     right:100px;
     top:21px;
+
     width:31px;
     height:31px;
+
     border-radius:50%;
+
     background:#f3bd91;
 }
+
 .person-hair{
     position:absolute;
+
     right:94px;
     top:10px;
+
     width:47px;
     height:50px;
+
     background:#101c42;
+
     border-radius:50% 50% 35% 35%;
+
     transform:rotate(-8deg);
 }
+
 .person-body{
     position:absolute;
+
     right:78px;
     bottom:7px;
+
     width:75px;
     height:65px;
+
     background:#0871d7;
+
     border-radius:38px 38px 8px 8px;
+
     transform:rotate(4deg);
 }
+
+
+/* =========================================================
+   PLANT
+========================================================= */
+
 .plant{
     position:absolute;
+
     left:16px;
     bottom:7px;
+
     width:65px;
     height:75px;
 }
+
 .stem{
     position:absolute;
+
     left:30px;
     bottom:0;
+
     width:4px;
     height:62px;
+
     background:#2181c7;
 }
+
 .leaf{
     position:absolute;
+
     width:25px;
     height:14px;
+
     background:#1593dd;
+
     border-radius:100% 0 100% 0;
 }
+
 .leaf.one{
     left:30px;
     top:24px;
+
     transform:rotate(-35deg);
 }
+
 .leaf.two{
     left:8px;
     top:40px;
+
     transform:rotate(30deg);
 }
+
 .leaf.three{
     left:35px;
     top:45px;
+
     transform:rotate(-30deg);
 }
+
+
+/* =========================================================
+   FORM SECTION
+========================================================= */
+
 .form-section{
     border:1px solid #dceaf5;
+
     border-radius:13px;
+
     margin-bottom:23px;
+
     overflow:hidden;
+
     background:white;
+
     box-shadow:
         0 2px 8px rgba(22,88,140,.04);
 }
+
+
+/* SECTION TITLE */
+
 .section-title{
     height:47px;
+
     background:#eaf5ff;
+
     display:flex;
+
     align-items:center;
+
     gap:15px;
+
     padding:0 20px;
+
     color:#0754a0;
+
     font-size:16px;
+
     font-weight:700;
 }
+
 .section-title i{
     font-size:23px;
 }
+
+
+/* FORM BODY */
+
 .form-body{
     padding:22px 20px 23px;
 }
+
+
+/* =========================================================
+   GRID
+========================================================= */
+
 .grid-3{
     display:grid;
+
     grid-template-columns:
         1fr 1fr 1fr;
+
     gap:30px;
 }
+
 .grid-2{
     display:grid;
+
     grid-template-columns:
         1fr 1fr;
+
     gap:38px;
 }
+
+
+/* =========================================================
+   FIELD
+========================================================= */
+
 .field{
     display:flex;
+
     flex-direction:column;
+
     gap:9px;
 }
+
 .field label{
     color:#143d70;
+
     font-size:14px;
+
     font-weight:600;
 }
+
 .required{
     color:#e53948;
 }
+
+
+/* =========================================================
+   INPUT BOX
+========================================================= */
+
 .input-box{
     height:46px;
+
     border:1px solid #ccdce9;
+
     border-radius:8px;
+
     background:white;
+
     display:flex;
+
     align-items:center;
+
     padding:0 14px;
+
     color:#8a9db2;
+
     transition:.2s;
 }
+
 .input-box i{
     color:#315b87;
+
     width:27px;
+
     font-size:17px;
 }
+
 .input-box input,
 .input-box select{
     flex:1;
+
     width:100%;
+
     height:100%;
+
     border:none;
+
     outline:none;
+
     background:transparent;
+
     color:#6f8298;
+
     font-family:inherit;
+
     font-size:13px;
 }
+
 .input-box select{
     cursor:pointer;
 }
+
 .input-box:focus-within{
     border-color:#2581df;
+
     box-shadow:
         0 0 0 2px rgba(37,129,223,.08);
 }
+
 .select-arrow{
     color:#50708f !important;
+
     width:auto !important;
+
     font-size:12px !important;
 }
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
 .button-row{
     display:flex;
+
     justify-content:flex-end;
+
     margin-top:5px;
 }
+
 .find-button{
     width:300px;
+
     height:54px;
+
     border:none;
+
     border-radius:10px;
+
     background:
         linear-gradient(
             90deg,
             #0874e8,
             #1479e8
         );
+
     color:white;
+
     font-size:15px;
+
     font-weight:600;
+
     cursor:pointer;
+
     display:flex;
+
     align-items:center;
+
     justify-content:center;
+
     gap:13px;
+
     box-shadow:
         0 5px 12px rgba(16,112,220,.18);
+
     transition:.2s;
 }
+
 .find-button:hover{
     transform:translateY(-1px);
+
     box-shadow:
         0 7px 15px rgba(16,112,220,.25);
 }
+
 .find-button i{
     font-size:20px;
 }
+
+
+/* SAVE LINK */
+
+.save-link{
+    color:white;
+
+    text-decoration:none;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media(max-width:1000px){
+
+    .header{
+        padding:0 20px;
+    }
+
+    .header-right{
+        gap:15px;
+    }
+
+    .profile span{
+        display:none;
+    }
+
+    .grid-3{
+        grid-template-columns:1fr 1fr;
+    }
+}
+
+
+/* =========================================================
+   850px
+========================================================= */
+
 @media(max-width:850px){
 
     .content{
-
         margin:25px 20px;
 
         padding:0 25px 30px;
     }
 
     .grid-3{
-
         grid-template-columns:1fr;
     }
 
     .grid-2{
-
         grid-template-columns:1fr;
 
         gap:20px;
@@ -540,16 +928,39 @@ body{
 }
 
 
+/* =========================================================
+   MOBILE
+========================================================= */
+
 @media(max-width:600px){
 
     .header{
-
         padding:0 15px;
     }
 
     .header-right{
+        gap:10px;
+    }
 
-        gap:15px;
+    .language-selector{
+        min-width:115px;
+
+        height:38px;
+
+        padding:0 7px;
+    }
+
+    .india-flag{
+        width:27px;
+        height:19px;
+    }
+
+    .language-selector select{
+        font-size:12px;
+    }
+
+    .notification{
+        display:none;
     }
 
     .profile span{
@@ -557,21 +968,18 @@ body{
     }
 
     .content{
-
         margin:15px;
 
         padding:0 15px 25px;
     }
 
     .page-heading{
-
         height:auto;
 
         padding:20px 0;
     }
 
     .heading-icon{
-
         width:60px;
         height:60px;
 
@@ -597,11 +1005,12 @@ body{
     .logo-text{
         font-size:22px;
     }
-
 }
 
 
-/* VERY SMALL SCREEN */
+/* =========================================================
+   VERY SMALL SCREEN
+========================================================= */
 
 @media(max-width:400px){
 
@@ -618,6 +1027,14 @@ body{
         font-size:19px;
     }
 
+    .language-selector{
+        min-width:100px;
+    }
+
+    .india-flag{
+        width:25px;
+        height:17px;
+    }
 }
 
 </style>
@@ -626,15 +1043,23 @@ body{
 
 
 <body>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="header">
-    <!-- LEFT HEADER -->
+
+
+    <!-- LEFT -->
+
     <div class="header-left">
-        <!-- LOGO -->
 
         <div class="logo">
 
 
-            <!-- PERFECT EMBLEM OF INDIA -->
+            <!-- EMBLEM OF INDIA -->
 
             <div class="logo-emblem">
 
@@ -646,8 +1071,12 @@ body{
             </div>
 
 
+            <!-- SCHEME FINDER -->
+
             <div class="logo-text">
+
                 Scheme Finder
+
             </div>
 
         </div>
@@ -656,9 +1085,66 @@ body{
 
 
 
-    <!-- RIGHT HEADER -->
+    <!-- =====================================================
+         RIGHT HEADER
+    ====================================================== -->
 
     <div class="header-right">
+
+
+        <!-- INDIA FLAG + LANGUAGE -->
+
+        <div class="language-selector">
+
+
+            <img
+                class="india-flag"
+                src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
+                alt="India Flag"
+            >
+
+
+            <select
+                id="languageSelect"
+                onchange="changeLanguage()"
+            >
+
+                <option value="English">
+                    English
+                </option>
+
+                <option value="Telugu">
+                    తెలుగు
+                </option>
+
+                <option value="Hindi">
+                    हिन्दी
+                </option>
+
+                <option value="Tamil">
+                    தமிழ்
+                </option>
+
+                <option value="Kannada">
+                    ಕನ್ನಡ
+                </option>
+
+                <option value="Malayalam">
+                    മലയാളം
+                </option>
+
+                <option value="Marathi">
+                    मराठी
+                </option>
+
+                <option value="Bengali">
+                    বাংলা
+                </option>
+
+            </select>
+
+        </div>
+
 
 
         <!-- NOTIFICATION -->
@@ -672,6 +1158,7 @@ body{
         </div>
 
 
+
         <!-- PROFILE -->
 
         <div class="profile">
@@ -682,22 +1169,18 @@ body{
 
             </div>
 
-            <span>Sneha</span>
+            <span>
+                Sneha
+            </span>
 
             <i class="fa-solid fa-chevron-down arrow"></i>
 
         </div>
 
+
     </div>
 
 </header>
-<!-- OVERLAY -->
-
-<div
-    class="overlay"
-    id="overlay"
-    onclick="toggleSidebar()"
-></div>
 
 
 
@@ -710,7 +1193,10 @@ body{
 
     <div class="content">
 
-        <!-- PAGE HEADER -->
+
+        <!-- =================================================
+             PAGE HEADING
+        ================================================== -->
 
         <div class="page-heading">
 
@@ -732,10 +1218,12 @@ body{
                     </h1>
 
                     <p>
-                        Help us understand your profile so we can find the best schemes for you.
+                        Help us understand your profile so we can
+                        find the best schemes for you.
                     </p>
 
                 </div>
+
 
             </div>
 
@@ -745,11 +1233,9 @@ body{
 
             <div class="illustration">
 
-
                 <div class="circle"></div>
 
                 <div class="circle2"></div>
-
 
                 <div class="person-hair"></div>
 
@@ -757,13 +1243,11 @@ body{
 
                 <div class="person-body"></div>
 
-
                 <div class="laptop">
 
                     <div class="screen"></div>
 
                 </div>
-
 
                 <div class="plant">
 
@@ -780,6 +1264,13 @@ body{
             </div>
 
         </div>
+
+
+
+        <!-- =================================================
+             PERSONAL INFORMATION
+        ================================================== -->
+
         <section class="form-section">
 
 
@@ -787,7 +1278,9 @@ body{
 
                 <i class="fa-regular fa-circle-user"></i>
 
-                <span>Personal Information</span>
+                <span>
+                    Personal Information
+                </span>
 
             </div>
 
@@ -797,6 +1290,8 @@ body{
 
                 <div class="grid-3">
 
+
+                    <!-- FULL NAME -->
 
                     <div class="field">
 
@@ -811,6 +1306,7 @@ body{
 
                             <input
                                 type="text"
+                                id="fullName"
                                 placeholder="Enter your full name"
                             >
 
@@ -819,6 +1315,8 @@ body{
                     </div>
 
 
+
+                    <!-- AGE -->
 
                     <div class="field">
 
@@ -833,6 +1331,7 @@ body{
 
                             <input
                                 type="number"
+                                id="age"
                                 placeholder="Enter your age"
                             >
 
@@ -841,6 +1340,8 @@ body{
                     </div>
 
 
+
+                    <!-- GENDER -->
 
                     <div class="field">
 
@@ -853,15 +1354,23 @@ body{
 
                             <i class="fa-regular fa-user"></i>
 
-                            <select>
+                            <select id="gender">
 
-                                <option>Select gender</option>
+                                <option value="">
+                                    Select gender
+                                </option>
 
-                                <option>Male</option>
+                                <option value="Male">
+                                    Male
+                                </option>
 
-                                <option>Female</option>
+                                <option value="Female">
+                                    Female
+                                </option>
 
-                                <option>Other</option>
+                                <option value="Other">
+                                    Other
+                                </option>
 
                             </select>
 
@@ -870,6 +1379,7 @@ body{
                         </div>
 
                     </div>
+
 
                 </div>
 
@@ -890,7 +1400,9 @@ body{
 
                 <i class="fa-solid fa-location-dot"></i>
 
-                <span>Location</span>
+                <span>
+                    Location
+                </span>
 
             </div>
 
@@ -900,6 +1412,8 @@ body{
 
                 <div class="grid-2">
 
+
+                    <!-- STATE -->
 
                     <div class="field">
 
@@ -912,19 +1426,31 @@ body{
 
                             <i class="fa-solid fa-location-dot"></i>
 
-                            <select>
+                            <select id="state">
 
-                                <option>Select state</option>
+                                <option value="">
+                                    Select state
+                                </option>
 
-                                <option>Andhra Pradesh</option>
+                                <option value="Andhra Pradesh">
+                                    Andhra Pradesh
+                                </option>
 
-                                <option>Telangana</option>
+                                <option value="Telangana">
+                                    Telangana
+                                </option>
 
-                                <option>Karnataka</option>
+                                <option value="Karnataka">
+                                    Karnataka
+                                </option>
 
-                                <option>Tamil Nadu</option>
+                                <option value="Tamil Nadu">
+                                    Tamil Nadu
+                                </option>
 
-                                <option>Maharashtra</option>
+                                <option value="Maharashtra">
+                                    Maharashtra
+                                </option>
 
                             </select>
 
@@ -935,6 +1461,8 @@ body{
                     </div>
 
 
+
+                    <!-- DISTRICT -->
 
                     <div class="field">
 
@@ -947,17 +1475,27 @@ body{
 
                             <i class="fa-regular fa-building"></i>
 
-                            <select>
+                            <select id="district">
 
-                                <option>Select district</option>
+                                <option value="">
+                                    Select district
+                                </option>
 
-                                <option>Krishna</option>
+                                <option value="Krishna">
+                                    Krishna
+                                </option>
 
-                                <option>Guntur</option>
+                                <option value="Guntur">
+                                    Guntur
+                                </option>
 
-                                <option>Vijayawada</option>
+                                <option value="Vijayawada">
+                                    Vijayawada
+                                </option>
 
-                                <option>Visakhapatnam</option>
+                                <option value="Visakhapatnam">
+                                    Visakhapatnam
+                                </option>
 
                             </select>
 
@@ -966,6 +1504,7 @@ body{
                         </div>
 
                     </div>
+
 
                 </div>
 
@@ -986,7 +1525,9 @@ body{
 
                 <i class="fa-solid fa-graduation-cap"></i>
 
-                <span>Background</span>
+                <span>
+                    Background
+                </span>
 
             </div>
 
@@ -996,6 +1537,8 @@ body{
 
                 <div class="grid-3">
 
+
+                    <!-- EDUCATION -->
 
                     <div class="field">
 
@@ -1008,19 +1551,31 @@ body{
 
                             <i class="fa-solid fa-graduation-cap"></i>
 
-                            <select>
+                            <select id="education">
 
-                                <option>Select education level</option>
+                                <option value="">
+                                    Select education level
+                                </option>
 
-                                <option>School</option>
+                                <option value="School">
+                                    School
+                                </option>
 
-                                <option>Intermediate</option>
+                                <option value="Intermediate">
+                                    Intermediate
+                                </option>
 
-                                <option>Diploma</option>
+                                <option value="Diploma">
+                                    Diploma
+                                </option>
 
-                                <option>Undergraduate</option>
+                                <option value="Undergraduate">
+                                    Undergraduate
+                                </option>
 
-                                <option>Postgraduate</option>
+                                <option value="Postgraduate">
+                                    Postgraduate
+                                </option>
 
                             </select>
 
@@ -1031,6 +1586,8 @@ body{
                     </div>
 
 
+
+                    <!-- OCCUPATION -->
 
                     <div class="field">
 
@@ -1043,19 +1600,31 @@ body{
 
                             <i class="fa-solid fa-briefcase"></i>
 
-                            <select>
+                            <select id="occupation">
 
-                                <option>Select occupation</option>
+                                <option value="">
+                                    Select occupation
+                                </option>
 
-                                <option>Student</option>
+                                <option value="Student">
+                                    Student
+                                </option>
 
-                                <option>Employed</option>
+                                <option value="Employed">
+                                    Employed
+                                </option>
 
-                                <option>Unemployed</option>
+                                <option value="Unemployed">
+                                    Unemployed
+                                </option>
 
-                                <option>Entrepreneur</option>
+                                <option value="Entrepreneur">
+                                    Entrepreneur
+                                </option>
 
-                                <option>Job Seeker</option>
+                                <option value="Job Seeker">
+                                    Job Seeker
+                                </option>
 
                             </select>
 
@@ -1066,6 +1635,8 @@ body{
                     </div>
 
 
+
+                    <!-- INCOME -->
 
                     <div class="field">
 
@@ -1078,19 +1649,31 @@ body{
 
                             <i class="fa-solid fa-indian-rupee-sign"></i>
 
-                            <select>
+                            <select id="income">
 
-                                <option>Select income range</option>
+                                <option value="">
+                                    Select income range
+                                </option>
 
-                                <option>Below ₹1 Lakh</option>
+                                <option value="Below ₹1 Lakh">
+                                    Below ₹1 Lakh
+                                </option>
 
-                                <option>₹1 - ₹2.5 Lakhs</option>
+                                <option value="₹1 - ₹2.5 Lakhs">
+                                    ₹1 - ₹2.5 Lakhs
+                                </option>
 
-                                <option>₹2.5 - ₹5 Lakhs</option>
+                                <option value="₹2.5 - ₹5 Lakhs">
+                                    ₹2.5 - ₹5 Lakhs
+                                </option>
 
-                                <option>₹5 - ₹10 Lakhs</option>
+                                <option value="₹5 - ₹10 Lakhs">
+                                    ₹5 - ₹10 Lakhs
+                                </option>
 
-                                <option>Above ₹10 Lakhs</option>
+                                <option value="Above ₹10 Lakhs">
+                                    Above ₹10 Lakhs
+                                </option>
 
                             </select>
 
@@ -1100,6 +1683,7 @@ body{
 
                     </div>
 
+
                 </div>
 
             </div>
@@ -1108,18 +1692,26 @@ body{
 
 
 
-        <!-- FIND BUTTON -->
+        <!-- =================================================
+             SAVE & CONTINUE
+        ================================================== -->
 
         <div class="button-row">
 
             <button
                 class="find-button"
+                type="button"
                 onclick="findSchemes()"
             >
 
-             <a href="dashboard.html" class="save-link">
-                <span>Save & Continue</span>
-             </a>
+                <a
+                    href="dashboard.html"
+                    class="save-link"
+                >
+                    <span>
+                        Save & Continue
+                    </span>
+                </a>
 
                 <i class="fa-solid fa-arrow-right"></i>
 
@@ -1132,57 +1724,149 @@ body{
 
 </main>
 
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
 <script>
+
+/* =========================================================
+   LANGUAGE DROPDOWN
+========================================================= */
+
+function changeLanguage(){
+
+    const language =
+        document.getElementById(
+            "languageSelect"
+        ).value;
+
+    if(language !== "English"){
+
+        alert(
+            "Language selected: " + language
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   FIND SCHEMES
+========================================================= */
 
 function findSchemes(){
 
     const name =
-        document.querySelector(
-            'input[placeholder="Enter your full name"]'
-        ).value;
+        document.getElementById(
+            "fullName"
+        ).value.trim();
 
     const age =
-        document.querySelector(
-            'input[placeholder="Enter your age"]'
+        document.getElementById(
+            "age"
+        ).value.trim();
+
+    const gender =
+        document.getElementById(
+            "gender"
+        ).value;
+
+    const state =
+        document.getElementById(
+            "state"
+        ).value;
+
+    const district =
+        document.getElementById(
+            "district"
+        ).value;
+
+    const education =
+        document.getElementById(
+            "education"
+        ).value;
+
+    const occupation =
+        document.getElementById(
+            "occupation"
+        ).value;
+
+    const income =
+        document.getElementById(
+            "income"
         ).value;
 
 
-    const selects =
-        document.querySelectorAll("select");
-
-
-    const gender = selects[0].value;
-
-    const state = selects[1].value;
-
-    const district = selects[2].value;
-
-    const education = selects[3].value;
-
-    const occupation = selects[4].value;
-
-    const income = selects[5].value;
-
+    /* VALIDATION */
 
     if(
         name === "" ||
         age === "" ||
-        gender === "Select gender" ||
-        state === "Select state" ||
-        district === "Select district" ||
-        education === "Select education level" ||
-        occupation === "Select occupation" ||
-        income === "Select income range"
+        gender === "" ||
+        state === "" ||
+        district === "" ||
+        education === "" ||
+        occupation === "" ||
+        income === ""
     ){
 
-        
+        alert(
+            "Please fill in all required details."
+        );
 
         return;
     }
 
 
+    /* SAVE USER DETAILS */
+
+    localStorage.setItem(
+        "userName",
+        name
+    );
+
+    localStorage.setItem(
+        "userAge",
+        age
+    );
+
+    localStorage.setItem(
+        "userGender",
+        gender
+    );
+
+    localStorage.setItem(
+        "userState",
+        state
+    );
+
+    localStorage.setItem(
+        "userDistrict",
+        district
+    );
+
+    localStorage.setItem(
+        "userEducation",
+        education
+    );
+
+    localStorage.setItem(
+        "userOccupation",
+        occupation
+    );
+
+    localStorage.setItem(
+        "userIncome",
+        income
+    );
+
+
     alert(
-        "Finding eligible government schemes for you..."
+        "Your details have been saved successfully!"
     );
 
 }
@@ -1191,5 +1875,4 @@ function findSchemes(){
 
 
 </body>
-
 </html>

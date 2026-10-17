@@ -2,1044 +2,714 @@
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Scheme Finder</title>
+    <title>Scheme Finder - Register</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-
-        /* ================= BASIC ================= */
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
         }
 
         body {
-            font-family: "Poppins", sans-serif;
-            background: #eef8ff;
-            color: #123f78;
+            background: #f5f9ff;
+            color: #173f73;
         }
-
 
         /* ================= HEADER ================= */
 
-        .header {
-            height: 88px;
+        header {
+            width: 100%;
+            height: 82px;
             background: white;
-
             display: flex;
             align-items: center;
             justify-content: space-between;
-
-            padding: 0 4%;
-
-            border-bottom: 1px solid #e2edf7;
-            box-shadow: 0 2px 10px rgba(20, 80, 140, 0.06);
+            padding: 0 55px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
+        /* LOGO */
 
-        /* ================= BRAND ================= */
-
-        .brand {
+        .logo-section {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
         }
 
-        /* GOVERNMENT OF INDIA EMBLEM */
-
-        .india-emblem {
+        .logo-section img {
             width: 48px;
-            height: 68px;
-
-            display: block;
-
+            height: 58px;
             object-fit: contain;
-            object-position: center;
-
-            flex-shrink: 0;
         }
 
-
-        /* SCHEME FINDER */
-
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .scheme-name {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-
-            color: #06478f;
-
-            font-size: 28px;
+        .logo-text h2 {
+            color: #0755a5;
+            font-size: 21px;
             font-weight: 700;
         }
 
-        .brand-text p {
-            color: #66809d;
-            font-size: 13px;
+        .logo-text p {
+            color: #6b7280;
+            font-size: 10px;
             margin-top: -2px;
         }
 
-        .leaf-logo {
-            width: 34px;
-            height: 34px;
+        /* NAVIGATION */
 
+        nav {
             display: flex;
             align-items: center;
-            justify-content: center;
-
-            border-radius: 50% 50% 50% 10px;
-
-            background: linear-gradient(
-                135deg,
-                #38a5f2,
-                #1769c7
-            );
-
-            color: white;
-
-            font-size: 20px;
-
-            transform: rotate(-20deg);
+            gap: 27px;
         }
 
-
-        /* ================= NAVIGATION ================= */
-
-        .navbar {
-            display: flex;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .navbar a {
-            position: relative;
-
+        nav a {
             text-decoration: none;
-
-            color: #173d69;
-
-            font-size: 15px;
+            color: #344d6e;
+            font-size: 14px;
             font-weight: 500;
-
-            padding: 32px 0 25px;
+            transition: 0.3s;
         }
 
-        .navbar a:hover {
+        nav a:hover {
             color: #0878e8;
         }
-
-        .navbar a.active {
-            color: #0878e8;
-        }
-
-        .navbar a.active::after {
-            content: "";
-
-            position: absolute;
-
-            left: 0;
-            right: 0;
-            bottom: 15px;
-
-            height: 3px;
-
-            background: #0878e8;
-
-            border-radius: 5px;
-        }
-
 
         /* ================= LANGUAGE ================= */
 
         .language {
             height: 45px;
-
-            padding: 0 16px;
-
+            padding: 0 12px;
             display: flex;
             align-items: center;
-
+            gap: 9px;
             border: 1px solid #d6e2ef;
-
             border-radius: 25px;
-
+            background: white;
             color: #173f73;
-
             font-size: 14px;
-
             white-space: nowrap;
+            transition: 0.2s;
         }
 
-        .language span {
-            margin-left: 8px;
+        .language:hover {
+            border-color: #0878e8;
         }
 
+        .india-flag {
+            width: 30px;
+            height: 21px;
+            object-fit: cover;
+            display: block;
+            flex-shrink: 0;
+        }
 
-        /* ================= BUTTONS ================= */
+        .language select {
+            border: none;
+            outline: none;
+            background: transparent;
+            color: #173f73;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 2px 20px 2px 0;
+            appearance: auto;
+        }
+
+        .language select option {
+            background: white;
+            color: #173f73;
+            font-family: "Poppins", sans-serif;
+            font-size: 14px;
+        }
+
+        /* BUTTONS */
 
         .login-btn,
         .register-btn {
-            height: 46px;
-
-            padding: 0 25px;
-
-            border-radius: 11px;
-
-            font-family: inherit;
-
+            padding: 11px 21px;
+            border-radius: 7px;
+            text-decoration: none;
             font-size: 14px;
             font-weight: 600;
-
-            cursor: pointer;
+            transition: 0.3s;
         }
 
         .login-btn {
+            border: 1px solid #0878e8;
+            color: #0878e8;
             background: white;
-
-            color: #0875df;
-
-            border: 1px solid #0875df;
         }
 
         .login-btn:hover {
-            background: #eef7ff;
+            background: #eef6ff;
         }
 
         .register-btn {
-            background: #0879e8;
-
+            background: #0878e8;
             color: white;
-
-            border: none;
-
-            box-shadow: 0 5px 15px rgba(0, 120, 230, 0.18);
+            border: 1px solid #0878e8;
         }
 
         .register-btn:hover {
-            background: #066bd0;
+            background: #075fc0;
         }
 
+        /* ================= HERO ================= */
 
-        /* ================= MAIN ================= */
-
-        .home-container {
-            min-height: 720px;
-
-            display: grid;
-
-            grid-template-columns: 43% 57%;
-
-            gap: 25px;
-
-            padding: 35px 4% 15px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #e9f7ff 0%,
-                    #f8fcff 55%,
-                    #e9f7ff 100%
-                );
-
-            overflow: hidden;
+        .hero {
+            min-height: 380px;
+            padding: 70px 70px;
+            background: linear-gradient(
+                135deg,
+                #eaf4ff,
+                #ffffff
+            );
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
         }
 
-
-        /* ================= LEFT HERO ================= */
-
-        .hero-section {
-            position: relative;
-
-            padding: 45px 20px 0;
-
-            overflow: hidden;
+        .hero-content {
+            max-width: 680px;
         }
 
-        .hero-section h1 {
-            color: #0c437f;
-
+        .hero-content h1 {
             font-size: 42px;
-
-            line-height: 1.2;
-
-            font-weight: 700;
-
-            position: relative;
-
-            z-index: 5;
+            line-height: 1.25;
+            color: #123f73;
+            margin-bottom: 18px;
         }
 
-        .hero-section h1 span {
-            color: #147ce4;
+        .hero-content h1 span {
+            color: #0878e8;
         }
 
+        .hero-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #64748b;
+            margin-bottom: 28px;
+        }
 
-        /* CATEGORY TEXT */
+        .hero-btn {
+            display: inline-block;
+            padding: 13px 25px;
+            background: #0878e8;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .hero-btn:hover {
+            background: #075fc0;
+        }
+
+        /* HERO CARD */
+
+        .hero-card {
+            width: 350px;
+            padding: 28px;
+            background: white;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        .hero-card h3 {
+            color: #173f73;
+            font-size: 19px;
+            margin-bottom: 18px;
+        }
+
+        .hero-card-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 13px 0;
+            border-bottom: 1px solid #edf1f5;
+            color: #50657d;
+            font-size: 14px;
+        }
+
+        .hero-card-item:last-child {
+            border-bottom: none;
+        }
+
+        .circle {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: #e8f3ff;
+            color: #0878e8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        /* ================= CATEGORIES ================= */
 
         .categories {
-            margin-top: 20px;
-
-            color: #57728f;
-
-            font-size: 16px;
-
-            line-height: 2;
-
-            position: relative;
-
-            z-index: 5;
-        }
-
-        .categories b {
-            color: #8298ad;
-
-            margin: 0 10px;
-
-            font-weight: 400;
-        }
-
-
-        /* ================= TAGLINE ================= */
-
-        .tagline {
-            margin-top: 30px;
-
-            position: relative;
-
-            z-index: 5;
-        }
-
-        .tagline h2 {
-            color: #07549d;
-
-            font-size: 24px;
-
-            line-height: 1.5;
-
-            font-weight: 600;
-
-            font-style: italic;
-
-            transform: rotate(-2deg);
-        }
-
-
-        /* ================= BUILDING ================= */
-
-        .building {
-            position: absolute;
-
-            left: 48%;
-            bottom: 65px;
-
-            width: 360px;
-            height: 220px;
-
-            opacity: 0.18;
-
-            z-index: 1;
-        }
-
-        .dome {
-            position: absolute;
-
-            left: 100px;
-            top: 15px;
-
-            width: 155px;
-            height: 85px;
-
-            background: #70b8e7;
-
-            border-radius: 100% 100% 0 0;
-        }
-
-        .dome::after {
-            content: "";
-
-            position: absolute;
-
-            width: 7px;
-            height: 28px;
-
-            background: #5faedc;
-
-            left: 74px;
-            top: -23px;
-        }
-
-        .building-body {
-            position: absolute;
-
-            left: 20px;
-            bottom: 0;
-
-            width: 320px;
-            height: 140px;
-
-            background: #9fd5f2;
-
-            display: flex;
-
-            align-items: flex-end;
-
-            justify-content: space-evenly;
-
-            padding: 15px 20px 0;
-        }
-
-        .pillar {
-            width: 25px;
-            height: 115px;
-
+            padding: 55px 70px;
             background: white;
-
-            border-radius: 5px 5px 0 0;
         }
 
-
-        /* ================= PEOPLE ================= */
-
-        .people {
-            position: absolute;
-
-            left: 20px;
-            bottom: -5px;
-
-            width: 560px;
-            height: 260px;
-
-            z-index: 4;
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
         }
 
-        .person {
-            position: absolute;
-
-            bottom: 0;
+        .section-title h2 {
+            font-size: 28px;
+            color: #173f73;
         }
 
-        .person .head {
-            position: absolute;
+        .section-title p {
+            color: #718096;
+            font-size: 14px;
+            margin-top: 7px;
+        }
 
-            width: 72px;
-            height: 72px;
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 20px;
+        }
 
+        .category-card {
+            padding: 25px 18px;
+            text-align: center;
+            background: #f8fbff;
+            border: 1px solid #e2ebf5;
+            border-radius: 12px;
+            transition: 0.3s;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #0878e8;
+            box-shadow: 0 8px 25px rgba(8,120,232,0.12);
+        }
+
+        .category-icon {
+            width: 55px;
+            height: 55px;
+            margin: auto;
             border-radius: 50%;
-
-            top: 0;
-
-            z-index: 2;
-        }
-
-        .person .body {
-            position: absolute;
-
-            width: 110px;
-            height: 160px;
-
-            top: 60px;
-
-            border-radius: 55px 55px 0 0;
-        }
-
-        .person1 {
-            left: 10px;
-
-            width: 110px;
-            height: 235px;
-        }
-
-        .person1 .head {
-            left: 20px;
-            background: #f1b38c;
-        }
-
-        .person1 .body {
-            background: #287ee0;
-        }
-
-        .person2 {
-            left: 140px;
-
-            width: 120px;
-            height: 260px;
-        }
-
-        .person2 .head {
-            left: 20px;
-
-            width: 80px;
-            height: 80px;
-
-            background: #e5a27d;
-        }
-
-        .person2 .body {
-            background: #1681dd;
-        }
-
-        .person3 {
-            left: 275px;
-
-            width: 115px;
-            height: 245px;
-        }
-
-        .person3 .head {
-            left: 20px;
-            background: #efb08a;
-        }
-
-        .person3 .body {
-            background: #ec7fa2;
-        }
-
-        .person4 {
-            left: 410px;
-
-            width: 115px;
-            height: 250px;
-        }
-
-        .person4 .head {
-            left: 20px;
-            background: #c68a65;
-        }
-
-        .person4 .body {
-            background: #59ad89;
-        }
-
-
-        /* ================= REGISTRATION CARD ================= */
-
-        .register-card {
-            width: 100%;
-
-            max-width: 850px;
-
-            background: white;
-
-            border-radius: 16px;
-
-            padding: 35px 40px 25px;
-
-            border: 1px solid #dceaf6;
-
-            box-shadow:
-                0 10px 35px rgba(50, 110, 160, 0.13);
-
-            justify-self: end;
-        }
-
-
-        /* CARD HEADING */
-
-        .card-heading {
-            display: flex;
-
-            align-items: center;
-
-            gap: 18px;
-
-            margin-bottom: 27px;
-        }
-
-        .profile-icon {
-            width: 68px;
-            height: 68px;
-
-            flex-shrink: 0;
-
-            border-radius: 50%;
-
+            background: #e7f2ff;
+            color: #0878e8;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            background: #e4f2ff;
-
-            color: #0878df;
-
-            font-size: 36px;
+            font-size: 24px;
+            margin-bottom: 14px;
         }
 
-        .card-heading h2 {
-            color: #093f7c;
-
-            font-size: 28px;
-
-            margin-bottom: 4px;
+        .category-card h3 {
+            font-size: 15px;
+            color: #173f73;
+            margin-bottom: 6px;
         }
 
-        .card-heading p {
-            color: #66809c;
+        .category-card p {
+            font-size: 12px;
+            color: #718096;
+            line-height: 1.5;
+        }
 
+        /* ================= REGISTER ================= */
+
+        .register-section {
+            padding: 65px 20px;
+            background: #f5f9ff;
+        }
+
+        .register-card {
+            max-width: 850px;
+            margin: auto;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+        }
+
+        .register-heading {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .register-heading h2 {
+            color: #173f73;
+            font-size: 27px;
+        }
+
+        .register-heading p {
+            color: #718096;
             font-size: 13px;
-
-            line-height: 1.6;
+            margin-top: 5px;
         }
 
-
-        /* ================= FORM ================= */
-
-        .form-row {
+        .form-grid {
             display: grid;
-
             grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
 
-            gap: 25px;
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
 
-            margin-bottom: 20px;
+        .form-group.full {
+            grid-column: 1 / -1;
         }
 
         .form-group label {
-            display: block;
-
-            color: #173e70;
-
+            color: #334e68;
             font-size: 13px;
-
             font-weight: 600;
-
             margin-bottom: 7px;
         }
 
-        .form-group label span {
-            color: #e33b43;
-        }
-
-
-        /* INPUT */
-
-        .input-box {
-            height: 54px;
-
-            display: flex;
-            align-items: center;
-
-            padding: 0 14px;
-
-            background: white;
-
-            border: 1px solid #d4e0eb;
-
-            border-radius: 9px;
-        }
-
-        .input-box:focus-within {
-            border-color: #1681ed;
-
-            box-shadow:
-                0 0 0 3px rgba(22, 129, 237, 0.08);
-        }
-
-        .input-icon {
-            width: 28px;
-
-            color: #627d9b;
-
-            font-size: 17px;
-        }
-
-        .input-box input,
-        .input-box select {
-            width: 100%;
-
-            height: 100%;
-
-            border: none;
-
+        .form-group input,
+        .form-group select {
+            height: 45px;
+            padding: 0 13px;
+            border: 1px solid #d8e2ee;
+            border-radius: 7px;
             outline: none;
+            color: #334e68;
+            font-size: 13px;
+            background: white;
+        }
 
-            background: transparent;
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #0878e8;
+            box-shadow: 0 0 0 3px rgba(8,120,232,0.08);
+        }
 
-            font-family: inherit;
+        .create-account {
+            width: 100%;
+            height: 48px;
+            margin-top: 28px;
+            border: none;
+            border-radius: 7px;
+            background: #0878e8;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
 
-            color: #3e5875;
+        .create-account:hover {
+            background: #075fc0;
+        }
 
+        .login-text {
+            text-align: center;
+            margin-top: 18px;
+            color: #718096;
             font-size: 13px;
         }
 
-        .input-box input::placeholder {
-            color: #91a3b7;
-        }
-
-        .input-box select {
-            cursor: pointer;
-        }
-
-        .eye {
-            color: #647b95;
-
-            cursor: pointer;
-        }
-
-
-        /* ================= TERMS ================= */
-
-        .terms {
-            display: flex;
-
-            align-items: center;
-
-            gap: 8px;
-
-            margin: 8px 0 17px;
-
-            color: #526e8e;
-
-            font-size: 11px;
-        }
-
-        .terms input {
-            width: 20px;
-            height: 20px;
-
-            accent-color: #1681ed;
-        }
-
-        .terms a {
-            color: #0875df;
-
+        .login-text a {
+            color: #0878e8;
             text-decoration: none;
-
-            font-weight: 500;
-        }
-
-
-        /* ================= CREATE BUTTON ================= */
-
-        .create-btn {
-            width: 100%;
-
-            height: 52px;
-
-            border: none;
-
-            border-radius: 9px;
-
-            background: linear-gradient(
-                90deg,
-                #167ce8,
-                #0878e9
-            );
-
-            color: white;
-
-            font-family: inherit;
-
-            font-size: 14px;
-
-            font-weight: 600;
-
-            cursor: pointer;
-        }
-
-        .create-btn span {
-            font-size: 22px;
-
-            margin-left: 10px;
-        }
-
-
-        /* ================= LOGIN ================= */
-
-        .already {
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 12px;
-
-            margin-top: 18px;
-
-            color: #71859c;
-
-            font-size: 11px;
-        }
-
-        .already span {
-            width: 85px;
-
-            height: 1px;
-
-            background: #dce4ec;
-        }
-
-        .already a {
-            color: #0875df;
-
-            text-decoration: none;
-
             font-weight: 600;
         }
-
 
         /* ================= FEATURES ================= */
 
         .features {
-            min-height: 115px;
-
-            background: #f6fbff;
-
-            border-top: 1px solid #e1edf7;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
+            padding: 60px 70px;
+            background: white;
         }
 
-        .feature {
-            width: 190px;
-
-            min-height: 70px;
-
-            text-align: center;
-
-            padding: 5px 20px;
-
-            border-right: 1px solid #d5e3ee;
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
         }
 
-        .feature:last-child {
-            border-right: none;
+        .feature-card {
+            padding: 28px;
+            border: 1px solid #e4ebf3;
+            border-radius: 12px;
+            background: white;
+        }
+
+        .feature-card h3 {
+            font-size: 17px;
+            color: #173f73;
+            margin-bottom: 9px;
+        }
+
+        .feature-card p {
+            font-size: 13px;
+            color: #718096;
+            line-height: 1.7;
         }
 
         .feature-icon {
             width: 48px;
             height: 48px;
-
-            margin: auto;
-
+            background: #e8f3ff;
+            color: #0878e8;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-
-            border-radius: 50%;
-
-            font-size: 21px;
+            font-size: 20px;
+            margin-bottom: 15px;
         }
-
-        .feature-icon.blue {
-            background: #e0f0ff;
-            color: #087be8;
-        }
-
-        .feature-icon.green {
-            background: #ddf8e8;
-            color: #20a75b;
-        }
-
-        .feature-icon.purple {
-            background: #eee6ff;
-            color: #7243d6;
-        }
-
-        .feature-icon.red {
-            background: #ffe5e7;
-            color: #e04454;
-        }
-
-        .feature h3 {
-            margin-top: 7px;
-
-            color: #194779;
-
-            font-size: 12px;
-
-            line-height: 1.4;
-
-            font-weight: 500;
-        }
-
 
         /* ================= FOOTER ================= */
 
         footer {
-            height: 42px;
-
-            display: flex;
-
-            align-items: center;
-
-            justify-content: center;
-
-            gap: 10px;
-
-            background: #f6fbff;
-
-            color: #72879f;
-
-            font-size: 10px;
+            background: #073b70;
+            color: white;
+            padding: 35px 70px 20px;
         }
 
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-section h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #cbd9e8;
+            font-size: 12px;
+            line-height: 1.8;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.15);
+            margin-top: 25px;
+            padding-top: 17px;
+            color: #b8cbe0;
+            font-size: 11px;
+        }
 
         /* ================= RESPONSIVE ================= */
 
-        @media (max-width: 1200px) {
+        @media (max-width: 1000px) {
 
-            .navbar {
-                gap: 17px;
+            header {
+                padding: 0 25px;
             }
 
-            .navbar a {
-                font-size: 13px;
+            nav {
+                gap: 13px;
             }
 
-            .home-container {
-                grid-template-columns: 40% 60%;
+            .hero {
+                padding: 55px 35px;
             }
 
-            .hero-section h1 {
-                font-size: 35px;
-            }
-
-            .register-card {
-                padding: 28px;
-            }
-        }
-
-
-        @media (max-width: 900px) {
-
-            .header {
-                height: auto;
-
-                padding: 15px 25px;
-
-                flex-direction: column;
-
-                gap: 15px;
-            }
-
-            .navbar {
-                flex-wrap: wrap;
-
-                justify-content: center;
-            }
-
-            .home-container {
-                grid-template-columns: 1fr;
-
-                padding: 25px;
-            }
-
-            .hero-section {
-                min-height: 500px;
-            }
-
-            .register-card {
-                justify-self: center;
-            }
-        }
-
-
-        @media (max-width: 600px) {
-
-            .form-row {
-                grid-template-columns: 1fr;
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .features {
+                padding: 50px 35px;
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                height: auto;
+                padding: 15px 20px;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            nav {
+                width: 100%;
+                justify-content: center;
                 flex-wrap: wrap;
             }
 
-            .feature {
-                width: 50%;
+            .hero {
+                flex-direction: column;
+                text-align: center;
             }
 
-            .scheme-name {
-                font-size: 21px;
+            .hero-card {
+                width: 100%;
+                max-width: 400px;
             }
 
-            .india-emblem {
-                width: 42px;
-                height: 58px;
+            .category-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .navbar {
-                gap: 10px;
+            .form-grid {
+                grid-template-columns: 1fr;
             }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 31px;
+            }
+
+            .register-card {
+                padding: 25px 18px;
+            }
+
+            .categories {
+                padding: 45px 20px;
+            }
+
+            footer {
+                padding: 30px 25px 20px;
+            }
+
         }
 
     </style>
-</head>
 
+</head>
 
 <body>
 
 
 <!-- ================= HEADER ================= -->
 
-<header class="header">
+<header>
 
-    <div class="brand">
+    <div class="logo-section">
 
-        <!-- Government of India Emblem -->
         <img
             src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
-            alt="Government of India"
-            class="india-emblem"
+            alt="Government of India Emblem"
         >
 
-        <div class="brand-text">
+        <div class="logo-text">
 
-            <div class="scheme-name">
-                <span class="leaf-logo">✓</span>
-                Scheme Finder
-            </div>
+            <h2>Scheme Finder</h2>
 
-            <p>
-                Government Schemes for a Brighter Future
-            </p>
+            <p>Government Schemes for a Brighter Future</p>
 
         </div>
 
     </div>
 
 
-    <!-- NAVIGATION -->
+    <nav>
 
-    <nav class="navbar">
+        <a href="index.html">Home</a>
 
-        <a href="#" class="active">Home</a>
+        <a href="schemes.html">Schemes</a>
 
-        <a href="#">Schemes</a>
+        <a href="about.html">About Us</a>
 
-        <a href="#">About Us</a>
+        <a href="help.html">Help</a>
 
-        <a href="#">Help</a>
+
+        <!-- LANGUAGE -->
 
         <div class="language">
-            🇮🇳 &nbsp; English
-            <span>⌄</span>
+
+            <img
+                src="https://upload.wikimedia.org/wikipedia/en/4/41/Flag_of_India.svg"
+                alt="India Flag"
+                class="india-flag"
+            >
+
+            <select
+                id="languageSelect"
+                onchange="changeLanguage()"
+            >
+
+                <option value="English">English</option>
+
+                <option value="Telugu">తెలుగు</option>
+
+                <option value="Hindi">हिन्दी</option>
+
+                <option value="Tamil">தமிழ்</option>
+
+                <option value="Kannada">ಕನ್ನಡ</option>
+
+                <option value="Malayalam">മലയാളം</option>
+
+                <option value="Marathi">मराठी</option>
+
+                <option value="Bengali">বাংলা</option>
+
+                <option value="Gujarati">ગુજરાતી</option>
+
+                <option value="Punjabi">ਪੰਜਾਬੀ</option>
+
+                <option value="Odia">ଓଡ଼ିଆ</option>
+
+                <option value="Assamese">অসমীয়া</option>
+
+            </select>
+
         </div>
 
-        <button class="login-btn">
-            Login
-        </button>
 
-        <button class="register-btn">
+        <a href="login.html" class="login-btn">
+            Login
+        </a>
+
+        <a href="register.html" class="register-btn">
             Register
-        </button>
+        </a>
 
     </nav>
 
@@ -1047,415 +717,418 @@
 
 
 
-<!-- ================= MAIN ================= -->
+<!-- ================= HERO ================= -->
 
-<main class="home-container">
+<section class="hero">
 
-
-    <!-- LEFT SECTION -->
-
-    <section class="hero-section">
+    <div class="hero-content">
 
         <h1>
             Government Schemes
-            <br>
-            for <span>Your Bright Future</span>
+            <span>for Your Bright Future</span>
         </h1>
 
-
-        <p class="categories">
-
-            Education
-            <b>|</b>
-
-            Employment
-            <b>|</b>
-
-            Entrepreneurship
-
-            <br>
-
-            Internships
-            <b>|</b>
-
-            Youth Opportunities
-            <b>|</b>
-
-            and more...
-
+        <p>
+            Discover government schemes designed to support
+            education, employment, entrepreneurship, internships
+            and other opportunities for citizens.
         </p>
 
+        <a href="schemes.html" class="hero-btn">
+            Explore Schemes →
+        </a>
 
-        <div class="tagline">
+    </div>
 
-            <h2>
-                One Portal.<br>
-                Multiple Opportunities.<br>
-                A Stronger You.
-            </h2>
+
+    <div class="hero-card">
+
+        <h3>Find the Right Scheme</h3>
+
+        <div class="hero-card-item">
+
+            <div class="circle">1</div>
+
+            <span>Choose your category</span>
+
+        </div>
+
+        <div class="hero-card-item">
+
+            <div class="circle">2</div>
+
+            <span>View eligible schemes</span>
+
+        </div>
+
+        <div class="hero-card-item">
+
+            <div class="circle">3</div>
+
+            <span>Check eligibility & documents</span>
+
+        </div>
+
+        <div class="hero-card-item">
+
+            <div class="circle">4</div>
+
+            <span>Apply through official portal</span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section class="categories">
+
+    <div class="section-title">
+
+        <h2>Explore Scheme Categories</h2>
+
+        <p>
+            Find opportunities according to your needs
+        </p>
+
+    </div>
+
+
+    <div class="category-grid">
+
+
+        <div class="category-card">
+
+            <div class="category-icon">
+                🎓
+            </div>
+
+            <h3>Education</h3>
+
+            <p>
+                Scholarships, fee reimbursement and
+                educational support.
+            </p>
 
         </div>
 
 
-        <!-- GOVERNMENT BUILDING -->
+        <div class="category-card">
 
-        <div class="building">
-
-            <div class="dome"></div>
-
-            <div class="building-body">
-
-                <div class="pillar"></div>
-                <div class="pillar"></div>
-                <div class="pillar"></div>
-                <div class="pillar"></div>
-                <div class="pillar"></div>
-
+            <div class="category-icon">
+                💼
             </div>
+
+            <h3>Employment</h3>
+
+            <p>
+                Employment opportunities and
+                skill development schemes.
+            </p>
 
         </div>
 
 
-        <!-- PEOPLE -->
+        <div class="category-card">
 
-        <div class="people">
-
-            <div class="person person1">
-
-                <div class="head"></div>
-                <div class="body"></div>
-
+            <div class="category-icon">
+                🚀
             </div>
 
+            <h3>Entrepreneurship</h3>
 
-            <div class="person person2">
-
-                <div class="head"></div>
-                <div class="body"></div>
-
-            </div>
-
-
-            <div class="person person3">
-
-                <div class="head"></div>
-                <div class="body"></div>
-
-            </div>
-
-
-            <div class="person person4">
-
-                <div class="head"></div>
-                <div class="body"></div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- ================= REGISTRATION ================= -->
-
-    <section class="register-card">
-
-
-        <div class="card-heading">
-
-            <div class="profile-icon">
-                ♙
-            </div>
-
-            <div>
-
-                <h2>
-                    Create Your Account
-                </h2>
-
-                <p>
-                    Join Scheme Finder and get personalized scheme
-                    recommendations based on your profile.
-                </p>
-
-            </div>
+            <p>
+                Financial assistance and startup
+                support for entrepreneurs.
+            </p>
 
         </div>
 
 
+        <div class="category-card">
 
-        <form>
+            <div class="category-icon">
+                🧑‍💻
+            </div>
+
+            <h3>Internships</h3>
+
+            <p>
+                Internship and practical learning
+                opportunities.
+            </p>
+
+        </div>
 
 
-            <!-- ROW 1 -->
+        <div class="category-card">
 
-            <div class="form-row">
+            <div class="category-icon">
+                ⭐
+            </div>
 
-                <div class="form-group">
+            <h3>Youth Opportunities</h3>
+
+            <p>
+                Schemes and programs created
+                for young citizens.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- ================= REGISTER ================= -->
+
+<section class="register-section">
+
+    <div class="register-card">
+
+        <div class="register-heading">
+
+            <h2>Create Your Account</h2>
+
+            <p>
+                Register to discover government schemes
+                made for you.
+            </p>
+
+        </div>
+
+
+        <form id="registerForm">
+
+
+            <div class="form-grid">
+
+
+                <!-- FULL NAME -->
+
+                <div class="form-group full">
 
                     <label>
-                        Full Name <span>*</span>
+                        Full Name
                     </label>
 
-                    <div class="input-box">
-
-                        <span class="input-icon">♙</span>
-
-                        <input
-                            type="text"
-                            placeholder="Enter your full name"
-                        >
-
-                    </div>
+                    <input
+                        type="text"
+                        id="fullName"
+                        placeholder="Enter your full name"
+                        required
+                    >
 
                 </div>
 
 
+                <!-- EMAIL -->
+
                 <div class="form-group">
 
                     <label>
-                        Email / Mobile Number <span>*</span>
+                        Email / Mobile Number
                     </label>
 
-                    <div class="input-box">
-
-                        <span class="input-icon">✉</span>
-
-                        <input
-                            type="text"
-                            placeholder="Enter your email or mobile number"
-                        >
-
-                    </div>
+                    <input
+                        type="text"
+                        id="emailMobile"
+                        placeholder="Enter email or mobile number"
+                        required
+                    >
 
                 </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Confirm Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DATE OF BIRTH -->
+
+                <div class="form-group">
+
+                    <label>
+                        Date of Birth
+                    </label>
+
+                    <input
+                        type="date"
+                        id="dob"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- GENDER -->
+
+                <div class="form-group">
+
+                    <label>
+                        Gender
+                    </label>
+
+                    <select id="gender" required>
+
+                        <option value="">
+                            Select Gender
+                        </option>
+
+                        <option value="Male">
+                            Male
+                        </option>
+
+                        <option value="Female">
+                            Female
+                        </option>
+
+                        <option value="Other">
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- STATE -->
+
+                <div class="form-group">
+
+                    <label>
+                        State
+                    </label>
+
+                    <select id="state" required>
+
+                        <option value="">
+                            Select State
+                        </option>
+
+                        <option>
+                            Andhra Pradesh
+                        </option>
+
+                        <option>
+                            Telangana
+                        </option>
+
+                        <option>
+                            Karnataka
+                        </option>
+
+                        <option>
+                            Tamil Nadu
+                        </option>
+
+                        <option>
+                            Kerala
+                        </option>
+
+                        <option>
+                            Maharashtra
+                        </option>
+
+                        <option>
+                            Delhi
+                        </option>
+
+                        <option>
+                            Other
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- DISTRICT -->
+
+                <div class="form-group">
+
+                    <label>
+                        District
+                    </label>
+
+                    <input
+                        type="text"
+                        id="district"
+                        placeholder="Enter your district"
+                        required
+                    >
+
+                </div>
+
 
             </div>
 
-
-
-            <!-- ROW 2 -->
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Password <span>*</span>
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">🔒</span>
-
-                        <input
-                            type="password"
-                            placeholder="Create a password"
-                        >
-
-                        <span class="eye">◉</span>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Confirm Password <span>*</span>
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">🔒</span>
-
-                        <input
-                            type="password"
-                            placeholder="Confirm your password"
-                        >
-
-                        <span class="eye">◉</span>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ROW 3 -->
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        Date of Birth <span>*</span>
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">▣</span>
-
-                        <input
-                            type="text"
-                            placeholder="DD / MM / YYYY"
-                        >
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        Gender <span>*</span>
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">♙</span>
-
-                        <select>
-
-                            <option>Select Gender</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- ROW 4 -->
-
-            <div class="form-row">
-
-                <div class="form-group">
-
-                    <label>
-                        State <span>*</span>
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">⌖</span>
-
-                        <select>
-
-                            <option>Select State</option>
-                            <option>Andhra Pradesh</option>
-                            <option>Telangana</option>
-                            <option>Tamil Nadu</option>
-                            <option>Karnataka</option>
-                            <option>Kerala</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-
-                <div class="form-group">
-
-                    <label>
-                        District <span>*</span>
-                    </label>
-
-                    <div class="input-box">
-
-                        <span class="input-icon">▦</span>
-
-                        <select>
-
-                            <option>Select District</option>
-                            <option>Guntur</option>
-                            <option>Krishna</option>
-                            <option>Vijayawada</option>
-                            <option>Visakhapatnam</option>
-
-                        </select>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-
-            <!-- TERMS -->
-
-            <div class="terms">
-
-                <input type="checkbox" id="terms">
-
-                <label for="terms">
-
-                    I agree to the
-
-                    <a href="#">
-                        Terms & Conditions
-                    </a>
-
-                    and
-
-                    <a href="#">
-                        Privacy Policy
-                    </a>
-
-                </label>
-
-            </div>
-
-
-
-            <!-- CREATE ACCOUNT -->
 
             <button
-    type="button"
-    class="create-btn"
-    onclick="window.location.href='dashboard.html'"
->
-    Create Account
-    <span>→</span>
-</button>
+                type="submit"
+                class="create-account"
+            >
 
+                Create Account →
 
-
-            <!-- LOGIN -->
-
-            <div class="already">
-
-                <span></span>
-
-                Already have an account?
-
-                <a href="login.html">
-                    Login
-                </a>
-
-                <span></span>
-
-            </div>
+            </button>
 
 
         </form>
 
-    </section>
 
-</main>
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
 
 
 
@@ -1463,62 +1136,76 @@
 
 <section class="features">
 
+    <div class="section-title">
 
-    <div class="feature">
+        <h2>Why Use Scheme Finder?</h2>
 
-        <div class="feature-icon blue">
-            🔍
-        </div>
-
-        <h3>
-            Find Relevant<br>
-            Schemes
-        </h3>
+        <p>
+            Everything you need to discover the right
+            government scheme in one place.
+        </p>
 
     </div>
 
 
-    <div class="feature">
+    <div class="feature-grid">
 
-        <div class="feature-icon green">
-            ✓
+
+        <div class="feature-card">
+
+            <div class="feature-icon">
+                🔎
+            </div>
+
+            <h3>
+                Easy Scheme Discovery
+            </h3>
+
+            <p>
+                Search and explore government schemes
+                based on your requirements and category.
+            </p>
+
         </div>
 
-        <h3>
-            Check<br>
-            Eligibility
-        </h3>
 
-    </div>
+        <div class="feature-card">
 
+            <div class="feature-icon">
+                📋
+            </div>
 
-    <div class="feature">
+            <h3>
+                Eligibility Information
+            </h3>
 
-        <div class="feature-icon purple">
-            ▤
+            <p>
+                Understand eligibility requirements,
+                benefits and required documents.
+            </p>
+
         </div>
 
-        <h3>
-            View Required<br>
-            Documents
-        </h3>
 
-    </div>
+        <div class="feature-card">
 
+            <div class="feature-icon">
+                🔗
+            </div>
 
-    <div class="feature">
+            <h3>
+                Official Application Links
+            </h3>
 
-        <div class="feature-icon red">
-            🔗
+            <p>
+                Access official application portals
+                and apply for suitable government schemes.
+            </p>
+
         </div>
 
-        <h3>
-            Apply via<br>
-            Official Portal
-        </h3>
 
     </div>
-
 
 </section>
 
@@ -1528,18 +1215,145 @@
 
 <footer>
 
-    <span>
-        Government of India
-    </span>
+    <div class="footer-content">
 
-    <b>|</b>
 
-    <span>
-        Designed for a Brighter Future
-    </span>
+        <div class="footer-section">
+
+            <h3>
+                Scheme Finder
+            </h3>
+
+            <p>
+                A unified portal to discover
+                government schemes and opportunities.
+            </p>
+
+        </div>
+
+
+        <div class="footer-section">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <p>
+                <a href="index.html">Home</a>
+            </p>
+
+            <p>
+                <a href="schemes.html">Schemes</a>
+            </p>
+
+            <p>
+                <a href="about.html">About Us</a>
+            </p>
+
+            <p>
+                <a href="help.html">Help</a>
+            </p>
+
+        </div>
+
+
+        <div class="footer-section">
+
+            <h3>
+                Support
+            </h3>
+
+            <p>
+                Need help finding the right scheme?
+            </p>
+
+            <p>
+                Explore our Help section.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 Scheme Finder | Government Schemes
+        Discovery Portal
+
+    </div>
 
 </footer>
 
 
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+
+    /* LANGUAGE DROPDOWN */
+
+    function changeLanguage() {
+
+        const selectedLanguage =
+            document.getElementById("languageSelect").value;
+
+        if (selectedLanguage !== "English") {
+
+            alert(
+                "Language selected: " +
+                selectedLanguage
+            );
+
+        }
+
+    }
+
+
+
+    /* REGISTER FORM */
+
+    document
+        .getElementById("registerForm")
+        .addEventListener("submit", function(event) {
+
+            event.preventDefault();
+
+
+            const password =
+                document.getElementById("password").value;
+
+            const confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+
+            if (password !== confirmPassword) {
+
+                alert(
+                    "Password and Confirm Password do not match."
+                );
+
+                return;
+
+            }
+
+
+            alert(
+                "Account created successfully!"
+            );
+
+
+            window.location.href =
+                "dashboard.html";
+
+        });
+
+
+</script>
+
+
 </body>
+
 </html>
