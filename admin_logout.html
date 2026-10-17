@@ -1,809 +1,976 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scheme Finder - Logout</title>
-
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-    <!-- Icons -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-    <style>
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #f4f9ff;
-            color: #0b4385;
-            min-height: 100vh;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* ================= SIDEBAR ================= */
+<title>Scheme Finder - Admin Logout</title>
 
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 260px;
-            height: 100vh;
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(37,99,235,.14),transparent 30%),
+        radial-gradient(circle at 85% 80%,rgba(6,75,145,.12),transparent 30%),
+        linear-gradient(135deg,#f7fbff,#eef5fc);
+    color:#1e293b;
+    overflow:hidden;
+}
 
-            background: linear-gradient(
-                180deg,
-                #07509d 0%,
-                #064b98 55%,
-                #063f82 100%
-            );
+
+/* =========================
+   SIDEBAR
+========================= */
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:260px;
+    height:100vh;
+
+    background:linear-gradient(
+        180deg,
+        #064b91,
+        #0755a5,
+        #0866c4
+    );
+
+    color:white;
+    padding:22px 15px;
+    z-index:100;
+}
+
+
+/* LOGO */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:4px 8px 28px;
+}
+
+.logo-emblem{
+    width:35px;
+    height:35px;
+    object-fit:contain;
+    filter:brightness(0) invert(1);
+}
+
+.logo-text{
+    font-size:17px;
+    font-weight:600;
+    white-space:nowrap;
+}
+
 
-            color: white;
-            padding: 18px 15px;
+/* MENU */
+
+.menu{
+    margin-top:5px;
+}
 
-            z-index: 10;
-            overflow: hidden;
-        }
+.menu a{
+    display:flex;
+    align-items:center;
+    gap:14px;
 
-        /* Decorative building inside sidebar */
+    color:white;
+    text-decoration:none;
 
-        .sidebar::after {
-            content: "";
-            position: absolute;
-            left: -70px;
-            bottom: 60px;
+    padding:13px 14px;
+    margin:5px 0;
 
-            width: 350px;
-            height: 300px;
+    border-radius:9px;
 
-            background:
-                linear-gradient(
-                    rgba(255,255,255,0.06),
-                    rgba(255,255,255,0.01)
-                );
+    font-size:13px;
+    font-weight:500;
 
-            border-radius: 50% 50% 0 0;
+    transition:.25s;
+}
 
-            transform: translateY(80px);
-        }
+.menu a i{
+    width:20px;
+    text-align:center;
+    font-size:15px;
+}
 
-        /* ================= LOGO ================= */
+.menu a:hover{
+    background:rgba(255,255,255,.13);
+}
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
+.menu a.active{
+    background:rgba(255,255,255,.20);
+    box-shadow:inset 3px 0 0 white;
+}
 
-            height: 65px;
-            padding-left: 10px;
 
-            margin-bottom: 25px;
-        }
+/* SIDEBAR BOTTOM */
 
-        .logo img {
-            width: 42px;
-            height: 52px;
-            object-fit: contain;
+.sidebar-bottom{
+    position:absolute;
+    bottom:20px;
+    left:15px;
+    right:15px;
+    text-align:center;
+}
 
-            filter: brightness(0) invert(1);
-        }
+.sidebar-bottom p{
+    font-size:9px;
+    line-height:1.5;
+    opacity:.85;
+}
 
-        .logo-text {
-            font-size: 24px;
-            font-weight: 600;
-            color: white;
-            white-space: nowrap;
-        }
+.tricolor{
+    width:75px;
+    height:3px;
+    margin:8px auto 0;
+    border-radius:5px;
 
-        /* ================= NAVIGATION ================= */
+    background:linear-gradient(
+        90deg,
+        #ff9933 33%,
+        white 33%,
+        white 66%,
+        #138808 66%
+    );
+}
 
-        .nav-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
 
-        .nav-item {
-            width: 100%;
-            height: 52px;
+/* =========================
+   MAIN
+========================= */
 
-            display: flex;
-            align-items: center;
+.main{
+    margin-left:260px;
+    min-height:100vh;
+}
 
-            gap: 20px;
 
-            padding: 0 14px;
+/* =========================
+   HEADER
+========================= */
 
-            color: white;
-            text-decoration: none;
+.header{
+    height:70px;
 
-            font-size: 16px;
-            font-weight: 500;
+    background:rgba(255,255,255,.9);
+    backdrop-filter:blur(10px);
 
-            border-radius: 9px;
+    border-bottom:1px solid #e5edf6;
 
-            transition: 0.25s ease;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 
-        .nav-item i {
-            width: 26px;
-            text-align: center;
-            font-size: 24px;
-        }
+    padding:0 32px;
+}
 
-        .nav-item:hover {
-            background: rgba(255,255,255,0.12);
-        }
 
-        /* Active Logout */
+/* TOGGLE */
 
-        .nav-item.active {
-            background: linear-gradient(
-                90deg,
-                #168cff,
-                #1685f4
-            );
+.sidebar-toggle{
+    border:none;
+    background:none;
 
-            box-shadow:
-                0 5px 15px rgba(0, 126, 255, 0.25);
-        }
+    color:#164e88;
 
-        /* ================= SIDEBAR FOOTER ================= */
+    font-size:21px;
+    cursor:pointer;
+}
 
-        .sidebar-footer {
-            position: absolute;
 
-            bottom: 25px;
-            left: 0;
+/* SEARCH */
 
-            width: 100%;
+.search-box{
+    margin-left:20px;
 
-            text-align: center;
+    width:300px;
+    height:38px;
 
-            z-index: 3;
-        }
+    background:#f3f7fc;
 
-        .sidebar-footer p {
-            color: white;
-            font-size: 14px;
-            line-height: 1.6;
-            opacity: 0.95;
-        }
+    border:1px solid #e6edf5;
+    border-radius:9px;
 
-        /* Indian tricolor curve */
+    display:flex;
+    align-items:center;
 
-        .tricolor {
-            width: 90px;
-            height: 20px;
+    padding:0 13px;
+}
 
-            margin: 8px auto 0;
+.search-box i{
+    color:#94a3b8;
+    font-size:13px;
+    margin-right:9px;
+}
 
-            position: relative;
-        }
+.search-box input{
+    width:100%;
+    border:none;
+    outline:none;
+    background:none;
 
-        .tricolor::before {
-            content: "";
+    font-family:Poppins;
+    font-size:11px;
+}
 
-            position: absolute;
 
-            width: 75px;
-            height: 5px;
+/* HEADER RIGHT */
 
-            background: #ff9933;
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:22px;
+}
 
-            border-radius: 50%;
+.notification{
+    position:relative;
+    color:#475569;
+    font-size:18px;
+}
 
-            left: 8px;
-            top: 2px;
+.notification span{
+    position:absolute;
+    right:-8px;
+    top:-7px;
 
-            transform: rotate(-10deg);
-        }
+    width:16px;
+    height:16px;
 
-        .tricolor::after {
-            content: "";
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-            position: absolute;
+    border-radius:50%;
 
-            width: 75px;
-            height: 5px;
+    background:#ef4444;
+    color:white;
 
-            background: #138808;
+    font-size:8px;
+}
 
-            border-radius: 50%;
+.admin-profile{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
 
-            left: 8px;
-            top: 11px;
+.admin-icon{
+    width:37px;
+    height:37px;
 
-            transform: rotate(-10deg);
-        }
+    border-radius:50%;
 
-        /* ================= MAIN CONTENT ================= */
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-        .main {
-            margin-left: 260px;
+    background:#e7f0ff;
+    color:#1769aa;
+}
 
-            width: calc(100% - 260px);
-            height: 100vh;
+.admin-info strong{
+    display:block;
+    font-size:11px;
+}
 
-            position: relative;
+.admin-info span{
+    font-size:9px;
+    color:#94a3b8;
+}
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
 
-            background:
-                radial-gradient(
-                    circle at 50% 35%,
-                    rgba(225,240,255,0.7),
-                    transparent 35%
-                ),
-                #f5f9fe;
-        }
+/* =========================
+   LOGOUT AREA
+========================= */
 
-        /* Decorative background waves */
+.logout-area{
+    height:calc(100vh - 70px);
 
-        .main::before {
-            content: "";
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-            position: absolute;
+    position:relative;
+}
 
-            width: 650px;
-            height: 650px;
 
-            top: -250px;
-            right: -180px;
+/* DECORATIVE CIRCLES */
 
-            background: rgba(224,239,255,0.35);
+.circle{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
+}
 
-            border-radius: 50%;
-        }
+.circle.one{
+    width:280px;
+    height:280px;
 
-        .main::after {
-            content: "";
+    background:rgba(37,99,235,.05);
 
-            position: absolute;
+    top:30px;
+    left:70px;
+}
 
-            width: 800px;
-            height: 300px;
+.circle.two{
+    width:220px;
+    height:220px;
 
-            left: -100px;
-            bottom: -210px;
+    background:rgba(6,75,145,.05);
 
-            background: rgba(220,237,255,0.55);
+    right:70px;
+    bottom:30px;
+}
 
-            border-radius: 50%;
-        }
 
-        /* ================= LOGOUT CONTENT ================= */
+/* =========================
+   LOGOUT CARD
+========================= */
 
-        .logout-container {
-            position: relative;
+.logout-card{
+    position:relative;
+    z-index:2;
 
-            width: 760px;
+    width:500px;
 
-            text-align: center;
+    background:rgba(255,255,255,.92);
 
-            z-index: 5;
+    border:1px solid rgba(255,255,255,.8);
 
-            margin-top: -20px;
-        }
+    border-radius:24px;
 
-        /* ================= ILLUSTRATION ================= */
+    padding:42px 48px 40px;
 
-        .logout-image {
-            width: 430px;
-            height: 300px;
+    text-align:center;
 
-            margin: 0 auto 10px;
+    box-shadow:
+        0 25px 70px rgba(30,64,175,.12),
+        0 5px 20px rgba(0,0,0,.04);
 
-            position: relative;
+    backdrop-filter:blur(15px);
 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+    animation:cardAppear .6s ease;
+}
 
-        .illustration-bg {
-            position: absolute;
+@keyframes cardAppear{
 
-            width: 440px;
-            height: 270px;
+    from{
+        opacity:0;
+        transform:translateY(20px) scale(.97);
+    }
 
-            background: #e8f4ff;
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
 
-            border-radius: 45% 55% 45% 55%;
 
-            opacity: 0.95;
-        }
+/* LOGOUT ICON */
 
-        /* Door */
+.logout-icon{
+    width:92px;
+    height:92px;
 
-        .door {
-            position: absolute;
+    margin:0 auto 23px;
 
-            width: 120px;
-            height: 210px;
+    border-radius:50%;
 
-            right: 105px;
-            top: 35px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-            background: linear-gradient(
-                135deg,
-                #168bff,
-                #0b6fe8
-            );
+    background:linear-gradient(
+        135deg,
+        #e8f2ff,
+        #dbeafe
+    );
 
-            border-radius: 7px;
+    color:#1769aa;
 
-            box-shadow:
-                inset 7px 0 0 rgba(255,255,255,0.12),
-                0 8px 20px rgba(0,100,220,0.15);
+    font-size:36px;
 
-            transform: skewY(-10deg);
-        }
+    box-shadow:
+        0 10px 25px rgba(37,99,235,.12);
 
-        .door-inner {
-            position: absolute;
+    animation:floatIcon 2.5s ease-in-out infinite;
+}
 
-            width: 92px;
-            height: 170px;
+@keyframes floatIcon{
 
-            left: 15px;
-            top: 18px;
+    0%,100%{
+        transform:translateY(0);
+    }
 
-            border: 6px solid #075ecb;
+    50%{
+        transform:translateY(-5px);
+    }
+}
 
-            border-radius: 4px;
-        }
 
-        /* Arrow */
+/* HEADING */
 
-        .door-arrow {
-            position: absolute;
+.logout-card h1{
+    font-size:24px;
+    color:#173b63;
+    font-weight:600;
 
-            top: 92px;
-            right: 25px;
+    margin-bottom:9px;
+}
 
-            color: white;
+.logout-card .subtitle{
+    font-size:12px;
+    color:#7b8794;
 
-            font-size: 45px;
+    line-height:1.7;
 
-            z-index: 3;
-        }
+    max-width:350px;
+    margin:0 auto 25px;
+}
 
-        /* Door frame */
 
-        .door-frame {
-            position: absolute;
+/* ADMIN PROFILE BOX */
 
-            width: 32px;
-            height: 225px;
+.admin-box{
+    display:flex;
+    align-items:center;
 
-            right: 210px;
-            top: 29px;
+    text-align:left;
 
-            background: #0768dc;
+    background:#f7faff;
 
-            border-radius: 5px;
+    border:1px solid #e5edf7;
 
-            transform: skewY(-10deg);
-        }
+    border-radius:13px;
 
-        /* Plant */
+    padding:13px 15px;
 
-        .plant {
-            position: absolute;
+    margin-bottom:26px;
+}
 
-            left: 105px;
-            bottom: 20px;
+.admin-avatar{
+    width:43px;
+    height:43px;
 
-            width: 120px;
-            height: 150px;
-        }
+    border-radius:50%;
 
-        .pot {
-            position: absolute;
+    background:linear-gradient(
+        135deg,
+        #1769aa,
+        #2563eb
+    );
 
-            bottom: 0;
-            left: 28px;
+    color:white;
 
-            width: 65px;
-            height: 55px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-            background: linear-gradient(
-                180deg,
-                #ffffff,
-                #d8efff
-            );
+    margin-right:12px;
 
-            border: 4px solid #76bff3;
+    font-size:17px;
+}
 
-            border-top: 0;
+.admin-box strong{
+    display:block;
 
-            border-radius: 0 0 14px 14px;
+    color:#334155;
 
-            transform: perspective(80px) rotateX(-3deg);
-        }
+    font-size:12px;
+}
 
-        .stem {
-            position: absolute;
+.admin-box span{
+    font-size:9px;
+    color:#94a3b8;
+}
 
-            width: 6px;
-            height: 95px;
 
-            background: #43b889;
+/* SECURITY MESSAGE */
 
-            left: 58px;
-            bottom: 42px;
+.security{
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-            border-radius: 10px;
+    gap:6px;
 
-            transform: rotate(5deg);
-        }
+    font-size:9px;
+    color:#7b8794;
 
-        .leaf {
-            position: absolute;
+    margin-bottom:24px;
+}
 
-            width: 30px;
-            height: 55px;
+.security i{
+    color:#16a34a;
+}
 
-            background: #49c794;
 
-            border-radius: 80% 20% 80% 20%;
+/* BUTTONS */
 
-            transform: rotate(-25deg);
-        }
+.buttons{
+    display:flex;
+    gap:12px;
+}
 
-        .leaf.one {
-            left: 37px;
-            bottom: 91px;
-        }
+.btn{
+    flex:1;
 
-        .leaf.two {
-            left: 63px;
-            bottom: 105px;
+    height:44px;
 
-            transform: rotate(25deg);
-        }
+    border-radius:9px;
 
-        .leaf.three {
-            left: 23px;
-            bottom: 65px;
+    font-family:Poppins;
+    font-size:11px;
+    font-weight:600;
 
-            transform: rotate(-45deg);
-        }
+    cursor:pointer;
 
-        /* Small cloud */
+    transition:.25s;
+}
 
-        .cloud {
-            position: absolute;
 
-            right: 30px;
-            top: 70px;
+/* CANCEL */
 
-            width: 65px;
-            height: 25px;
+.cancel{
+    background:white;
+    border:1px solid #d9e1eb;
+    color:#526173;
+}
 
-            background: #bcdcff;
+.cancel:hover{
+    background:#f5f8fc;
+    transform:translateY(-1px);
+}
 
-            border-radius: 30px;
-        }
 
-        .cloud::before,
-        .cloud::after {
-            content: "";
+/* LOGOUT */
 
-            position: absolute;
+.logout{
+    border:none;
 
-            background: #bcdcff;
+    color:white;
 
-            border-radius: 50%;
-        }
+    background:linear-gradient(
+        135deg,
+        #1769aa,
+        #2563eb
+    );
 
-        .cloud::before {
-            width: 30px;
-            height: 30px;
-            left: 10px;
-            top: -15px;
-        }
+    box-shadow:
+        0 7px 18px rgba(37,99,235,.22);
 
-        .cloud::after {
-            width: 35px;
-            height: 35px;
-            right: 8px;
-            top: -18px;
-        }
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+}
 
-        /* ================= TEXT ================= */
+.logout:hover{
+    transform:translateY(-2px);
 
-        .logout-container h1 {
-            color: #084484;
+    box-shadow:
+        0 10px 24px rgba(37,99,235,.28);
+}
 
-            font-size: 48px;
-            font-weight: 700;
 
-            margin-top: 5px;
-            margin-bottom: 20px;
-        }
+/* FOOTER */
 
-        .logout-container p {
-            font-size: 21px;
+.card-footer{
+    margin-top:22px;
 
-            color: #345d8e;
+    font-size:9px;
+    color:#a0aec0;
+}
 
-            line-height: 1.8;
 
-            margin-bottom: 38px;
-        }
+/* =========================
+   RESPONSIVE
+========================= */
 
-        /* ================= BUTTON ================= */
+@media(max-width:900px){
 
-        .login-btn {
-            display: inline-flex;
+    .sidebar{
+        transform:translateX(-100%);
+        transition:.3s;
+    }
 
-            align-items: center;
-            justify-content: center;
+    .sidebar.open{
+        transform:translateX(0);
+    }
 
-            gap: 18px;
+    .main{
+        margin-left:0;
+    }
 
-            width: 285px;
-            height: 68px;
+    .search-box{
+        width:220px;
+    }
+}
 
-            background: linear-gradient(
-                90deg,
-                #087df5,
-                #167cf0
-            );
 
-            color: white;
+@media(max-width:600px){
 
-            text-decoration: none;
+    .header{
+        padding:0 16px;
+    }
 
-            border-radius: 11px;
+    .search-box{
+        display:none;
+    }
 
-            font-size: 20px;
-            font-weight: 600;
+    .admin-info{
+        display:none;
+    }
 
-            box-shadow:
-                0 8px 18px rgba(0,117,235,0.20);
+    .logout-card{
+        width:calc(100% - 30px);
+        padding:35px 24px;
+    }
 
-            transition: all 0.25s ease;
-        }
+    .logout-card h1{
+        font-size:21px;
+    }
 
-        .login-btn i {
-            font-size: 24px;
-        }
+    .buttons{
+        flex-direction:column;
+    }
 
-        .login-btn:hover {
-            transform: translateY(-2px);
+    .circle{
+        display:none;
+    }
+}
 
-            box-shadow:
-                0 12px 25px rgba(0,117,235,0.30);
-        }
-
-        /* ================= RESPONSIVE ================= */
-
-        @media (max-width: 900px) {
-
-            .sidebar {
-                width: 220px;
-            }
-
-            .main {
-                margin-left: 220px;
-                width: calc(100% - 220px);
-            }
-
-            .logout-container {
-                width: 90%;
-            }
-
-            .logout-container h1 {
-                font-size: 38px;
-            }
-
-            .logout-container p {
-                font-size: 17px;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            body {
-                overflow: auto;
-            }
-
-            .sidebar {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-
-            .main {
-                margin-left: 0;
-                width: 100%;
-                min-height: 700px;
-            }
-
-            .sidebar-footer {
-                display: none;
-            }
-
-            .nav-menu {
-                display: none;
-            }
-
-            .logout-container h1 {
-                font-size: 30px;
-            }
-
-            .logout-container p {
-                font-size: 15px;
-            }
-
-            .logout-image {
-                transform: scale(0.75);
-            }
-        }
-
-    </style>
+</style>
 </head>
+
 
 <body>
 
-    <!-- ================= SIDEBAR ================= -->
 
-    <aside class="sidebar">
+<!-- =========================
+     SIDEBAR
+========================= -->
 
-        <div class="logo">
+<aside class="sidebar" id="sidebar">
 
-            <!-- Government Emblem -->
-            <img
-                src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
-                alt="Government of India">
+    <div class="logo">
 
-            <span class="logo-text">
-                Scheme Finder
-            </span>
+        <img
+            class="logo-emblem"
+            src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+            alt="Government Emblem">
 
-        </div>
+        <span class="logo-text">
+            Scheme Finder
+        </span>
+
+    </div>
 
 
-        <nav class="nav-menu">
+    <nav class="menu">
 
-            <a href="admin_dashboard.html" class="active">
+        <a href="admin-dashboard.html">
             <i class="fa-solid fa-chart-line"></i>
             <span>Dashboard</span>
         </a>
 
-        <a href="admin_schemes.html">
+        <a href="manage-schemes.html">
             <i class="fa-solid fa-layer-group"></i>
             <span>Schemes</span>
         </a>
 
-        <a href="admin_users.html">
+        <a href="manage-users.html">
             <i class="fa-solid fa-users"></i>
             <span>Users</span>
         </a>
 
-        <a href="admin_applications.html">
+        <a href="applications.html">
             <i class="fa-solid fa-file-lines"></i>
             <span>Applications</span>
         </a>
 
-        <a href="admin_alerts.html">
+        <a href="admin-alerts.html">
             <i class="fa-solid fa-bell"></i>
             <span>Alerts</span>
         </a>
 
-        <a href="admin_reports.html">
-            <i class="fa-solid fa-chart-pie"></i>
+        <a href="reports.html">
+            <i class="fa-solid fa-chart-column"></i>
             <span>Reports</span>
         </a>
 
-        <a href="admin_settings.html">
+        <a href="admin-settings.html">
             <i class="fa-solid fa-gear"></i>
             <span>Settings</span>
         </a>
 
-        <a href="admin_logout.html">
+        <a href="admin-logout.html" class="active">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span>Logout</span>
         </a>
 
-        </nav>
+    </nav>
 
 
-        <!-- Sidebar Bottom -->
+    <div class="sidebar-bottom">
 
-        <div class="sidebar-footer">
+        <p>
+            Government Schemes for a<br>
+            Better Tomorrow
+        </p>
 
-            <p>
-                Government Schemes<br>
-                for a Better Tomorrow
-            </p>
+        <div class="tricolor"></div>
 
-            <div class="tricolor"></div>
+    </div>
+
+</aside>
+
+
+
+<!-- =========================
+     MAIN
+========================= -->
+
+<main class="main">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div style="display:flex;align-items:center;">
+
+            <button
+                class="sidebar-toggle"
+                onclick="toggleSidebar()">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+            <div class="search-box">
+
+                <i class="fa-solid fa-magnifying-glass"></i>
+
+                <input
+                    type="text"
+                    placeholder="Search schemes..."
+                >
+
+            </div>
 
         </div>
 
-    </aside>
+
+        <div class="header-right">
+
+            <div class="notification">
+
+                <i class="fa-regular fa-bell"></i>
+
+                <span>3</span>
+
+            </div>
 
 
-    <!-- ================= MAIN CONTENT ================= -->
+            <div class="admin-profile">
 
-    <main class="main">
+                <div class="admin-icon">
 
-        <div class="logout-container">
-
-            <!-- Illustration -->
-
-            <div class="logout-image">
-
-                <div class="illustration-bg"></div>
-
-                <div class="cloud"></div>
-
-                <!-- Plant -->
-
-                <div class="plant">
-
-                    <div class="stem"></div>
-
-                    <div class="leaf one"></div>
-                    <div class="leaf two"></div>
-                    <div class="leaf three"></div>
-
-                    <div class="pot"></div>
+                    <i class="fa-solid fa-user-shield"></i>
 
                 </div>
 
-                <!-- Door -->
+                <div class="admin-info">
 
-                <div class="door-frame"></div>
+                    <strong>Admin</strong>
 
-                <div class="door">
+                    <span>Administrator</span>
 
-                    <div class="door-inner"></div>
+                </div>
 
-                    <i class="fa-solid fa-arrow-right door-arrow"></i>
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         LOGOUT CONTENT
+    ========================= -->
+
+    <section class="logout-area">
+
+
+        <div class="circle one"></div>
+        <div class="circle two"></div>
+
+
+        <div class="logout-card">
+
+
+            <!-- ICON -->
+
+            <div class="logout-icon">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Ready to Sign Out?
+            </h1>
+
+
+            <p class="subtitle">
+                You're about to leave the Scheme Finder
+                Admin Portal. Make sure you've saved all
+                your changes before logging out.
+            </p>
+
+
+            <!-- ADMIN -->
+
+            <div class="admin-box">
+
+                <div class="admin-avatar">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Admin
+                    </strong>
+
+                    <span>
+                        Administrator Account
+                    </span>
 
                 </div>
 
             </div>
 
 
-            <!-- Logout Message -->
+            <!-- SECURITY -->
 
-            <h1>
-                You have been logged out!
-            </h1>
+            <div class="security">
 
-            <p>
-                Thank you for using Scheme Finder.<br>
-                Your session has ended securely.
-            </p>
+                <i class="fa-solid fa-shield-halved"></i>
+
+                Your session will be securely ended
+
+            </div>
 
 
-            <!-- Back to Login -->
+            <!-- BUTTONS -->
 
-            <a href="login.html" class="login-btn">
+            <div class="buttons">
 
-                <i class="fa-solid fa-house"></i>
+                <button
+                    class="btn cancel"
+                    onclick="goDashboard()">
 
-                <span>Back to Login</span>
+                    Stay Logged In
 
-            </a>
+                </button>
+
+
+                <button
+                    class="btn logout"
+                    onclick="logoutAdmin()">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Yes, Logout
+
+                </button>
+
+            </div>
+
+
+            <div class="card-footer">
+
+                Scheme Finder • Government Schemes Portal
+
+            </div>
+
 
         </div>
 
-    </main>
+    </section>
+
+</main>
+
+
+
+<script>
+
+/* =========================
+   SIDEBAR
+========================= */
+
+function toggleSidebar(){
+
+    document
+        .getElementById("sidebar")
+        .classList.toggle("open");
+
+}
+
+
+/* =========================
+   STAY LOGGED IN
+========================= */
+
+function goDashboard(){
+
+    window.location.href =
+        "admin_dashboard.html";
+
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+function logoutAdmin(){
+
+    sessionStorage.clear();
+
+    window.location.href =
+        "login.html";
+
+}
+
+</script>
+
 
 </body>
 </html>
